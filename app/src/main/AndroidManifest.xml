@@ -16,9 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DatenbankTest"></activity>
+        <activity android:name=".DatenbankTest">
+        </activity>
         <activity android:name=".TestActivity" />
-        <activity android:name=".AuswertungActivity"></activity>
+        <activity android:name=".TypActivity"></activity>
     </application>
 
 </manifest>
