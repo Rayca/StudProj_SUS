@@ -17,7 +17,7 @@ public class StartActivity extends AppCompatActivity {
 
 
     public void startt(View view){
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, TypActivity.class);
         startActivity(intent);
     }
 }
