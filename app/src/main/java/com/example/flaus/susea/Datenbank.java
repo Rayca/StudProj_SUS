@@ -109,10 +109,35 @@ public class Datenbank extends SQLiteOpenHelper {
     }
 
     //NUR ZUM TEST!!!
-    public Cursor zeile_auslesen(){
+    public Cursor selectAll(){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_TEST, null);
         return  cursor;
+    }
+
+    public void insertTest(int[] antworten, int alter, String geschlecht){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues neueZeile = new ContentValues();
+        neueZeile.put(SPALTE_FRAGE1, antworten[0]);
+        neueZeile.put(SPALTE_FRAGE2, antworten[1]);
+        neueZeile.put(SPALTE_FRAGE3, antworten[2]);
+        neueZeile.put(SPALTE_FRAGE4, antworten[3]);
+        neueZeile.put(SPALTE_FRAGE5, antworten[4]);
+        neueZeile.put(SPALTE_FRAGE6, antworten[5]);
+        neueZeile.put(SPALTE_FRAGE7, antworten[6]);
+        neueZeile.put(SPALTE_FRAGE8, antworten[7]);
+        neueZeile.put(SPALTE_FRAGE9, antworten[8]);
+        neueZeile.put(SPALTE_FRAGE10, antworten[9]);
+        neueZeile.put(SPALTE_ALTER, alter);
+        neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
+        db.insert(TABELLE_TEST, null, neueZeile);
+
+
+
+
+
+
+
     }
 
 

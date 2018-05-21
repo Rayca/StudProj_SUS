@@ -34,7 +34,7 @@ public class DatenbankTest extends AppCompatActivity {
     }
 
     public void testdaten(){
-        Cursor c = manager.zeile_auslesen();
+        Cursor c = manager.selectAll();
         c.moveToFirst();
         int id = c.getInt(0);
         String datum = c.getString(1);

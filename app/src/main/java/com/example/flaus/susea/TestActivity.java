@@ -18,6 +18,7 @@ public class TestActivity extends AppCompatActivity {
     Button next;
     int[] antworten = new int[10];
     int index = 0;
+    Datenbank manager = new Datenbank(this);
     String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
             "Die Software wirkt auf mich recht einfach aufgebaut.",
             "Ich finde die Software leicht zu benutzen.",
@@ -103,15 +104,17 @@ public class TestActivity extends AppCompatActivity {
                 next.setEnabled(false);
             } else {
                 //TODO: UI ändern um Geschlecht und Alter noch abzufragen
-                //TODO: Daten in die DB schreiben
-                //TODO: "AbschlussScreen"
+
+                //Gesammelte Daten in die Datenbank schreiben
+                //TODO: Aktuelles Datum noch in die DB schreiben
+                manager.insertTest(antworten, 10, "w");
+
+
                 //Daten an die AuswertungsActivity übergeben
-                for( int i =0; i< antworten.length; i ++){
-                    Log.d("Jule", "antworten["+ i + "] = " + antworten[i]);
-                    Intent intent = new Intent(this, AuswertungActivity.class);
-                    intent.putExtra("Ergebnisse", antworten);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(this, AuswertungActivity.class);
+                intent.putExtra("Ergebnisse", antworten);
+                startActivity(intent);
+                //TODO: "AbschlussScreen"
             }
 
 
