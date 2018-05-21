@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/button_next"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_key"
             android:choiceMode="singleChoice"
             android:listSelector="@color/pressed_color">
 

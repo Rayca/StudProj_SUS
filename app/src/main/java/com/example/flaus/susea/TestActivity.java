@@ -1,5 +1,6 @@
 package com.example.flaus.susea;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,9 +102,15 @@ public class TestActivity extends AppCompatActivity {
                 progessBar.incrementProgressBy(1);
                 next.setEnabled(false);
             } else {
+                //TODO: UI ändern um Geschlecht und Alter noch abzufragen
+                //TODO: Daten in die DB schreiben
+                //TODO: "AbschlussScreen"
+                //Daten an die AuswertungsActivity übergeben
                 for( int i =0; i< antworten.length; i ++){
                     Log.d("Jule", "antworten["+ i + "] = " + antworten[i]);
-                    //TODO: Hier den Intent abschicken, der die AuswertungsActivity startet + erhobene Daten mitschicken
+                    Intent intent = new Intent(this, AuswertungActivity.class);
+                    intent.putExtra("Ergebnisse", antworten);
+                    startActivity(intent);
                 }
             }
 

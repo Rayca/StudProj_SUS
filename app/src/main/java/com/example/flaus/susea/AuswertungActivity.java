@@ -1,7 +1,9 @@
 package com.example.flaus.susea;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class AuswertungActivity extends AppCompatActivity {
 
@@ -9,10 +11,21 @@ public class AuswertungActivity extends AppCompatActivity {
     int[] antworten = new int[10];
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auswertung);
+
+        Bundle extras = getIntent().getExtras();
+        antworten = extras.getIntArray("Ergebnisse");
+
+
+        // Nur zum Überprüfen, ob die richtigen Werte im Array übergeben werden
+        for(int i = 0; i< antworten.length; i++){
+            Log.d("Jule", "Antwort "+ (i+1) +" : " + antworten[i] + "\n");
+        }
     }
 
 
