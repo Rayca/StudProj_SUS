@@ -44,15 +44,63 @@
             android:paddingTop="10dp">
 
             <TextView
+                android:id="@+id/textView_Ablehnung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Starke Ablehnung" />
 
             <TextView
+                android:id="@+id/textView_Zustimmung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Starke Zustimmung"
                 android:gravity="end"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout_letzeSeiteTest"
+                android:orientation="vertical"
+                android:visibility="gone">
+            <LinearLayout
+                android:id="@+id/linearLayout_Alter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alter: " />
+                <EditText
+                    android:id="@+id/textEdit_alter"
+                    android:layout_width="5dp"
+                    android:layout_height="15dp"
+                    android:inputType="number"
+                    android:text=" "/>
+            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Geschlecht:"/>
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioGroup_Geschlecht"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton_male"
+                        android:text="Männlich"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton_female"
+                        android:text="Weiblich"/>
+                </RadioGroup>
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <RadioGroup
@@ -60,7 +108,8 @@
             android:layout_width="294dp"
             android:layout_height="54dp"
             android:layout_margin="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <RadioButton
                 android:id="@+id/radioButton1"

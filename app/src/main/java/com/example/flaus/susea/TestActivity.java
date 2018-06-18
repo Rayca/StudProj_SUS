@@ -1,16 +1,22 @@
 package com.example.flaus.susea;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class TestActivity extends AppCompatActivity {
+
+
     TextView ueberschrift;
     TextView frage;
     ProgressBar progessBar;
@@ -35,6 +41,9 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup_Antworten);
 
@@ -47,7 +56,7 @@ public class TestActivity extends AppCompatActivity {
         frage.setText(texteFragen[index]);
 
         progessBar = (ProgressBar) findViewById(R.id.progressBar);
-        progessBar.setMax(texteFragen.length-1);
+        progessBar.setMax(texteFragen.length);
 
         next = (Button) findViewById(R.id.button_naechsteFrage);
         next.setEnabled(false);
@@ -97,14 +106,15 @@ public class TestActivity extends AppCompatActivity {
         //Setzt wieder alle RadioButtons auf unchecked
             radioGroup.clearCheck();
             index = index + 1;
+            ueberschrift.setText("Frage " + (index + 1));
+            progessBar.incrementProgressBy(1);
             if (index < texteFragen.length) {
-                ueberschrift.setText("Frage " + (index + 1));
                 frage.setText(texteFragen[index]);
-                progessBar.incrementProgressBy(1);
                 next.setEnabled(false);
             } else {
-                //TODO: UI ändern um Geschlecht und Alter noch abzufragen
 
+                //TODO: UI ändern um Geschlecht und Alter noch abzufragen
+                changeUi();
                 //Gesammelte Daten in die Datenbank schreiben
                 //TODO: Aktuelles Datum noch in die DB schreiben
                 manager.insertTest(antworten, 10, "w");
@@ -113,12 +123,27 @@ public class TestActivity extends AppCompatActivity {
                 //Daten an die AuswertungsActivity übergeben
                 Intent intent = new Intent(this, AuswertungActivity.class);
                 intent.putExtra("Ergebnisse", antworten);
-                startActivity(intent);
+                //startActivity(intent);
                 //TODO: "AbschlussScreen"
             }
 
 
 
+
+    }
+
+    //Ändert das UI für die letzte Seite des Fragebogens zur Erhebung von Alter und Geschlecht
+        public void changeUi(){
+        LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
+        TextView zustimmung = (TextView) findViewById(R.id.textView_Zustimmung);
+        TextView ablehnung = (TextView) findViewById(R.id.textView_Ablehnung);
+
+        frage.setText("Bitten geben Sie noch Ihr Alter und Geschlecht an.");
+
+        layout.setVisibility(View.VISIBLE);
+        radioGroup.setVisibility(View.GONE);
+        zustimmung.setVisibility(View.GONE);
+        ablehnung.setVisibility(View.GONE);
 
     }
 }
