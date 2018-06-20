@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class Datenbank extends SQLiteOpenHelper {
     public static final int DATENBANK_VERSION = 1;
@@ -130,10 +131,8 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_FRAGE10, antworten[9]);
         neueZeile.put(SPALTE_ALTER, alter);
         neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
+        //TODO: Aktuelles Datum noch dazuspeichern
         db.insert(TABELLE_TEST, null, neueZeile);
-
-
-
 
 
 

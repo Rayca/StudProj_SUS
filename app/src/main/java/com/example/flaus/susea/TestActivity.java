@@ -1,12 +1,16 @@
 package com.example.flaus.susea;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -17,13 +21,16 @@ import org.w3c.dom.Text;
 public class TestActivity extends AppCompatActivity {
 
 
+    EditText eingabe_alter;
     TextView ueberschrift;
     TextView frage;
     ProgressBar progessBar;
     RadioGroup radioGroup;
+    RadioGroup radioGroup_geschlecht;
     Button next;
     int[] antworten = new int[10];
     int index = 0;
+    int alter;
     Datenbank manager = new Datenbank(this);
     String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
             "Die Software wirkt auf mich recht einfach aufgebaut.",
@@ -42,6 +49,13 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         ActionBar actionBar = getSupportActionBar();
+       /* GradientDrawable background = new GradientDrawable(
+                GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{ContextCompat.getColor(this, R.color.imst),
+                        ContextCompat.getColor(this, R.color.alp),
+                        ContextCompat.getColor(this, R.color.aing),
+                        ContextCompat.getColor(this, R.color.bw),
+                        ContextCompat.getColor(this, R.color.bg)}); */
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
 
 
@@ -61,6 +75,8 @@ public class TestActivity extends AppCompatActivity {
         next = (Button) findViewById(R.id.button_naechsteFrage);
         next.setEnabled(false);
 
+        radioGroup_geschlecht = (RadioGroup) findViewById(R.id.radioGroup_Geschlecht);
+
 
         // Erst wenn man eine Antwort ausgewählt hat, kann man zur nächsten frage weiterkommen
         //Und auch erst mit dem Klick auf den Button wird die ausgewählte Antwort gespeichert
@@ -74,6 +90,14 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
             naechsteFrage();
+            }
+        });
+
+        //Erst wenn eine Anwtort aufgewählt wurde, wird der Button enabled
+        radioGroup_geschlecht.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                next.setEnabled(true);
             }
         });
 
@@ -111,20 +135,43 @@ public class TestActivity extends AppCompatActivity {
             if (index < texteFragen.length) {
                 frage.setText(texteFragen[index]);
                 next.setEnabled(false);
-            } else {
-
-                //TODO: UI ändern um Geschlecht und Alter noch abzufragen
+            } else if(index == texteFragen.length){
+                //Ui ändern für die letzen beiden Fragen (Geschlecht/Alter)
                 changeUi();
-                //Gesammelte Daten in die Datenbank schreiben
-                //TODO: Aktuelles Datum noch in die DB schreiben
-                manager.insertTest(antworten, 10, "w");
+            } else if (index == texteFragen.length +1) {
+                next.setEnabled(false);
+                //Text des Button ändern
+                next.setText("Test beenden");
+                //Eingegebne Daten sammeln
+                //TODO: evtl Numberpicker statt EditText
+                eingabe_alter = (EditText) findViewById(R.id.textEdit_alter);
+                //TODO: sicher stellen, dass eine sinnvolle Zahl eingegben wurde
+                alter = Integer.parseInt(eingabe_alter.getText().toString());
 
+
+                //Geschlecht auswerten
+                int radioButtonId = radioGroup_geschlecht.getCheckedRadioButtonId();
+                String geschlecht ="";
+
+                switch (radioButtonId){
+                    case R.id.radioButton_male:
+                        geschlecht =  geschlecht + "m";
+                        break;
+                    case R.id.radioButton_female:
+                        geschlecht = geschlecht + "w";
+                        break;
+                }
+
+                //gesammelte Daten in die Datenbank schreiben
+                manager.insertTest(antworten, alter, geschlecht);
 
                 //Daten an die AuswertungsActivity übergeben
                 Intent intent = new Intent(this, AuswertungActivity.class);
                 intent.putExtra("Ergebnisse", antworten);
-                //startActivity(intent);
+                startActivity(intent);
                 //TODO: "AbschlussScreen"
+            } else {
+                //irgendeine Fehlermeldung, weil dann ist wirklich was schief gelaufen
             }
 
 

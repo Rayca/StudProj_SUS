@@ -5,12 +5,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class AuswertungActivity extends AppCompatActivity {
 
 
     int[] antworten = new int[10];
-
+    TextView anezige_score;
 
 
 
@@ -30,6 +31,11 @@ public class AuswertungActivity extends AppCompatActivity {
         for(int i = 0; i< antworten.length; i++){
             Log.d("Jule", "Antwort "+ (i+1) +" : " + antworten[i] + "\n");
         }
+
+        //Score berechnen und anzeigen
+        anezige_score = (TextView) findViewById(R.id.anzeige_score);
+        int score = berechneScore(antworten);
+        anezige_score.setText(score+ "");
     }
 
 

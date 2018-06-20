@@ -17,7 +17,7 @@
             android:layout_above="@id/button_next"
             android:layout_alignParentTop="true"
             android:choiceMode="singleChoice"
-            android:listSelector="@color/pressed_color">
+            android:listSelector="@color/colorAccent">
 
         </ListView>
 

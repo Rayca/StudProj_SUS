@@ -5,4 +5,9 @@
     <color name="colorAccent">#10BAEE</color>
     <color name="default_color">#FFFFFF</color>
     <color name="pressed_color">#00FFAA</color>
+    <color name="aing">#AA006C7D</color>
+    <color name="bg">#AA93C11F</color>
+    <color name="alp">#AA5CACAA</color>
+    <color name="bw">#AA008E5C</color>
+    <color name="imst">#AA10BAEE</color>
 </resources>

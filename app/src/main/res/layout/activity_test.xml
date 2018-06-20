@@ -65,33 +65,40 @@
             <LinearLayout
                 android:id="@+id/linearLayout_Alter"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Alter: " />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Alter: "
+                    android:gravity="center"/>
                 <EditText
+                    android:gravity="center"
                     android:id="@+id/textEdit_alter"
-                    android:layout_width="5dp"
-                    android:layout_height="15dp"
-                    android:inputType="number"
-                    android:text=" "/>
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:inputType="number" />
             </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Geschlecht:"/>
+                    android:text="Geschlecht:"
+                    android:layout_gravity="center"/>
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/radioGroup_Geschlecht"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingBottom="5dp"
+                    android:layout_margin="10dp">
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/radioButton_male"
-                        android:text="Männlich"/>
+                        android:text="Männlich"
+                        android:paddingRight="2dp"/>
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
