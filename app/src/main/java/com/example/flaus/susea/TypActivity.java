@@ -7,10 +7,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.content.DialogInterface;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import java.util.List;
 
 public class TypActivity extends AppCompatActivity {
     String typ;
+    android.app.AlertDialog studie_erstellen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,9 @@ public class TypActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+
+       Intent intent = this.getIntent();
+       final boolean studie = intent.getBooleanExtra("Studie", false);
 
 
         final ListView listview = findViewById(R.id.list_view_typ);
@@ -60,16 +67,22 @@ public class TypActivity extends AppCompatActivity {
             public void onClick(View button_next) {
 
                 if (typ != null) {
+                    if(studie){
+
+                        EditText eingabe_name = (EditText) findViewById(R.id.editText_name);
+                        String name_studie = eingabe_name.getText().toString();
+                        //TODO: name und typ an die nächste Activity mitschicken und in der Db speichern
+                    } else {
                     Intent intent = new Intent(getBaseContext(), TestActivity.class);
                     intent.putExtra("typ", typ);
-                    startActivity(intent);
+                    startActivity(intent); }
                 }else{
                     Toast toast = Toast.makeText(getApplicationContext(),"Bitte einen Typen wählen",Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
         });
-        Button button_help = (Button) findViewById(R.id.button_help);
+        ImageButton button_help = (ImageButton) findViewById(R.id.button_help);
         button_help.setOnClickListener(new OnClickListener() { //Help Button
 
 
@@ -105,6 +118,34 @@ public class TypActivity extends AppCompatActivity {
 
     public void setTyp(String typ){
         this.typ = typ;
+    }
+
+    public void name_studie(){
+        // Öffnet und erstellt den Dialog um der neuen Studie einen Namen zu geben
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Neue Studie erstellen");
+        builder.setMessage("Bitte einen Namen für die Studie eingeben");
+        builder.setPositiveButton("Studie erstellen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //TODO: weiter zum Auswertungsscreen
+               // Intent intent = new Intent(getBaseContext(), TypActivity.class);
+                //intent.putExtra("Studie", studie);
+                //startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //Dialog wird einfach geschlossen, sonst passiert nichts
+            }
+        });
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_studie_erstellen, null));
+        studie_erstellen = builder.create();
+
+        return;
     }
 
 }

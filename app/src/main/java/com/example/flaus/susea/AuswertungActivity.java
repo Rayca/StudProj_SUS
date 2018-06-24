@@ -5,6 +5,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class AuswertungActivity extends AppCompatActivity {
@@ -12,6 +15,7 @@ public class AuswertungActivity extends AppCompatActivity {
 
     int[] antworten = new int[10];
     TextView anezige_score;
+    ImageButton start;
 
 
 
@@ -36,6 +40,15 @@ public class AuswertungActivity extends AppCompatActivity {
         anezige_score = (TextView) findViewById(R.id.anzeige_score);
         int score = berechneScore(antworten);
         anezige_score.setText(score+ "");
+
+        start = (ImageButton) findViewById(R.id.button_home);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), StartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

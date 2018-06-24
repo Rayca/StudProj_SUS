@@ -148,12 +148,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </RadioGroup>
+
         <Button
             android:id="@+id/button_naechsteFrage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Nächste Frage"/>
+            android:text="Nächste Frage"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
 
     </LinearLayout>

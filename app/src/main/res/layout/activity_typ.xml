@@ -22,20 +22,21 @@
         </ListView>
 
 
-        <Button
+        <ImageButton
             android:id="@+id/button_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:text="\?"></Button>
+            android:layout_alignParentLeft="true"
+            android:src="@android:drawable/ic_menu_help"></ImageButton>
 
         <Button
             android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:text="Weiter"></Button>
+            android:layout_alignParentRight="true"
+            android:text="Weiter"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"></Button>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
