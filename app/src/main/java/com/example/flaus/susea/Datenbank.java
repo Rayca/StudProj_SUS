@@ -10,6 +10,7 @@ import android.util.Log;
 public class Datenbank extends SQLiteOpenHelper {
     public static final int DATENBANK_VERSION = 1;
     public static final String DATENBANK_NAMEN = "Datenbank.db";
+
     //Konstanten für die Test-Datenbank
     public static final String TABELLE_TEST = "Einzelner_Test";
     public static final String SPALTE_TEST_ID = "Test_ID";
@@ -116,7 +117,7 @@ public class Datenbank extends SQLiteOpenHelper {
         return  cursor;
     }
 
-    public void insertTest(int[] antworten, int alter, String geschlecht){
+    public long insertTest(int[] antworten, int alter, String geschlecht){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_FRAGE1, antworten[0]);
@@ -132,11 +133,35 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_ALTER, alter);
         neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
         //TODO: Aktuelles Datum noch dazuspeichern
-        db.insert(TABELLE_TEST, null, neueZeile);
+
+        long id = db.insert(TABELLE_TEST, null, neueZeile);
+        Log.d("Jule", id+"");
+    return id;
 
 
 
+    }
+    public String getData(String string){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT "+string+" FROM " + TABELLE_TEST,null);
 
+        if(c!=null){
+            c.moveToFirst();
+            String data = c.getString(0);
+            return data;
+        }
+
+        return null;
+    }
+    public void setScore(long id, int score){
+
+        SQLiteDatabase db = getWritableDatabase();
+        //Cursor c = db.rawQuery("SELECT * FROM " + TABELLE_TEST+" WHERE "+SPALTE_TEST_ID+" = "+id,null);
+        ContentValues neueZeile = new ContentValues();
+        neueZeile.put(SPALTE_SCORE,score);
+        String[] arg = new String[]{Long.toString(id)};
+        Log.d("Jule", "In die DB geschr. "+score+" "+id);
+        db.update(TABELLE_TEST,neueZeile,SPALTE_TEST_ID,arg);
     }
 
 

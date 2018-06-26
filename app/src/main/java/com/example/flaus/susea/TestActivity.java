@@ -161,15 +161,15 @@ public class TestActivity extends AppCompatActivity {
                         geschlecht = geschlecht + "w";
                         break;
                 }
-
                 //gesammelte Daten in die Datenbank schreiben
-                manager.insertTest(antworten, alter, geschlecht);
+                long id = manager.insertTest(antworten, alter, geschlecht);
 
                 //Daten an die AuswertungsActivity übergeben
                 Intent intent = new Intent(this, AuswertungActivity.class);
                 intent.putExtra("Ergebnisse", antworten);
+                intent.putExtra("Test_ID",id);
                 startActivity(intent);
-                //TODO: "AbschlussScreen"
+                //TODO: "AbschlussScreen".*
             } else {
                 //irgendeine Fehlermeldung, weil dann ist wirklich was schief gelaufen
             }
@@ -193,4 +193,8 @@ public class TestActivity extends AppCompatActivity {
         ablehnung.setVisibility(View.GONE);
 
     }
+
+
+
+
 }

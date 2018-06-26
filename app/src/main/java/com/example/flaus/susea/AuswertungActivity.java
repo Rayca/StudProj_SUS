@@ -10,13 +10,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import static com.example.flaus.susea.Datenbank.SPALTE_SCORE;
+
 public class AuswertungActivity extends AppCompatActivity {
 
 
+    Datenbank manager = new Datenbank(this);
     int[] antworten = new int[10];
     TextView anezige_score;
     ImageButton start;
-
+    long id;
 
 
     @Override
@@ -29,7 +32,7 @@ public class AuswertungActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         antworten = extras.getIntArray("Ergebnisse");
-
+        id = extras.getLong("Test_ID",-1);
 
         // Nur zum Überprüfen, ob die richtigen Werte im Array übergeben werden
         for(int i = 0; i< antworten.length; i++){
@@ -42,6 +45,13 @@ public class AuswertungActivity extends AppCompatActivity {
         Log.d("Jule", "Übergebener Score " + score);
         anezige_score.setText(score+ "");
 
+
+
+        Log.d("Jule","Von DB "+manager.getData(SPALTE_SCORE));
+
+
+
+
         start = (ImageButton) findViewById(R.id.button_home);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,19 +63,6 @@ public class AuswertungActivity extends AppCompatActivity {
     }
 
 
-    public int berechneScore(int[] antworten){
-        int score = 0;
-
-        for(int i = 0; i<antworten.length;i++){
-                if(i % 2 == 0){
-                    score += antworten[i] - 1;
-                } else {
-                     score += 5- antworten[i];
-                }
-        }
-        Log.d("Jule", "Berechneter Scroe: " + score);
-        return score;
-    }
 
 
     public int berechneStandardabweichung(int[] antworten){
@@ -86,7 +83,20 @@ public class AuswertungActivity extends AppCompatActivity {
 
         return cronbachAlpha;
     }
+    public int berechneScore(int[] antworten){
+        int score = 0;
 
+        for(int i = 0; i<antworten.length;i++){
+            if(i % 2 == 0){
+                score += antworten[i] - 1;
+            } else {
+                score += 5- antworten[i];
+            }
+        }
+        manager.setScore(id,score);
+        Log.d("Jule", "Berechneter Score: " + score);
+        return score;
+    }
 
 }
 
