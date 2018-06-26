@@ -10,23 +10,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.content.DialogInterface;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TypActivity extends AppCompatActivity {
     String typ;
-    android.app.AlertDialog studie_erstellen;
+    AlertDialog studie_erstellen;
+    String name_studie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +65,12 @@ public class TypActivity extends AppCompatActivity {
 
                 if (typ != null) {
                     if(studie){
-
-                        EditText eingabe_name = (EditText) findViewById(R.id.editText_name);
-                        String name_studie = eingabe_name.getText().toString();
+                        dialog_studie_erstellen_öffnen();
                         //TODO: name und typ an die nächste Activity mitschicken und in der Db speichern
+                        //TODO: weiter zum Auswertungsscreen
+                        // Intent intent = new Intent(getBaseContext(), TypActivity.class);
+                        //intent.putExtra("Studie", studie);
+                        //startActivity(intent);
                     } else {
                     Intent intent = new Intent(getBaseContext(), TestActivity.class);
                     intent.putExtra("typ", typ);
@@ -120,18 +119,29 @@ public class TypActivity extends AppCompatActivity {
         this.typ = typ;
     }
 
-    public void name_studie(){
-        // Öffnet und erstellt den Dialog um der neuen Studie einen Namen zu geben
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+    // Öffnet und erstellt den Dialog um der neuen Studie einen Namen zu geben
+    public void dialog_studie_erstellen_öffnen(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        Log.d("Jule", "Funktion zum Erstellen des Dialogs wird aufgerufen");
         builder.setTitle("Neue Studie erstellen");
         builder.setMessage("Bitte einen Namen für die Studie eingeben");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_studie_erstellen, null);
+        builder.setView(v);
+
+        final EditText eingabe_name = (EditText) v.findViewById(R.id.editText_name);
+
         builder.setPositiveButton("Studie erstellen", new DialogInterface.OnClickListener() {
             @Override
+            //TODO: sicherstellen, dass auch etwas eingegeben wurde
             public void onClick(DialogInterface dialogInterface, int i) {
-                //TODO: weiter zum Auswertungsscreen
-               // Intent intent = new Intent(getBaseContext(), TypActivity.class);
-                //intent.putExtra("Studie", studie);
-                //startActivity(intent);
+                name_studie = eingabe_name.getText().toString();
+                Log.d("Jule", name_studie);
+                Intent intent = new Intent(getBaseContext(), AuswertungActivity.class);
+                intent.putExtra("Name_der_Studie", name_studie);
+                intent.putExtra("Interfacetyp", typ);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
@@ -141,9 +151,9 @@ public class TypActivity extends AppCompatActivity {
             }
         });
 
-        LayoutInflater inflater = this.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_studie_erstellen, null));
         studie_erstellen = builder.create();
+        studie_erstellen.show();
+
 
         return;
     }

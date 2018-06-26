@@ -39,6 +39,7 @@ public class AuswertungActivity extends AppCompatActivity {
         //Score berechnen und anzeigen
         anezige_score = (TextView) findViewById(R.id.anzeige_score);
         int score = berechneScore(antworten);
+        Log.d("Jule", "Übergebener Score " + score);
         anezige_score.setText(score+ "");
 
         start = (ImageButton) findViewById(R.id.button_home);
@@ -62,6 +63,7 @@ public class AuswertungActivity extends AppCompatActivity {
                      score += 5- antworten[i];
                 }
         }
+        Log.d("Jule", "Berechneter Scroe: " + score);
         return score;
     }
 
