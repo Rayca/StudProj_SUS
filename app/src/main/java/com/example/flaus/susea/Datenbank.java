@@ -161,7 +161,7 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_SCORE,score);
         String[] arg = new String[]{Long.toString(id)};
         Log.d("Jule", "In die DB geschr. "+score+" "+id);
-        db.update(TABELLE_TEST,neueZeile,SPALTE_TEST_ID,arg);
+        db.update(TABELLE_TEST,neueZeile,SPALTE_TEST_ID + " = ?",arg);
     }
 
 
