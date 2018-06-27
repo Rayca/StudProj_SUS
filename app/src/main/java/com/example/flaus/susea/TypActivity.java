@@ -74,6 +74,7 @@ public class TypActivity extends AppCompatActivity {
                     } else {
                     Intent intent = new Intent(getBaseContext(), TestActivity.class);
                     intent.putExtra("typ", typ);
+                    intent.putExtra("Studie", studie);
                     startActivity(intent); }
                 }else{
                     Toast toast = Toast.makeText(getApplicationContext(),"Bitte einen Typen wählen",Toast.LENGTH_SHORT);

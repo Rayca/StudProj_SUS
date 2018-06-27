@@ -20,6 +20,7 @@ public class AuswertungActivity extends AppCompatActivity {
     TextView anezige_score;
     ImageButton start;
     long id;
+    int score =0;
 
 
     @Override
@@ -32,24 +33,25 @@ public class AuswertungActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         antworten = extras.getIntArray("Ergebnisse");
-        id = extras.getLong("Test_ID",-1);
+        id = extras.getLong("Test_ID", -1);
+        boolean studie = extras.getBoolean("Studie", false);
 
-        // Nur zum Überprüfen, ob die richtigen Werte im Array übergeben werden
-        for(int i = 0; i< antworten.length; i++){
-            Log.d("Jule", "Antwort "+ (i+1) +" : " + antworten[i] + "\n");
-        }
+        if (studie) {        // Nur zum Überprüfen, ob die richtigen Werte im Array übergeben werden
+            for (int i = 0; i < antworten.length; i++) {
+                Log.d("Jule", "Antwort " + (i + 1) + " : " + antworten[i] + "\n");
+            }
+
 
         //Score berechnen und anzeigen
         anezige_score = (TextView) findViewById(R.id.anzeige_score);
-        int score = berechneScore(antworten);
+        score = berechneScore(antworten);
         Log.d("Jule", "Übergebener Score " + score);
-        anezige_score.setText(score+ "");
+        anezige_score.setText(score + "");
 
 
+        Log.d("Jule", "Von DB " + manager.getData(SPALTE_SCORE));
 
-        Log.d("Jule","Von DB "+manager.getData(SPALTE_SCORE));
-
-
+    }
 
 
         start = (ImageButton) findViewById(R.id.button_home);

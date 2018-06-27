@@ -31,6 +31,7 @@ public class TestActivity extends AppCompatActivity {
     int[] antworten = new int[10];
     int index = 0;
     int alter;
+    boolean studie;
     Datenbank manager = new Datenbank(this);
     String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
             "Die Software wirkt auf mich recht einfach aufgebaut.",
@@ -48,6 +49,8 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+
+
         ActionBar actionBar = getSupportActionBar();
        /* GradientDrawable background = new GradientDrawable(
                 GradientDrawable.Orientation.LEFT_RIGHT,
@@ -59,6 +62,8 @@ public class TestActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
 
 
+        Intent intent = this.getIntent();
+        studie = intent.getBooleanExtra("Studie", true);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup_Antworten);
 
         ueberschrift = (TextView) findViewById(R.id.textView_Ueberschrift);
@@ -168,6 +173,7 @@ public class TestActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, AuswertungActivity.class);
                 intent.putExtra("Ergebnisse", antworten);
                 intent.putExtra("Test_ID",id);
+                if(studie) intent.putExtra("Studie", true);
                 startActivity(intent);
                 //TODO: "AbschlussScreen".*
             } else {
