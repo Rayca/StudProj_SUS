@@ -24,6 +24,13 @@ public class TypActivity extends AppCompatActivity {
     String typ;
     AlertDialog studie_erstellen;
     String name_studie;
+    Datenbank db;
+
+    // Variabeln zur erstellung der studie
+    int anzahlTests = 0;
+    int scoreGesamt = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +38,8 @@ public class TypActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+
+        db = new Datenbank(this);
 
        Intent intent = this.getIntent();
        final boolean studie = intent.getBooleanExtra("Studie", false);
@@ -68,6 +77,7 @@ public class TypActivity extends AppCompatActivity {
                         dialog_studie_erstellen_öffnen();
                         //TODO: name und typ an die nächste Activity mitschicken und in der Db speichern
                         //TODO: weiter zum Auswertungsscreen
+
                         // Intent intent = new Intent(getBaseContext(), TypActivity.class);
                         //intent.putExtra("Studie", studie);
                         //startActivity(intent);
@@ -143,6 +153,11 @@ public class TypActivity extends AppCompatActivity {
                 intent.putExtra("Name_der_Studie", name_studie);
                 intent.putExtra("Interfacetyp", typ);
                 startActivity(intent);
+               long studieId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
+               Log.d("TJ", "StudieId = " + studieId);
+               Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
+
+
             }
         });
         builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {

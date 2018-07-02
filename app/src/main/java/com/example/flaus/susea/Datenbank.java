@@ -165,4 +165,24 @@ public class Datenbank extends SQLiteOpenHelper {
     }
 
 
+
+
+
+    public long insertStudie(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues neueZeile = new ContentValues();
+        neueZeile.put(SPALTE_STUDIE_NAME,name);
+        neueZeile.put(SPALTE_INTERFACE, interfaceTyp);
+        neueZeile.put(SPALTE_ANZAHL_TESTS,anzahlTests);
+        neueZeile.put(SPALTE_STUDIE_SCORE,scoreGesamt);
+
+        long id = db.insert(TABELLE_STUDIE,null,neueZeile);
+        Log.d("Jule", "Studie_Id = " + id);
+
+
+        return id;
+
+    }
+
+
 }

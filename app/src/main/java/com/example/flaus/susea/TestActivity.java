@@ -38,7 +38,7 @@ public class TestActivity extends AppCompatActivity {
             "Ich finde die Software leicht zu benutzen.",
             "Ich kann die Software ohne Unterstützung durch Fachpersonal direkt benutzen.",
             "Ich finde, dass die angebotenen Funktionen gut in die Software integriert sind.",
-            "Ich finde, dass die Software einheitlich ausfgebaut ist.",
+            "Ich finde, dass die Software einheitlich aufgebaut ist.",
             "Ich denke, dass die meisten Nutzer sehr schnell mit der Software zurecht kommen.",
             "Ich finde die Software in der Benutzung sehr intuitiv.",
             "Ich weiß bei der benutzung der Software zu jedem Zeitpunkt, was ich tue.",

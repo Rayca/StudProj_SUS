@@ -51,6 +51,9 @@ public class AuswertungActivity extends AppCompatActivity {
 
         Log.d("Jule", "Von DB " + manager.getData(SPALTE_SCORE));
 
+
+
+
     }
 
 
@@ -77,14 +80,7 @@ public class AuswertungActivity extends AppCompatActivity {
     }
 
 
-    public double berechneCronbachAlpha(int[] antworten){
 
-        double cronbachAlpha = 0;
-
-
-
-        return cronbachAlpha;
-    }
     public int berechneScore(int[] antworten){
         int score = 0;
 
