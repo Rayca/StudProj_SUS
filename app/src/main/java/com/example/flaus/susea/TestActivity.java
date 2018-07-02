@@ -188,15 +188,18 @@ public class TestActivity extends AppCompatActivity {
     //Ändert das UI für die letzte Seite des Fragebogens zur Erhebung von Alter und Geschlecht
         public void changeUi(){
         LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
-        TextView zustimmung = (TextView) findViewById(R.id.textView_Zustimmung);
-        TextView ablehnung = (TextView) findViewById(R.id.textView_Ablehnung);
+        //TextView zustimmung = (TextView) findViewById(R.id.textView_Zustimmung);
+        //TextView ablehnung = (TextView) findViewById(R.id.textView_Ablehnung);
+        LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmung);
+
 
         frage.setText("Bitten geben Sie noch Ihr Alter und Geschlecht an.");
 
+        layoutZustimmung.setVisibility((View.GONE));
         layout.setVisibility(View.VISIBLE);
         radioGroup.setVisibility(View.GONE);
-        zustimmung.setVisibility(View.GONE);
-        ablehnung.setVisibility(View.GONE);
+        //zustimmung.setVisibility(View.GONE);
+        //ablehnung.setVisibility(View.GONE);
 
     }
 
