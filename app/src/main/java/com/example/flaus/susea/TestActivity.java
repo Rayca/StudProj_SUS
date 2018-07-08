@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ public class TestActivity extends AppCompatActivity {
     int index = 0;
     int alter;
     boolean studie;
+    long testId;
     Datenbank manager = new Datenbank(this);
     String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
             "Die Software wirkt auf mich recht einfach aufgebaut.",
@@ -108,7 +110,6 @@ public class TestActivity extends AppCompatActivity {
 
     public void naechsteFrage(){
 
-        Intent intent = new Intent(this, AuswertungTestActivity.class);
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
             switch (radioButtonID) {
                 case R.id.radioButton1:
@@ -141,7 +142,6 @@ public class TestActivity extends AppCompatActivity {
                 changeUi();
             } else if (index == texteFragen.length +1) {
                 btnWeiter.setEnabled(false);
-                //Text des Button ändern
 
                 //Eingegebne Daten sammeln
                 //TODO: evtl Numberpicker statt EditText
@@ -163,30 +163,31 @@ public class TestActivity extends AppCompatActivity {
                         break;
                 }
 
+
                 //gesammelte Daten in die Datenbank schreiben
-                long id = manager.insertTest(antworten, alter, geschlecht);
+                testId = manager.insertTest(antworten, alter, geschlecht);
+                Log.d("TJ","test_id vor intent" + testId);
+                //Daten an die AuswertungsTestActivity übergeben
 
-                //Daten an die AuswertungsActivity übergeben
 
-                intent.putExtra("Ergebnisse", antworten);
-                intent.putExtra("Test_ID",id);
-                if(studie) {
-                    intent.putExtra("Studie", true);
-                    intent.putExtra("Test_abgeschlossen", true);
-                }
 
                 // Endscreen
                 endScreen();
 
-            } else if (index == texteFragen.length +2){
+            } else {
+                Intent intent = new Intent(this,AuswertungTestActivity.class);
+                Bundle bundle = new Bundle();
 
-                btnWeiter.setEnabled(true);
+                bundle.putIntArray("Ergebnisse", antworten);
+                bundle.putLong("testId",testId);
 
-                startActivity(intent);
-
-
+                if(studie) {
+                    bundle.putBoolean("Studie", true);
                 } else {
-                //irgendeine Fehlermeldung, weil dann ist wirklich was schief gelaufen
+                    bundle.putBoolean("Studie", false);
+                }
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
 
