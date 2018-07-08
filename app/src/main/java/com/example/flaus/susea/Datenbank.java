@@ -117,7 +117,7 @@ public class Datenbank extends SQLiteOpenHelper {
         return  cursor;
     }
 
-    public long insertTest(int[] antworten, int alter, String geschlecht){
+    public long insertTest(int[] antworten, int alter, String geschlecht, String datum){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_FRAGE1, antworten[0]);
@@ -132,7 +132,7 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_FRAGE10, antworten[9]);
         neueZeile.put(SPALTE_ALTER, alter);
         neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
-        //TODO: Aktuelles Datum noch dazuspeichern
+        neueZeile.put(SPALTE_DATUM,datum);
 
         long id = db.insert(TABELLE_TEST, null, neueZeile);
         Log.d("Jule", id+"");
@@ -153,10 +153,12 @@ public class Datenbank extends SQLiteOpenHelper {
 
         return null;
     }
+
+
     public void setScore(long id, int score){
 
         SQLiteDatabase db = getWritableDatabase();
-        //Cursor c = db.rawQuery("SELECT * FROM " + TABELLE_TEST+" WHERE "+SPALTE_TEST_ID+" = "+id,null);
+        //Cursor c = db.rawQuery("SELECT * FROM " + TABELLE_TEST+" WHERE "+SPALTE_TEST_ID+" = "+studienId,null);
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_SCORE,score);
         String[] arg = new String[]{Long.toString(id)};
@@ -183,6 +185,5 @@ public class Datenbank extends SQLiteOpenHelper {
         return id;
 
     }
-
 
 }

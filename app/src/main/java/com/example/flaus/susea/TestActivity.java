@@ -13,6 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TestActivity extends AppCompatActivity {
 
 
@@ -28,6 +31,7 @@ public class TestActivity extends AppCompatActivity {
     int alter;
     boolean studie;
     long testId;
+    String datum;
     Datenbank manager = new Datenbank(this);
     String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
             "Die Software wirkt auf mich recht einfach aufgebaut.",
@@ -164,8 +168,11 @@ public class TestActivity extends AppCompatActivity {
                 }
 
 
+                // Datum hinzufügen
+                datum = getDatum();
+
                 //gesammelte Daten in die Datenbank schreiben
-                testId = manager.insertTest(antworten, alter, geschlecht);
+                testId = manager.insertTest(antworten, alter, geschlecht, datum);
                 Log.d("TJ","test_id vor intent" + testId);
                 //Daten an die AuswertungsTestActivity übergeben
 
@@ -175,18 +182,16 @@ public class TestActivity extends AppCompatActivity {
                 endScreen();
 
             } else {
-                Intent intent = new Intent(this,AuswertungTestActivity.class);
-                Bundle bundle = new Bundle();
-
-                bundle.putIntArray("Ergebnisse", antworten);
-                bundle.putLong("testId",testId);
+                Intent intent = new Intent(TestActivity.this,AuswertungTestActivity.class);
+                intent.putExtra("Ergebnisse", antworten);
+                intent.putExtra("testId",testId);
 
                 if(studie) {
-                    bundle.putBoolean("Studie", true);
+                    intent.putExtra("Studie", true);
                 } else {
-                    bundle.putBoolean("Studie", false);
+                    intent.putExtra("Studie", false);
                 }
-                intent.putExtras(bundle);
+
                 startActivity(intent);
             }
 
@@ -197,10 +202,10 @@ public class TestActivity extends AppCompatActivity {
     }
 
     //Ändert das UI für die letzte Seite des Fragebogens zur Erhebung von Alter und Geschlecht
-        public void changeUi(){
+    public void changeUi(){
         LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
-        //TextView zustimmung = (TextView) findViewById(R.id.textView_Zustimmung);
-        //TextView ablehnung = (TextView) findViewById(R.id.textView_Ablehnung);
+        //TextView zustimmung = (TextView) findViewById(R.studienId.textView_Zustimmung);
+        //TextView ablehnung = (TextView) findViewById(R.studienId.textView_Ablehnung);
         LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmung);
 
 
@@ -215,6 +220,8 @@ public class TestActivity extends AppCompatActivity {
         //ablehnung.setVisibility(View.GONE);
 
     }
+
+
     public void endScreen(){
             LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
             textViewFrage.setText("Vielen Dank für Ihre Teilnahme, sie sind fertig! Bitte geben sie das Gerät zurück.");
@@ -228,6 +235,18 @@ public class TestActivity extends AppCompatActivity {
                 }
             });
     }
+
+
+    public String getDatum() {
+        SimpleDateFormat sdf = new SimpleDateFormat("  dd MM yyyy   HH:mm");
+        String dateAndTime = sdf.format(new Date());
+
+
+        return  dateAndTime;
+    }
+
+
+
 
 
 

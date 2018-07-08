@@ -14,6 +14,7 @@ public class AuswertungTestActivity extends AppCompatActivity {
 
     TextView textViewScore, textViewGeschlecht, textViewAlter, textViewAntworten;
     Button btnZurStudie, btnZurStartseite;
+    long testId;
 
 
     @Override
@@ -33,11 +34,8 @@ public class AuswertungTestActivity extends AppCompatActivity {
 
 
         // Intent empfangen
-        Intent empfangsIntent = getIntent();
-        Bundle empfangsBundle = empfangsIntent.getExtras();
-        boolean studie = empfangsBundle.getBoolean("Studie",false);
-        int[] antworten = empfangsBundle.getIntArray("Ergebnisse");
-        long testId = empfangsBundle.getLong("testId",-1);
+        Intent intent = getIntent();
+        testId = intent.getLongExtra("testId",-1);
 
 
 

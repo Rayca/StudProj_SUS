@@ -29,6 +29,7 @@ public class TypActivity extends AppCompatActivity {
     // Variabeln zur erstellung der studie
     int anzahlTests = 0;
     int scoreGesamt = 0;
+    long studieId = -1;
 
 
     @Override
@@ -75,12 +76,6 @@ public class TypActivity extends AppCompatActivity {
                 if (typ != null) {
                     if(studie){
                         dialog_studie_erstellen_öffnen();
-                        //TODO: name und typ an die nächste Activity mitschicken und in der Db speichern
-                        //TODO: weiter zum Auswertungsscreen
-
-                        // Intent intent = new Intent(getBaseContext(), TypActivity.class);
-                        //intent.putExtra("Studie", studie);
-                        //startActivity(intent);
                     } else {
                     Intent intent = new Intent(getBaseContext(), TestActivity.class);
                     intent.putExtra("typ", typ);
@@ -150,18 +145,22 @@ public class TypActivity extends AppCompatActivity {
                 name_studie = eingabe_name.getText().toString();
                 Log.d("Jule", name_studie);
 
-                //TODO: Neue Studie in der DB erzeugen
-                //manager.Studieeinfügen();
-                //Leitet weiter zur Übersicht der Studie
-                Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
-                intent.putExtra("Name_der_Studie", name_studie);
-                intent.putExtra("Interfacetyp", typ);
-                startActivity(intent);
-               long studieId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
+
+
+                // Studie in Datenbank einfügen
+                studieId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
                Log.d("TJ", "StudieId = " + studieId);
-               Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
+               if(studieId != -1) {
+                   Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
+                   Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
+                   intent.putExtra("Name_der_Studie", name_studie);
+                   intent.putExtra("Interfacetyp", typ);
+                   intent.putExtra("studienId",studieId);
+                   startActivity(intent);
 
-
+               } else {
+                   Toast.makeText(TypActivity.this, "Ups, da lief was schief!",Toast.LENGTH_SHORT).show();
+               }
             }
         });
         builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
