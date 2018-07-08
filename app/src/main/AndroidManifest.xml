@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".TestActivity" />
         <activity android:name=".TypActivity"></activity>
-        <activity android:name=".AuswertungActivity"></activity>
+        <activity android:name=".AuswertungStudieActivity"></activity>
+        <activity android:name=".AuswertungTestActivity"></activity>
     </application>
 
 </manifest>

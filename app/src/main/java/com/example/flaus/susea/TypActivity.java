@@ -153,7 +153,7 @@ public class TypActivity extends AppCompatActivity {
                 //TODO: Neue Studie in der DB erzeugen
                 //manager.Studieeinfügen();
                 //Leitet weiter zur Übersicht der Studie
-                Intent intent = new Intent(getBaseContext(), AuswertungActivity.class);
+                Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
                 intent.putExtra("Name_der_Studie", name_studie);
                 intent.putExtra("Interfacetyp", typ);
                 startActivity(intent);

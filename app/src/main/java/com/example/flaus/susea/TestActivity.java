@@ -1,13 +1,9 @@
 package com.example.flaus.susea;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,18 +12,16 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class TestActivity extends AppCompatActivity {
 
 
     EditText eingabe_alter;
-    TextView ueberschrift;
-    TextView frage;
+    TextView textViewUeberschrift;
+    TextView textViewFrage;
     ProgressBar progessBar;
     RadioGroup radioGroup;
     RadioGroup radioGroup_geschlecht;
-    Button next;
+    Button btnWeiter;
     int[] antworten = new int[10];
     int index = 0;
     int alter;
@@ -66,32 +60,32 @@ public class TestActivity extends AppCompatActivity {
         studie = intent.getBooleanExtra("Studie", true);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup_Antworten);
 
-        ueberschrift = (TextView) findViewById(R.id.textView_Ueberschrift);
-        ueberschrift.setText("Frage "+ (index+1));
+        textViewUeberschrift = (TextView) findViewById(R.id.textView_Ueberschrift);
+        textViewUeberschrift.setText("Frage "+ (index+1));
 
 
 
-        frage = (TextView) findViewById(R.id.textView_Fragen);
-        frage.setText(texteFragen[index]);
+        textViewFrage = (TextView) findViewById(R.id.textView_Fragen);
+        textViewFrage.setText(texteFragen[index]);
 
         progessBar = (ProgressBar) findViewById(R.id.progressBar);
         progessBar.setMax(texteFragen.length);
 
-        next = (Button) findViewById(R.id.button_naechsteFrage);
-        next.setEnabled(false);
+        btnWeiter = (Button) findViewById(R.id.button_naechsteFrage);
+        btnWeiter.setEnabled(false);
 
         radioGroup_geschlecht = (RadioGroup) findViewById(R.id.radioGroup_Geschlecht);
 
 
-        // Erst wenn man eine Antwort ausgewählt hat, kann man zur nächsten frage weiterkommen
+        // Erst wenn man eine Antwort ausgewählt hat, kann man zur nächsten textViewFrage weiterkommen
         //Und auch erst mit dem Klick auf den Button wird die ausgewählte Antwort gespeichert
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                next.setEnabled(true);
+                btnWeiter.setEnabled(true);
             }
         });
-        next.setOnClickListener(new View.OnClickListener() {
+        btnWeiter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             naechsteFrage();
@@ -102,7 +96,7 @@ public class TestActivity extends AppCompatActivity {
         radioGroup_geschlecht.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                next.setEnabled(true);
+                btnWeiter.setEnabled(true);
             }
         });
 
@@ -114,7 +108,7 @@ public class TestActivity extends AppCompatActivity {
 
     public void naechsteFrage(){
 
-        Intent intent = new Intent(this, AuswertungActivity.class);
+        Intent intent = new Intent(this, AuswertungTestActivity.class);
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
             switch (radioButtonID) {
                 case R.id.radioButton1:
@@ -137,18 +131,18 @@ public class TestActivity extends AppCompatActivity {
         //Setzt wieder alle RadioButtons auf unchecked
             radioGroup.clearCheck();
             index = index + 1;
-            ueberschrift.setText("Frage " + (index + 1));
+            textViewUeberschrift.setText("Frage " + (index + 1));
             progessBar.incrementProgressBy(1);
             if (index < texteFragen.length) {
-                frage.setText(texteFragen[index]);
-                next.setEnabled(false);
+                textViewFrage.setText(texteFragen[index]);
+                btnWeiter.setEnabled(false);
             } else if(index == texteFragen.length){
                 //Ui ändern für die letzen beiden Fragen (Geschlecht/Alter)
                 changeUi();
             } else if (index == texteFragen.length +1) {
-                next.setEnabled(false);
+                btnWeiter.setEnabled(false);
                 //Text des Button ändern
-                next.setText("Test beenden");
+
                 //Eingegebne Daten sammeln
                 //TODO: evtl Numberpicker statt EditText
                 eingabe_alter = (EditText) findViewById(R.id.textEdit_alter);
@@ -181,17 +175,14 @@ public class TestActivity extends AppCompatActivity {
                     intent.putExtra("Test_abgeschlossen", true);
                 }
 
+                // Endscreen
                 endScreen();
-                //TODO: "AbschlussScreen".*
+
             } else if (index == texteFragen.length +2){
 
-
-
-                next.setEnabled(true);
-
+                btnWeiter.setEnabled(true);
 
                 startActivity(intent);
-                //TODO: "AbschlussScreen".*
 
 
                 } else {
@@ -212,20 +203,29 @@ public class TestActivity extends AppCompatActivity {
         LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmung);
 
 
-        frage.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
+        textViewFrage.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
+        btnWeiter.setText("Test beenden");
 
         layoutZustimmung.setVisibility((View.GONE));
         layout.setVisibility(View.VISIBLE);
         radioGroup.setVisibility(View.GONE);
-        ueberschrift.setVisibility(View.GONE);
+        textViewUeberschrift.setVisibility(View.GONE);
         //zustimmung.setVisibility(View.GONE);
         //ablehnung.setVisibility(View.GONE);
 
     }
     public void endScreen(){
             LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
-            frage.setText("Vielen Dank für Ihre Teilnahme, sie sind fertig! Bitte geben sie das Gerät zurück.");
+            textViewFrage.setText("Vielen Dank für Ihre Teilnahme, sie sind fertig! Bitte geben sie das Gerät zurück.");
             layout.setVisibility(View.GONE);
+            btnWeiter.setEnabled(true);
+            btnWeiter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getBaseContext(),AuswertungTestActivity.class);
+                    startActivity(intent);
+                }
+            });
     }
 
 

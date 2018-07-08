@@ -2,7 +2,7 @@ package com.example.flaus.susea;
 
 import android.util.Log;
 
-public class Auswertung {
+public class Statistik {
 
     public static int berechneStandardabweichung(int[] antworten){
 
