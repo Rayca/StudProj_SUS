@@ -173,7 +173,11 @@ public class TestActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, AuswertungActivity.class);
                 intent.putExtra("Ergebnisse", antworten);
                 intent.putExtra("Test_ID",id);
-                if(studie) intent.putExtra("Studie", true);
+                if(studie) {
+                    intent.putExtra("Studie", true);
+                    intent.putExtra("Test_abgeschlossen", true);
+                }
+
                 startActivity(intent);
                 //TODO: "AbschlussScreen".*
             } else {
