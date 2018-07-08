@@ -113,6 +113,8 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void naechsteFrage(){
+
+        Intent intent = new Intent(this, AuswertungActivity.class);
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
             switch (radioButtonID) {
                 case R.id.radioButton1:
@@ -166,11 +168,12 @@ public class TestActivity extends AppCompatActivity {
                         geschlecht = geschlecht + "w";
                         break;
                 }
+
                 //gesammelte Daten in die Datenbank schreiben
                 long id = manager.insertTest(antworten, alter, geschlecht);
 
                 //Daten an die AuswertungsActivity übergeben
-                Intent intent = new Intent(this, AuswertungActivity.class);
+
                 intent.putExtra("Ergebnisse", antworten);
                 intent.putExtra("Test_ID",id);
                 if(studie) {
@@ -178,11 +181,23 @@ public class TestActivity extends AppCompatActivity {
                     intent.putExtra("Test_abgeschlossen", true);
                 }
 
+                endScreen();
+                //TODO: "AbschlussScreen".*
+            } else if (index == texteFragen.length +2){
+
+
+
+                next.setEnabled(true);
+
+
                 startActivity(intent);
                 //TODO: "AbschlussScreen".*
-            } else {
+
+
+                } else {
                 //irgendeine Fehlermeldung, weil dann ist wirklich was schief gelaufen
             }
+
 
 
 
@@ -202,9 +217,15 @@ public class TestActivity extends AppCompatActivity {
         layoutZustimmung.setVisibility((View.GONE));
         layout.setVisibility(View.VISIBLE);
         radioGroup.setVisibility(View.GONE);
+        ueberschrift.setVisibility(View.GONE);
         //zustimmung.setVisibility(View.GONE);
         //ablehnung.setVisibility(View.GONE);
 
+    }
+    public void endScreen(){
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
+            frage.setText("Vielen Dank für Ihre Teilnahme, sie sind fertig! Bitte geben sie das Gerät zurück.");
+            layout.setVisibility(View.GONE);
     }
 
 
