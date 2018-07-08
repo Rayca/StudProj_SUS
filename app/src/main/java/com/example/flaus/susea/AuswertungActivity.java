@@ -29,17 +29,28 @@ public class AuswertungActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auswertung);
 
+
+        //View-Binding
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        anezige_score = findViewById(R.id.anzeige_score);
+        TextView anzeige_anzahl_tests =  findViewById(R.id.anzeige_anzahl_tests);
+        TextView anzeiege_standrasabweichung = findViewById(R.id.anzeige_standardabweichung);
+        start =  findViewById(R.id.button_home);
 
+
+
+        //Inten auseinander nehmen
         Bundle extras = getIntent().getExtras();
         id = extras.getLong("Test_ID", -1);
         boolean studie = extras.getBoolean("Studie", false);
         String studie_name = extras.getString("Name_der_Studie");
         final String interfacetyp = extras.getString("Interfacetyp");
         boolean test_ende = extras.getBoolean("TestTest_abgeschlossen", false);
+        antworten = extras.getIntArray("Ergebnisse");
+
 
 
         //Button um zurück auf den "Home-Screen" zu kommen
@@ -52,41 +63,45 @@ public class AuswertungActivity extends AppCompatActivity {
             }
         });
 
-        anezige_score = findViewById(R.id.anzeige_score);
         //Nach dem Erstellen der Studie den Screen mit Default-Werten füllen:
         //TODO Werte aus der DB holen
-        if(!test_ende){
+        if(antworten == null){
             anezige_score.setText("Noch kein Wert");
+            //Anzahl Tests:
+            //TODO Wert aus der DB holen
+            anzeige_anzahl_tests.setText("0");
+            //TODO Wert aus der DB holen
+            anzeiege_standrasabweichung.setText("0");
         }
-        //Anzahl Tests:
-        TextView anzeige_anzahl_tests =  findViewById(R.id.anzeige_anzahl_tests);
-        //TODO Wert aus der DB holen
-        anzeige_anzahl_tests.setText("0");
 
-        TextView anzeiege_standrasabweichung = findViewById(R.id.anzeige_standardabweichung);
-        //TODO Wert aus der DB holen
-        anzeiege_standrasabweichung.setText("0");
 
 
 
         //Wenn ein Test abgeschlossen wurde, alle Werte der Studie aktualisieren
         if(test_ende){
-            aktualisiereStudie();
+            //aktualisiereStudie();
         }
-       /* //Wenn es keine Studie ist, sondern nur ein einzelner Test, dann wird hier auch nur der SUS des einzelnen Tests berechnte und angezeitgt
-        //TODO: hier das XML Layout File setzen, für den einzelnen Test
-        if (!studie) {
-            antworten = extras.getIntArray("Ergebnisse"); // Nur zum Überprüfen, ob die richtigen Werte im Array übergeben werden
-            for (int i = 0; i < antworten.length; i++) {
-                Log.d("Jule", "Antwort " + (i + 1) + " : " + antworten[i] + "\n");
-            }
-*/
+        //Wenn es keine Studie ist, sondern nur ein einzelner Test, dann wird hier auch nur der SUS des einzelnen Tests berechnet und angezeigt
+        if (!studie && (antworten != null)) {
+            setContentView(R.layout.activity_auswertung_einzelner_test);
+            score = Auswertung.berechneScore(antworten);
+            Log.d("Jule", "Berechneter Scroe einzelner Test:" + score);
+            anezige_score.setText(score + "");
+
+            start.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), StartActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
 
         //Score berechnen und anzeigen
        if(test_ende) {
            score = Auswertung.berechneScore(antworten);
            manager.setScore(id, score);
-
            Log.d("Jule", "Übergebener Score " + score);
            anezige_score.setText(score + "");
 

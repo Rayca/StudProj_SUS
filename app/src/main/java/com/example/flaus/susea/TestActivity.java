@@ -41,7 +41,7 @@ public class TestActivity extends AppCompatActivity {
             "Ich finde, dass die Software einheitlich aufgebaut ist.",
             "Ich denke, dass die meisten Nutzer sehr schnell mit der Software zurecht kommen.",
             "Ich finde die Software in der Benutzung sehr intuitiv.",
-            "Ich weiß bei der benutzung der Software zu jedem Zeitpunkt, was ich tue.",
+            "Ich weiß bei der Benutzung der Software zu jedem Zeitpunkt, was ich tue.",
             "Ich konnte die Software bedienen ohne zuvor Neues erlernen zu müssen."};
 
     @Override
@@ -192,15 +192,18 @@ public class TestActivity extends AppCompatActivity {
     //Ändert das UI für die letzte Seite des Fragebogens zur Erhebung von Alter und Geschlecht
         public void changeUi(){
         LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
-        TextView zustimmung = (TextView) findViewById(R.id.textView_Zustimmung);
-        TextView ablehnung = (TextView) findViewById(R.id.textView_Ablehnung);
+        //TextView zustimmung = (TextView) findViewById(R.id.textView_Zustimmung);
+        //TextView ablehnung = (TextView) findViewById(R.id.textView_Ablehnung);
+        LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmung);
 
-        frage.setText("Bitten geben Sie noch Ihr Alter und Geschlecht an.");
 
+        frage.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
+
+        layoutZustimmung.setVisibility((View.GONE));
         layout.setVisibility(View.VISIBLE);
         radioGroup.setVisibility(View.GONE);
-        zustimmung.setVisibility(View.GONE);
-        ablehnung.setVisibility(View.GONE);
+        //zustimmung.setVisibility(View.GONE);
+        //ablehnung.setVisibility(View.GONE);
 
     }
 

@@ -16,7 +16,7 @@ import android.view.WindowManager;
 
 public class StartActivity extends AppCompatActivity {
 
-    boolean studie = false;
+    boolean studie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void studie_starten(View v){
-
         studie = true;
         Intent intent = new Intent(this, TypActivity.class);
         intent.putExtra("Studie", studie);
@@ -40,6 +39,7 @@ public class StartActivity extends AppCompatActivity {
 
 
     public void start(View view){
+        studie = false;
         Intent intent = new Intent(this, TypActivity.class);
         intent.putExtra("Studie", studie);
         startActivity(intent);

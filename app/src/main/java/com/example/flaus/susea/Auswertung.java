@@ -24,16 +24,15 @@ public class Auswertung {
 
 
     public static int berechneScore(int[] antworten){
-        int score = 0;
+        double score = 0;
 
         for(int i = 0; i<antworten.length;i++){
-            if(i % 2 == 0){
-                score += antworten[i] - 1;
-            } else {
-                score += 5- antworten[i];
-            }
+
+            score += antworten[i] - 1;
+
         }
+        score= score*2.5;
         Log.d("Jule", "Berechneter Score: " + score);
-        return score;
+        return (int) score;
     }
 }
