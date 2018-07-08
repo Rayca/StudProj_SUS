@@ -4,27 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.flaus.susea.StartActivity">
+    tools:context="com.example.flaus.susea.StartActivity"
+    tools:layout_editor_absoluteY="81dp">
 
+
+    <Button
+        android:id="@+id/button_daten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="211dp"
+        android:clickable="false"
+        android:onClick="start"
+        android:text="Daten ansehen"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/create_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginBottom="14dp"
+        android:layout_marginStart="4dp"
         android:onClick="start"
         android:text="@string/test_starten"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/button_daten"
+        app:layout_constraintStart_toStartOf="@+id/button_studie_starten" />
 
     <Button
         android:id="@+id/button_studie_starten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="13dp"
         android:onClick="studie_starten"
         android:text="Studie starten"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
