@@ -1,6 +1,7 @@
 package com.example.flaus.susea;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,33 +29,32 @@ public class AuswertungActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auswertung);
 
+
+        //View-Binding
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
 
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        anezige_score = findViewById(R.id.anzeige_score);
+        TextView anzeige_anzahl_tests =  findViewById(R.id.anzeige_anzahl_tests);
+        TextView anzeiege_standrasabweichung = findViewById(R.id.anzeige_standardabweichung);
+        start =  findViewById(R.id.button_home);
+
+
+
+        //Inten auseinander nehmen
         Bundle extras = getIntent().getExtras();
-        antworten = extras.getIntArray("Ergebnisse");
         id = extras.getLong("Test_ID", -1);
         boolean studie = extras.getBoolean("Studie", false);
-
-        if (studie) {        // Nur zum Überprüfen, ob die richtigen Werte im Array übergeben werden
-            for (int i = 0; i < antworten.length; i++) {
-                Log.d("Jule", "Antwort " + (i + 1) + " : " + antworten[i] + "\n");
-            }
-
-
-        //Score berechnen und anzeigen
-        anezige_score = (TextView) findViewById(R.id.anzeige_score);
-        score = berechneScore(antworten);
-        Log.d("Jule", "Übergebener Score " + score);
-        anezige_score.setText(score + "");
+        String studie_name = extras.getString("Name_der_Studie");
+        final String interfacetyp = extras.getString("Interfacetyp");
+        boolean test_ende = extras.getBoolean("TestTest_abgeschlossen", false);
+        antworten = extras.getIntArray("Ergebnisse");
 
 
-        Log.d("Jule", "Von DB " + manager.getData(SPALTE_SCORE));
 
-    }
-
-
-        start = (ImageButton) findViewById(R.id.button_home);
+        //Button um zurück auf den "Home-Screen" zu kommen
+        start =  findViewById(R.id.button_home);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,43 +62,73 @@ public class AuswertungActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-
-
-
-    public int berechneStandardabweichung(int[] antworten){
-
-        int standardAbweichung = 0;
-
-
-
-        return standardAbweichung;
-    }
-
-
-    public double berechneCronbachAlpha(int[] antworten){
-
-        double cronbachAlpha = 0;
-
-
-
-        return cronbachAlpha;
-    }
-    public int berechneScore(int[] antworten){
-        int score = 0;
-
-        for(int i = 0; i<antworten.length;i++){
-            if(i % 2 == 0){
-                score += antworten[i] - 1;
-            } else {
-                score += 5- antworten[i];
-            }
+        //Nach dem Erstellen der Studie den Screen mit Default-Werten füllen:
+        //TODO Werte aus der DB holen
+        if(antworten == null){
+            anezige_score.setText("Noch kein Wert");
+            //Anzahl Tests:
+            //TODO Wert aus der DB holen
+            anzeige_anzahl_tests.setText("0");
+            //TODO Wert aus der DB holen
+            anzeiege_standrasabweichung.setText("0");
         }
-        manager.setScore(id,score);
-        Log.d("Jule", "Berechneter Score: " + score);
-        return score;
+
+
+
+
+        //Wenn ein Test abgeschlossen wurde, alle Werte der Studie aktualisieren
+        if(test_ende){
+            //aktualisiereStudie();
+        }
+        //Wenn es keine Studie ist, sondern nur ein einzelner Test, dann wird hier auch nur der SUS des einzelnen Tests berechnet und angezeigt
+        if (!studie && (antworten != null)) {
+            setContentView(R.layout.activity_auswertung_einzelner_test);
+            score = Auswertung.berechneScore(antworten);
+            Log.d("Jule", "Berechneter Scroe einzelner Test:" + score);
+            anezige_score.setText(score + "");
+
+            start.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), StartActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
+
+        //Score berechnen und anzeigen
+       if(test_ende) {
+           score = Auswertung.berechneScore(antworten);
+           manager.setScore(id, score);
+           Log.d("Jule", "Übergebener Score " + score);
+           anezige_score.setText(score + "");
+
+       }
+        Log.d("Jule", "Von DB " + manager.getData(SPALTE_SCORE));
+
+        //Click auf den Floating Action Button startet einen neuen Test in der Studie
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: ID der Studie noch mitschicken
+                    Intent intent = new Intent(getBaseContext(), TestActivity.class);
+                    startActivity(intent);
+                }
+            });
+
     }
+
+    // Wenn es eine Studie ist, dann hier die Werte aus der DB ziehen und anzeigen.
+        //TODO: Alle Test, die zu der aktuellen Studie gehören(passende ID) aus der DB holen und Werte daruas berechnen
+
+
+    public void aktualisiereStudie(){
+        //TODO hier alle Werte neu berechnen und neu anzeigen
+    }
+
+
 
 }
 

@@ -139,6 +139,10 @@ public class TypActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 name_studie = eingabe_name.getText().toString();
                 Log.d("Jule", name_studie);
+
+                //TODO: Neue Studie in der DB erzeugen
+                //manager.Studieeinfügen();
+                //Leitet weiter zur Übersicht der Studie
                 Intent intent = new Intent(getBaseContext(), AuswertungActivity.class);
                 intent.putExtra("Name_der_Studie", name_studie);
                 intent.putExtra("Interfacetyp", typ);
