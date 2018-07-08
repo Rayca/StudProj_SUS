@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="211dp"
-        android:clickable="false"
+       android:enabled="false"
         android:onClick="start"
         android:text="Daten ansehen"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"

@@ -38,10 +38,10 @@ public class TestActivity extends AppCompatActivity {
             "Ich finde die Software leicht zu benutzen.",
             "Ich kann die Software ohne Unterstützung durch Fachpersonal direkt benutzen.",
             "Ich finde, dass die angebotenen Funktionen gut in die Software integriert sind.",
-            "Ich finde, dass die Software einheitlich ausfgebaut ist.",
+            "Ich finde, dass die Software einheitlich aufgebaut ist.",
             "Ich denke, dass die meisten Nutzer sehr schnell mit der Software zurecht kommen.",
             "Ich finde die Software in der Benutzung sehr intuitiv.",
-            "Ich weiß bei der benutzung der Software zu jedem Zeitpunkt, was ich tue.",
+            "Ich weiß bei der Benutzung der Software zu jedem Zeitpunkt, was ich tue.",
             "Ich konnte die Software bedienen ohne zuvor Neues erlernen zu müssen."};
 
     @Override
@@ -195,7 +195,7 @@ public class TestActivity extends AppCompatActivity {
         TextView zustimmung = (TextView) findViewById(R.id.textView_Zustimmung);
         TextView ablehnung = (TextView) findViewById(R.id.textView_Ablehnung);
 
-        frage.setText("Bitten geben Sie noch Ihr Alter und Geschlecht an.");
+        frage.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
 
         layout.setVisibility(View.VISIBLE);
         radioGroup.setVisibility(View.GONE);
