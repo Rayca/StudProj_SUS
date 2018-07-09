@@ -15,6 +15,8 @@ public class AuswertungTestActivity extends AppCompatActivity {
     TextView textViewScore, textViewGeschlecht, textViewAlter, textViewAntworten;
     Button btnZurStudie, btnZurStartseite;
     long testId;
+    int[] antworten = new int[10];
+    boolean studie;
 
 
     @Override
@@ -36,7 +38,8 @@ public class AuswertungTestActivity extends AppCompatActivity {
         // Intent empfangen
         Intent intent = getIntent();
         testId = intent.getLongExtra("testId",-1);
-
+        studie = intent.getBooleanExtra("studie", false);
+        antworten = intent.getIntArrayExtra("antworten");
 
 
         // Funktion für btnStartseite
@@ -51,7 +54,7 @@ public class AuswertungTestActivity extends AppCompatActivity {
 
 
         // TextViews füllen
-        //textViewScore.setText(" " + Statistik.berechneScore(antworten));
+        textViewScore.setText(" " + Statistik.berechneScore(antworten));
 
        // for(int i = 0; i < antworten.length; i++) {
        //     Log.d("TJ2", "antworten: " + antworten[i]);

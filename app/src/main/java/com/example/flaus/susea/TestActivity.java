@@ -176,24 +176,15 @@ public class TestActivity extends AppCompatActivity {
                 Log.d("TJ","test_id vor intent" + testId);
                 //Daten an die AuswertungsTestActivity übergeben
 
-
-
+                for(int i = 0; i<antworten.length;i++) {
+                    Log.d("test", "antworten länge = " + antworten.length);
+                    Log.d("test", " antworten = " + antworten[i]);
+                }
                 // Endscreen
                 endScreen();
 
-            } else {
-                Intent intent = new Intent(TestActivity.this,AuswertungTestActivity.class);
-                intent.putExtra("Ergebnisse", antworten);
-                intent.putExtra("testId",testId);
-
-                if(studie) {
-                    intent.putExtra("Studie", true);
-                } else {
-                    intent.putExtra("Studie", false);
-                }
-
-                startActivity(intent);
             }
+
 
 
 
@@ -230,7 +221,16 @@ public class TestActivity extends AppCompatActivity {
             btnWeiter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getBaseContext(),AuswertungTestActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), AuswertungTestActivity.class);
+                    intent.putExtra("antworten", antworten);
+                    intent.putExtra("testId",testId);
+
+                    if(studie) {
+                        intent.putExtra("studie", true);
+                    } else {
+                        intent.putExtra("studie", false);
+                    }
+
                     startActivity(intent);
                 }
             });
@@ -238,7 +238,7 @@ public class TestActivity extends AppCompatActivity {
 
 
     public String getDatum() {
-        SimpleDateFormat sdf = new SimpleDateFormat("  dd MM yyyy   HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy   HH:mm");
         String dateAndTime = sdf.format(new Date());
 
 

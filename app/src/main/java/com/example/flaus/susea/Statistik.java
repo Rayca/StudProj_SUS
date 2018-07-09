@@ -26,12 +26,14 @@ public class Statistik {
     public static int berechneScore(int[] antworten){
         double score = 0;
 
+
+
         for(int i = 0; i<antworten.length;i++){
 
             score += antworten[i] - 1;
 
         }
-        score= score*2.5;
+        score *= 2.5;
         Log.d("Jule", "Berechneter Score: " + score);
         return (int) score;
     }
