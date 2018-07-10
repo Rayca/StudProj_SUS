@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class Datenbank extends SQLiteOpenHelper {
-    public static final int DATENBANK_VERSION = 1;
+    public static final int DATENBANK_VERSION = 2;
     public static final String DATENBANK_NAMEN = "Datenbank.db";
 
     //Konstanten für die Test-Datenbank
@@ -28,12 +28,14 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_ALTER = "Proband_Alter";
     public static final String SPALTE_GESCHLECHT = "Proband_Geschlecht";
     public static final String SPALTE_SCORE = "Test_Score";
+    public static final String SPALTE_STUDIEN_ID = "Studien_ID";
+    public static final String SPALTE_INTERFACE_TYP_TEST = "Test_Interfacetyp";
 
     //Konstanten für die Studien-Datenbank
     public static final String TABELLE_STUDIE = "Studie";
     public static final String SPALTE_STUDIE_ID = "Studie_ID";
     public static final String SPALTE_STUDIE_NAME = "Studie_Name";
-    public static final String SPALTE_INTERFACE = "Studie_Interfacetyp";
+    public static final String SPALTE_INTERFACE_TYP_STUDIE = "Studie_Interfacetyp";
     public static final String SPALTE_ANZAHL_TESTS = "Studie_Anzahl_Tests";
     public static final String SPALTE_STUDIE_SCORE = "Studie_Score_gesamt";
 
@@ -61,7 +63,9 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_ALTER + " INTEGER," +
                         SPALTE_GESCHLECHT + " TEXT," +
                         SPALTE_SCORE + " INTEGER," +
-                        SPALTE_STUDIE_ID + " INTEGER" +
+                        SPALTE_STUDIE_ID + " INTEGER," +
+                        SPALTE_STUDIEN_ID + "INTEGER," +
+                        SPALTE_INTERFACE_TYP_TEST + "TEXT" +
                         ")"
         );
 
@@ -69,7 +73,7 @@ public class Datenbank extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABELLE_STUDIE + " (" +
                         SPALTE_STUDIE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                         SPALTE_STUDIE_NAME + " TEXT," +
-                        SPALTE_INTERFACE + " TEXT," +
+                        SPALTE_INTERFACE_TYP_STUDIE + " TEXT," +
                         SPALTE_ANZAHL_TESTS + " INTEGER," +
                         SPALTE_STUDIE_SCORE + " INTEGER" +
                         ")"
@@ -174,7 +178,7 @@ public class Datenbank extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_STUDIE_NAME,name);
-        neueZeile.put(SPALTE_INTERFACE, interfaceTyp);
+        neueZeile.put(SPALTE_INTERFACE_TYP_STUDIE, interfaceTyp);
         neueZeile.put(SPALTE_ANZAHL_TESTS,anzahlTests);
         neueZeile.put(SPALTE_STUDIE_SCORE,scoreGesamt);
 

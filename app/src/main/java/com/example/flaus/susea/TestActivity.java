@@ -30,6 +30,8 @@ public class TestActivity extends AppCompatActivity {
     int index = 0;
     int alter;
     boolean studie;
+    long studienId;
+    String studienName;
     long testId;
     String datum;
     Datenbank manager = new Datenbank(this);
@@ -61,9 +63,18 @@ public class TestActivity extends AppCompatActivity {
                         ContextCompat.getColor(this, R.color.bg)}); */
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
 
-
+        // Intent empfangen
         Intent intent = this.getIntent();
-        studie = intent.getBooleanExtra("Studie", true);
+        studie = intent.getBooleanExtra("studie", false);
+        studienId = intent.getLongExtra("studienId",-1);
+        studienName = intent.getStringExtra("studienName");
+
+
+            Log.d("studie","testActivity : " + studie);
+
+
+
+
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup_Antworten);
 
         textViewUeberschrift = (TextView) findViewById(R.id.textView_Ueberschrift);
@@ -230,6 +241,8 @@ public class TestActivity extends AppCompatActivity {
                     } else {
                         intent.putExtra("studie", false);
                     }
+                    intent.putExtra("studienId", studienId);
+                    intent.putExtra("studienName", studienName);
 
                     startActivity(intent);
                 }

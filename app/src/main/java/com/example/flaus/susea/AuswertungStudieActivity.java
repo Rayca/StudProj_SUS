@@ -1,6 +1,7 @@
 package com.example.flaus.susea;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,9 +19,11 @@ public class AuswertungStudieActivity extends AppCompatActivity {
     Datenbank manager = new Datenbank(this);
     TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests;
     Button btnStatistik, btnViewTests, btnZurStartseite;
+    FloatingActionButton fab;
     long studienId;
     int score = 0;
     String studieName;
+    boolean studie;
 
 
     @Override
@@ -40,20 +43,21 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         btnStatistik = (Button) findViewById(R.id.btnStatistik);
         btnViewTests = (Button) findViewById(R.id.btnViewTests);
         btnZurStartseite = (Button) findViewById(R.id.btnZurStartseite);
+        fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
 
         // Name und Id der Studie empfangen
         Intent intent = getIntent();
-
         studienId = intent.getLongExtra("studienId", -1);
         studieName = intent.getStringExtra("Name_der_Studie");
-
+        studie = intent.getBooleanExtra("studie",false);
 
         // TextViews füllen
 
         textViewNameStudie.setText(" " + studieName);
 
 
+Log.d("studie", "AuswertungsstudieActivity =" + studie);
 
 
 
@@ -67,12 +71,31 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             }
         });
 
-        // Funktion für btbViewTests
+
+
+
+        // Funktion für btnViewTests
 
         btnViewTests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), ListViewTestsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+        // Funktion für fab
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+                intent.putExtra("studienID", studienId);
+                intent.putExtra("studienName",studieName);
+                intent.putExtra("studie",studie);
                 startActivity(intent);
             }
         });

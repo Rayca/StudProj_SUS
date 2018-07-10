@@ -30,7 +30,7 @@ public class TypActivity extends AppCompatActivity {
     int anzahlTests = 0;
     int scoreGesamt = 0;
     long studieId = -1;
-
+    boolean studie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class TypActivity extends AppCompatActivity {
         db = new Datenbank(this);
 
        Intent intent = this.getIntent();
-       final boolean studie = intent.getBooleanExtra("Studie", false);
-
+        studie = intent.getBooleanExtra("Studie", false);
+        Log.d("studie", "TypActivity =" + studie);
 
         final ListView listview = findViewById(R.id.list_view_typ);
         String[] typen = {
@@ -74,13 +74,17 @@ public class TypActivity extends AppCompatActivity {
             public void onClick(View button_next) {
 
                 if (typ != null) {
-                    if(studie){
+                    if ( studie == true) {
                         dialog_studie_erstellen_öffnen();
                     } else {
-                    Intent intent = new Intent(getBaseContext(), TestActivity.class);
-                    intent.putExtra("typ", typ);
-                    intent.putExtra("Studie", studie);
-                    startActivity(intent); }
+                        Intent intent1= new Intent(getBaseContext(), TestActivity.class);
+                        intent1.putExtra("Name_der_Studie", name_studie);
+                        intent1.putExtra("Interfacetyp", typ);
+                        intent1.putExtra("studienId",studieId);
+                        intent1.putExtra("studie", studie);
+                        startActivity(intent1);
+                    }
+
                 }else{
                     Toast toast = Toast.makeText(getApplicationContext(),"Bitte einen Typen wählen",Toast.LENGTH_SHORT);
                     toast.show();
@@ -156,6 +160,7 @@ public class TypActivity extends AppCompatActivity {
                    intent.putExtra("Name_der_Studie", name_studie);
                    intent.putExtra("Interfacetyp", typ);
                    intent.putExtra("studienId",studieId);
+                   intent.putExtra("studie", studie);
                    startActivity(intent);
 
                } else {

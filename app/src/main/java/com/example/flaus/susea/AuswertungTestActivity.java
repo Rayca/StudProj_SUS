@@ -14,9 +14,10 @@ public class AuswertungTestActivity extends AppCompatActivity {
 
     TextView textViewScore, textViewGeschlecht, textViewAlter, textViewAntworten;
     Button btnZurStudie, btnZurStartseite;
-    long testId;
+    long testId, studienId;
     int[] antworten = new int[10];
     boolean studie;
+    String studienName;
 
 
     @Override
@@ -40,6 +41,29 @@ public class AuswertungTestActivity extends AppCompatActivity {
         testId = intent.getLongExtra("testId",-1);
         studie = intent.getBooleanExtra("studie", false);
         antworten = intent.getIntArrayExtra("antworten");
+        studienName = intent.getStringExtra("studienName");
+        studienId = intent.getLongExtra("studienId",-1);
+
+
+        Log.d("studie", "AuswertungTest =" + studie);
+
+
+
+        // Button Text ändert sich je nach dem, ob es einzelner Test war oder ob man von einer Studie kommt
+
+        if(studie){
+            btnZurStudie.setText("Zurück zur Studien Activity");
+            Intent intent1 = new Intent(getApplicationContext(),AuswertungStudieActivity.class);
+            intent1.putExtra("testId", testId);
+            intent1.putExtra("studie",studie);
+            intent1.putExtra("studienName", studienName);
+            intent1.putExtra("studienId", studienId);
+        } else {
+            btnZurStudie.setText("Test einer Studie zuordnen");
+            // TODO: Intent zur ListView Activity mit Studien, sodass man einzelnen Test zuordnen kann
+        }
+
+
 
 
         // Funktion für btnStartseite
@@ -56,13 +80,9 @@ public class AuswertungTestActivity extends AppCompatActivity {
         // TextViews füllen
         textViewScore.setText(" " + Statistik.berechneScore(antworten));
 
-       // for(int i = 0; i < antworten.length; i++) {
-       //     Log.d("TJ2", "antworten: " + antworten[i]);
-       // }
 
-       // Log.d("TJ2", "antworten.length: " + antworten.length);
-        Log.d("TJ2", "test ID : " + testId);
-
+        // TODO : geschlecht und alter angeben und antworten einzelner fragen
+        // TODO : Button zurück zur StudienActivity mit funktion versetzen. intent muss alles mitgeben
 
 
 
