@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class Datenbank extends SQLiteOpenHelper {
-    public static final int DATENBANK_VERSION = 2;
+    public static final int DATENBANK_VERSION = 3;
     public static final String DATENBANK_NAMEN = "Datenbank.db";
 
     //Konstanten für die Test-Datenbank
@@ -28,7 +28,6 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_ALTER = "Proband_Alter";
     public static final String SPALTE_GESCHLECHT = "Proband_Geschlecht";
     public static final String SPALTE_SCORE = "Test_Score";
-    public static final String SPALTE_STUDIEN_ID = "Studien_ID";
     public static final String SPALTE_INTERFACE_TYP_TEST = "Test_Interfacetyp";
 
     //Konstanten für die Studien-Datenbank
@@ -64,7 +63,6 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_GESCHLECHT + " TEXT," +
                         SPALTE_SCORE + " INTEGER," +
                         SPALTE_STUDIE_ID + " INTEGER," +
-                        SPALTE_STUDIEN_ID + "INTEGER," +
                         SPALTE_INTERFACE_TYP_TEST + "TEXT" +
                         ")"
         );
