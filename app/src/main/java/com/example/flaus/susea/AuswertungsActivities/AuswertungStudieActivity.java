@@ -1,4 +1,4 @@
-package com.example.flaus.susea;
+package com.example.flaus.susea.AuswertungsActivities;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import static com.example.flaus.susea.Datenbank.SPALTE_SCORE;
+import com.example.flaus.susea.Datenbank;
+import com.example.flaus.susea.R;
+import com.example.flaus.susea.StartActivity;
+import com.example.flaus.susea.TestActivity;
+import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 
 public class AuswertungStudieActivity extends AppCompatActivity {
 
@@ -22,7 +25,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
     FloatingActionButton fab;
     long studienId;
     int score = 0;
-    String studieName;
+    String studienName;
     boolean studie;
 
 
@@ -49,12 +52,12 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         // Name und Id der Studie empfangen
         Intent intent = getIntent();
         studienId = intent.getLongExtra("studienId", -1);
-        studieName = intent.getStringExtra("Name_der_Studie");
+        studienName = intent.getStringExtra("studienName");
         studie = intent.getBooleanExtra("studie",false);
 
         // TextViews füllen
 
-        textViewNameStudie.setText(" " + studieName);
+        textViewNameStudie.setText(" " + studienName);
 
 
 Log.d("studie", "AuswertungsstudieActivity =" + studie);
@@ -80,6 +83,7 @@ Log.d("studie", "AuswertungsstudieActivity =" + studie);
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), ListViewTestsActivity.class);
+                intent.putExtra("studienId",studienId);
                 startActivity(intent);
             }
         });
@@ -94,7 +98,7 @@ Log.d("studie", "AuswertungsstudieActivity =" + studie);
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TestActivity.class);
                 intent.putExtra("studienID", studienId);
-                intent.putExtra("studienName",studieName);
+                intent.putExtra("studienName", studienName);
                 intent.putExtra("studie",studie);
                 startActivity(intent);
             }

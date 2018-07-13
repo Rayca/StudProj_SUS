@@ -9,42 +9,48 @@
 
 
     <Button
-        android:id="@+id/button_daten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="211dp"
-       android:enabled="false"
-        android:onClick="start"
-        android:text="Daten ansehen"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
         android:id="@+id/create_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="14dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="start"
         android:text="@string/test_starten"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/button_daten"
-        app:layout_constraintStart_toStartOf="@+id/button_studie_starten" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_studie_starten" />
 
     <Button
         android:id="@+id/button_studie_starten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
+        android:layout_marginTop="80dp"
         android:onClick="studie_starten"
         android:text="Studie starten"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/create_test"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="276dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="studienEinsehen"
+        android:text="Studien einsehen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_test"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

@@ -16,12 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DatenbankTest"></activity>
+        <activity android:name=".DatenbankTest" />
         <activity android:name=".TestActivity" />
         <activity android:name=".TypActivity" />
-        <activity android:name=".AuswertungStudieActivity" />
-        <activity android:name=".AuswertungTestActivity" />
-        <activity android:name=".ListViewTestsActivity"></activity>
+        <activity android:name=".AuswertungsActivities.AuswertungStudieActivity" />
+        <activity android:name=".AuswertungsActivities.AuswertungTestActivity" />
+        <activity android:name=".ListViewActivities.ListViewTestsActivity" />
+        <activity android:name=".ListViewActivities.ListViewStudienActivity"></activity>
     </application>
 
 </manifest>

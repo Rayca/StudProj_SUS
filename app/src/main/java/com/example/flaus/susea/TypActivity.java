@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+
 import java.util.ArrayList;
 
 public class TypActivity extends AppCompatActivity {
@@ -157,7 +159,7 @@ public class TypActivity extends AppCompatActivity {
                if(studieId != -1) {
                    Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
                    Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
-                   intent.putExtra("Name_der_Studie", name_studie);
+                   intent.putExtra("studienName", name_studie);
                    intent.putExtra("Interfacetyp", typ);
                    intent.putExtra("studienId",studieId);
                    intent.putExtra("studie", studie);

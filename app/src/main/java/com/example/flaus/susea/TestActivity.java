@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -183,7 +185,8 @@ public class TestActivity extends AppCompatActivity {
                 datum = getDatum();
 
                 //gesammelte Daten in die Datenbank schreiben
-                testId = manager.insertTest(antworten, alter, geschlecht, datum);
+                testId = manager.insertTest(antworten, alter, geschlecht, datum,studienId);
+
                 Log.d("TJ","test_id vor intent" + testId);
                 //Daten an die AuswertungsTestActivity übergeben
 

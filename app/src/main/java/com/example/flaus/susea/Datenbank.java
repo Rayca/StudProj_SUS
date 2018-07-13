@@ -90,38 +90,26 @@ public class Datenbank extends SQLiteOpenHelper {
     ---------------------------------------------------------------------------------------------*/
 
 
-    public void Test_einfuegen (int[] antworten, int alter, String geschlecht, int score){
-        ContentValues neueZeile = new ContentValues();
-        neueZeile.put(SPALTE_TEST_ID, 0);
-        neueZeile.put(SPALTE_DATUM, "2018-04-29");
-        neueZeile.put(SPALTE_FRAGE1, antworten[0]);
-        neueZeile.put(SPALTE_FRAGE2, antworten[1]);
-        neueZeile.put(SPALTE_FRAGE3, antworten[2]);
-        neueZeile.put(SPALTE_FRAGE4, antworten[3]);
-        neueZeile.put(SPALTE_FRAGE5, antworten[4]);
-        neueZeile.put(SPALTE_FRAGE6, antworten[5]);
-        neueZeile.put(SPALTE_FRAGE7, antworten[6]);
-        neueZeile.put(SPALTE_FRAGE8, antworten[7]);
-        neueZeile.put(SPALTE_FRAGE9, antworten[8]);
-        neueZeile.put(SPALTE_FRAGE10, antworten[9]);
-        neueZeile.put(SPALTE_ALTER, alter);
-        neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
-        neueZeile.put(SPALTE_SCORE, score);
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABELLE_TEST, null, neueZeile);
-    }
 
     //NUR ZUM TEST!!!
-    public Cursor selectAll(){
+    public Cursor selectAllTests(){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_TEST, null);
         return  cursor;
     }
 
+
+    public Cursor selectAllStudien() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_STUDIE_SCORE+" FROM " + TABELLE_STUDIE, null);
+        return cursor;
+    }
+
+
     public Cursor selectAllTestsbyStudienId (long studienId){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"";
+        String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"";
 
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
@@ -130,7 +118,7 @@ public class Datenbank extends SQLiteOpenHelper {
 
 
 
-    public long insertTest(int[] antworten, int alter, String geschlecht, String datum){
+    public long insertTest(int[] antworten, int alter, String geschlecht, String datum) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_FRAGE1, antworten[0]);
@@ -145,15 +133,44 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_FRAGE10, antworten[9]);
         neueZeile.put(SPALTE_ALTER, alter);
         neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
-        neueZeile.put(SPALTE_DATUM,datum);
+        neueZeile.put(SPALTE_DATUM, datum);
 
         long id = db.insert(TABELLE_TEST, null, neueZeile);
-        Log.d("Jule", id+"");
-    return id;
-
-
+        Log.d("Jule", id + "");
+        return id;
 
     }
+
+    public long insertTest(int[] antworten, int alter, String geschlecht, String datum, long studienId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues neueZeile = new ContentValues();
+        neueZeile.put(SPALTE_FRAGE1, antworten[0]);
+        neueZeile.put(SPALTE_FRAGE2, antworten[1]);
+        neueZeile.put(SPALTE_FRAGE3, antworten[2]);
+        neueZeile.put(SPALTE_FRAGE4, antworten[3]);
+        neueZeile.put(SPALTE_FRAGE5, antworten[4]);
+        neueZeile.put(SPALTE_FRAGE6, antworten[5]);
+        neueZeile.put(SPALTE_FRAGE7, antworten[6]);
+        neueZeile.put(SPALTE_FRAGE8, antworten[7]);
+        neueZeile.put(SPALTE_FRAGE9, antworten[8]);
+        neueZeile.put(SPALTE_FRAGE10, antworten[9]);
+        neueZeile.put(SPALTE_ALTER, alter);
+        neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
+        neueZeile.put(SPALTE_DATUM, datum);
+        neueZeile.put(SPALTE_STUDIE_ID,studienId);
+
+        long id = db.insert(TABELLE_TEST, null, neueZeile);
+        Log.d("Jule", id + "");
+        return id;
+
+    }
+
+
+
+
+
+
+
     public String getData(String string){
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery("SELECT "+string+" FROM " + TABELLE_TEST,null);
@@ -166,6 +183,9 @@ public class Datenbank extends SQLiteOpenHelper {
 
         return null;
     }
+
+
+
 
 
     public void setScore(long id, int score){

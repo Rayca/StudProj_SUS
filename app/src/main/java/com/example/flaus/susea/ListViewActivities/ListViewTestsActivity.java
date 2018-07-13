@@ -1,4 +1,4 @@
-package com.example.flaus.susea;
+package com.example.flaus.susea.ListViewActivities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,13 +10,17 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.flaus.susea.Adapter.AdapterTests;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.Datenbank;
+import com.example.flaus.susea.R;
 
 public class ListViewTestsActivity extends AppCompatActivity {
 
     ListView listView;
     Button btnZurueck;
+    long studienId = -1;
     Datenbank db = new Datenbank(this);
-    long studienId = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,10 @@ public class ListViewTestsActivity extends AppCompatActivity {
         // View - Binding
         listView = (ListView) findViewById(R.id.listViewTests);
         btnZurueck = (Button) findViewById(R.id.btnZurueck);
+
+        // Intent empfangen
+        Intent intent = getIntent();
+        studienId = intent.getLongExtra("studienId", -1);
 
 
         // ListView füllen

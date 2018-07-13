@@ -24,7 +24,7 @@ public class DatenbankTest extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int[] testdaten = {1,2,3,4,5,6,7,8,9,10};
-                manager.Test_einfuegen(testdaten, 12, "m", 100 );
+               // manager.Test_einfuegen(testdaten, 12, "m", 100 );
                 testdaten();
             }
         });
@@ -34,7 +34,7 @@ public class DatenbankTest extends AppCompatActivity {
     }
 
     public void testdaten(){
-        Cursor c = manager.selectAll();
+        Cursor c = manager.selectAllTests();
         c.moveToFirst();
         int id = c.getInt(0);
         String datum = c.getString(1);
