@@ -63,7 +63,7 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_GESCHLECHT + " TEXT," +
                         SPALTE_SCORE + " INTEGER," +
                         SPALTE_STUDIE_ID + " INTEGER," +
-                        SPALTE_INTERFACE_TYP_TEST + "TEXT" +
+                        SPALTE_INTERFACE_TYP_TEST + " TEXT" +
                         ")"
         );
 
@@ -118,6 +118,17 @@ public class Datenbank extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_TEST, null);
         return  cursor;
     }
+
+    public Cursor selectAllTestsbyStudienId (long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"";
+
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
+
 
     public long insertTest(int[] antworten, int alter, String geschlecht, String datum){
         SQLiteDatabase db = getWritableDatabase();
