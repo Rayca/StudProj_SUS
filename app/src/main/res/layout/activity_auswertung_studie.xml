@@ -103,7 +103,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnViewTests"
-        app:layout_constraintVertical_bias="0.315" />
+        app:layout_constraintVertical_bias="0.315"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        />
 
     <TextView
         android:id="@+id/textViewNameStudie"
@@ -119,5 +121,6 @@
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintVertical_bias="0.075"
+        android:textSize="14sp"/>
 </android.support.constraint.ConstraintLayout>

@@ -22,7 +22,8 @@
         <activity android:name=".AuswertungsActivities.AuswertungStudieActivity" />
         <activity android:name=".AuswertungsActivities.AuswertungTestActivity" />
         <activity android:name=".ListViewActivities.ListViewTestsActivity" />
-        <activity android:name=".ListViewActivities.ListViewStudienActivity"></activity>
+        <activity android:name=".ListViewActivities.ListViewStudienActivity" />
+        <activity android:name=".AnzeigeErgebnisseTest"></activity>
     </application>
 
 </manifest>
