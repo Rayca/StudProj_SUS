@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -235,7 +235,7 @@ public class TestActivity extends AppCompatActivity {
             btnWeiter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), AuswertungTestActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), AuswertungStudieActivity.class);
                     intent.putExtra("antworten", antworten);
                     intent.putExtra("testId",testId);
 

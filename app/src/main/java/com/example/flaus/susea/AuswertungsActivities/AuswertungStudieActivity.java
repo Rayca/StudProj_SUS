@@ -1,6 +1,7 @@
 package com.example.flaus.susea.AuswertungsActivities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
     int score = 0;
     String studienName;
     boolean studie;
+    Datenbank db = new Datenbank(this);
 
 
     @Override
@@ -52,15 +54,27 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         // Name und Id der Studie empfangen
         Intent intent = getIntent();
         studienId = intent.getLongExtra("studienId", -1);
-        studienName = intent.getStringExtra("studienName");
+        Log.d("Jule", "Id der neuen Studie empfangen:  " + studienId);
         studie = intent.getBooleanExtra("studie",false);
+        if(studie){
+            //Wenn eine neue Studie erstellt wurde, wird der Name gleich mit dem Intent mitgeschickt
+            studienName = intent.getStringExtra("studienName");
+            //Und es sind noch keine Tests drin
+            textViewAnzahlTests.setText("Noch keine Tests");
+        } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
+            Cursor c = db.getStudieById(studienId);
+            studienName = c.getString(1);
+             //int anzahl_tests = c.getInt(3); //TODO: Nachgucken, ob Anzahl Tests in der Db auch brav erhöht wird
+            // textViewAnzahlTests.setText(anzahl_tests);
+        }
+
+
 
         // TextViews füllen
-
         textViewNameStudie.setText(" " + studienName);
 
 
-Log.d("studie", "AuswertungsstudieActivity =" + studie);
+
 
 
 
@@ -83,7 +97,7 @@ Log.d("studie", "AuswertungsstudieActivity =" + studie);
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), ListViewTestsActivity.class);
-                intent.putExtra("studienId",studienId);
+                intent.putExtra("studienId", studienId);
                 startActivity(intent);
             }
         });

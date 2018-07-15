@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,7 +19,6 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
     ListView listView;
     Button btnZurueck;
-    long studienId = -1;
     Datenbank db = new Datenbank(this);
 
 
@@ -33,7 +33,8 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
         // Intent empfangen
         Intent intent = getIntent();
-        studienId = intent.getLongExtra("studienId", -1);
+        final long studienId = intent.getLongExtra("studienId", -1);
+        Log.d("Jule", "Empfangene Studien-ID: "+ studienId);
 
 
         // ListView füllen
@@ -57,6 +58,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(),AuswertungStudieActivity.class);
+                intent.putExtra("studienId", studienId);
                 startActivity(intent);
             }
         });

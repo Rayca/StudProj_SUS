@@ -103,6 +103,16 @@ public class Datenbank extends SQLiteOpenHelper {
     public Cursor selectAllStudien() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_STUDIE_SCORE+" FROM " + TABELLE_STUDIE, null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
+    public Cursor getStudieById(long id){
+        Log.d("Jule", "Übergebene ID: " + id);
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID  + " = " + id, null);
+        cursor.moveToFirst();
+        Log.d("Jule", "ID : " + cursor.getInt(0) + ", Name: " + cursor.getString(1) );
         return cursor;
     }
 
