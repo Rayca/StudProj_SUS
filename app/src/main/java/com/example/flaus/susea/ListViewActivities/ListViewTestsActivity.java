@@ -39,7 +39,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
         // Intent empfangen
         final Intent intent = getIntent();
         final long studienId = intent.getLongExtra("studienId", -1);
-        Log.d("Jule", "Empfangene Studien-ID: "+ studienId);
+        Log.d("studID", "Empfangene Studien-ID: "+ studienId);
 
 
         // ListView füllen

@@ -194,6 +194,7 @@ public class Datenbank extends SQLiteOpenHelper {
         if(c!=null){
             c.moveToFirst();
             String data = c.getString(0);
+            Log.d("jule",data);
             return data;
         }
 

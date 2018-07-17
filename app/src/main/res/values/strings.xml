@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">System Usability Scale</string>
     <string name="test_starten">Test Starten!</string>
-    <string name="danke">Vielen Dank für Ihre Teilnahme, bitte geben sie nun das Gerät zurück.</string>
+    <string name="danke">Vielen Dank für Ihre Teilnahme, sie sind fertig! Bitte geben sie das Gerät zurück.</string>
 </resources>

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
@@ -103,13 +104,23 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         btnViewTests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("studID", "StudieId = " + studienId);
                 Intent intent = new Intent(getBaseContext(), ListViewTestsActivity.class);
                 intent.putExtra("studienId", studienId);
                 startActivity(intent);
             }
         });
 
+        btnStatistik.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
 
+                int i = manager.selectAllTestsbyStudienId(studienId).getCount();
+                if (i < 3) {
+                    Toast.makeText(AuswertungStudieActivity.this, "Mindestens 3 Tests für eine Auswertung", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
         // Funktion für fab
@@ -118,7 +129,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TestActivity.class);
-                intent.putExtra("studienID", studienId);
+                Log.d("studID", "StudieId = " + studienId);
+                intent.putExtra("studienId", studienId);
                 intent.putExtra("studienName", studienName);
                 intent.putExtra("studie",studie);
                 startActivity(intent);

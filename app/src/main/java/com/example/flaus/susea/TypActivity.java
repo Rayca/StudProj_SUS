@@ -144,7 +144,7 @@ public class TypActivity extends AppCompatActivity {
 
                 // Studie in Datenbank einfügen
                 studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
-               Log.d("TJ", "StudieId = " + studienId);
+               Log.d("studID", "StudieId = " + studienId);
                if(studienId != -1) {
                    Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
                    Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
