@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
     int score = 0;
     String studienName;
     boolean studie;
+
+    Toolbar toolbar;
     Datenbank db = new Datenbank(this);
 
 
@@ -37,9 +40,13 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_auswertung_studie);
 
 
+        // Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Auswertung Studie");
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+
+
 
         // View-Binding
         textViewNameStudie = (TextView) findViewById(R.id.textViewNameStudie);

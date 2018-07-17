@@ -30,8 +30,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_tests);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+
 
         // View - Binding
         listView = (ListView) findViewById(R.id.listViewTests);

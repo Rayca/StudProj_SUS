@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.AdapterView;
@@ -31,16 +32,19 @@ public class TypActivity extends AppCompatActivity {
     // Variabeln zur erstellung der studie
     int anzahlTests = 0;
     int scoreGesamt = 0;
-    long studieId = -1;
+    long studienId = -1;
     boolean studie;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_typ);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+        // Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Bitte einen Interfacetyp auswählen");
 
         db = new Datenbank(this);
 
@@ -82,7 +86,7 @@ public class TypActivity extends AppCompatActivity {
                         Intent intent1= new Intent(getBaseContext(), TestActivity.class);
                         intent1.putExtra("Name_der_Studie", name_studie);
                         intent1.putExtra("Interfacetyp", typ);
-                        intent1.putExtra("studienId",studieId);
+                        intent1.putExtra("studienId", studienId);
                         intent1.putExtra("studie", studie);
                         startActivity(intent1);
                     }
@@ -93,36 +97,7 @@ public class TypActivity extends AppCompatActivity {
                 }
             }
         });
-        ImageButton button_help = (ImageButton) findViewById(R.id.button_help);
-        button_help.setOnClickListener(new OnClickListener() { //Help Button
 
-
-            @Override
-            public void onClick(View button_help) {
-                AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(TypActivity.this);
-                dlgBuilder.setTitle("Hilfe");
-                dlgBuilder.setMessage("B2B: Enterprise software application such as accounting, HR, CRM and order-management systems\n\n" +
-                        "B2C: Public-facing mass-market consumer software: Office Applications, Graphics Apps and Personal Finance Software\n\n" +
-                        "Web: Public-facing large-scale websites (airlines, rental cars, retailers, financial service) and intranets\n\n" +
-                        "Cell: Cell-phone equipment\n\n" +
-                        "HW: Hardware such as phones, modems and Ethernet cards\n\n" +
-                        "Internal SW: Internal-productivity software: Customer Service and Network Operations applications. This group likely has overlaps between the B2C and B2B groups.\n\n" +
-                        "IVR: Interactive Voice Response Systems (phone- and speech-based)\n\n" +
-                        "Web/IVR: A combination of web-based and interactive voice-response systems");
-                dlgBuilder.setCancelable(true);
-                dlgBuilder.setNeutralButton("Verstanden!", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-
-                AlertDialog alert = dlgBuilder.create();
-                alert.show();
-            }
-        });
 
 
     }
@@ -154,14 +129,14 @@ public class TypActivity extends AppCompatActivity {
 
 
                 // Studie in Datenbank einfügen
-                studieId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
-               Log.d("TJ", "StudieId = " + studieId);
-               if(studieId != -1) {
+                studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
+               Log.d("TJ", "StudieId = " + studienId);
+               if(studienId != -1) {
                    Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
                    Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
                    intent.putExtra("studienName", name_studie);
                    intent.putExtra("Interfacetyp", typ);
-                   intent.putExtra("studienId",studieId);
+                   intent.putExtra("studienId", studienId);
                    intent.putExtra("studie", studie);
                    startActivity(intent);
 

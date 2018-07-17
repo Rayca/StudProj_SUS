@@ -54,17 +54,6 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
 
-
-        ActionBar actionBar = getSupportActionBar();
-       /* GradientDrawable background = new GradientDrawable(
-                GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{ContextCompat.getColor(this, R.color.imst),
-                        ContextCompat.getColor(this, R.color.alp),
-                        ContextCompat.getColor(this, R.color.aing),
-                        ContextCompat.getColor(this, R.color.bw),
-                        ContextCompat.getColor(this, R.color.bg)}); */
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
-
         // Intent empfangen
         Intent intent = this.getIntent();
         studie = intent.getBooleanExtra("studie", false);

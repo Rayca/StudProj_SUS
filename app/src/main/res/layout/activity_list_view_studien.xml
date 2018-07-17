@@ -26,6 +26,7 @@
 
     <ListView
         android:id="@+id/listView"
+        style="@android:style/Widget.Material.ListView"
         android:layout_width="368dp"
         android:layout_height="418dp"
         android:layout_marginBottom="8dp"
