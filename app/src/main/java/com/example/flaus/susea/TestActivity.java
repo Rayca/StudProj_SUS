@@ -18,6 +18,7 @@ import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/* Implementiert den eigentlichen SUS-Fragebogen */
 public class TestActivity extends AppCompatActivity {
 
 
@@ -37,6 +38,7 @@ public class TestActivity extends AppCompatActivity {
     long testId;
     String datum;
     Datenbank manager = new Datenbank(this);
+    //Aussagen des SUS-Fragebogens
     String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
             "Die Software wirkt auf mich recht einfach aufgebaut.",
             "Ich finde die Software leicht zu benutzen.",
@@ -56,12 +58,12 @@ public class TestActivity extends AppCompatActivity {
 
         // Intent empfangen
         Intent intent = this.getIntent();
-        studie = intent.getBooleanExtra("studie", false);
+        studie = intent.getBooleanExtra("neue_studie", false);
         studienId = intent.getLongExtra("studienId",-1);
         studienName = intent.getStringExtra("studienName");
 
 
-            Log.d("studie","testActivity : " + studie);
+            Log.d("neue_studie","testActivity : " + studie);
 
 
 
@@ -114,6 +116,9 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
+    /* Je nachdem, welcher der RadioButtons angeklcikt wurde, wird der asugewählte Wert 1-5
+    an der passenden Stelle im Array abgelegt
+     */
     public void naechsteFrage(){
 
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
@@ -216,9 +221,11 @@ public class TestActivity extends AppCompatActivity {
     }
 
 
+    //Schaltet das UI um, sodass das EndScreen angezeigt wird
+    //Außerdem wird hier der Intent anbeschickt, der zur Auswertung der Studie weiterleitet
     public void endScreen(){
             LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
-            textViewFrage.setText("Vielen Dank für Ihre Teilnahme, sie sind fertig! Bitte geben sie das Gerät zurück.");
+            textViewFrage.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
             layout.setVisibility(View.GONE);
             btnWeiter.setEnabled(true);
             btnWeiter.setOnClickListener(new View.OnClickListener() {
@@ -229,11 +236,12 @@ public class TestActivity extends AppCompatActivity {
                     intent.putExtra("testId",testId);
 
                     if(studie) {
-                        intent.putExtra("studie", true);
+                        intent.putExtra("neue_studie", true);
                     } else {
-                        intent.putExtra("studie", false);
+                        intent.putExtra("neue_studie", false);
                     }
                     intent.putExtra("studienId", studienId);
+                    Log.d("Jule", "Id, die mitgeschickt wird: " + studienId);
                     intent.putExtra("studienName", studienName);
 
                     startActivity(intent);
@@ -242,6 +250,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
 
+    //Hilfsfunktion um das aktuelle Datum und Uhrzeit vom System zu bekommen
     public String getDatum() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy   HH:mm");
         String dateAndTime = sdf.format(new Date());

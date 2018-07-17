@@ -18,6 +18,7 @@ import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 
+//Füllt und verwaltet das ListView, mit dem alle Studien aus der DB als Liste angezeigt werden können
 public class ListViewStudienActivity extends AppCompatActivity {
 
     ListView listView;
@@ -36,7 +37,6 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
 
         // listView füllen
-
         final Context context = this;
         int itemLayout = R.layout.studie_list_item_layout;
         final Cursor cursor = db.selectAllStudien();
@@ -50,10 +50,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
 
 
-
-
         // btnZurueck
-
         btnZurueck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

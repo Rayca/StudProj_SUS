@@ -2,6 +2,8 @@ package com.example.flaus.susea;
 
 import android.util.Log;
 
+//GANZ VIEL MATHEMATIK UND STATISTIK !! DANGER !!
+/* Stellt die mathematischen Funktionen zu Verfügung um Kennzahlen für Studien zu berechnen */
 public class Statistik {
 
     public static int berechneStandardabweichung(int[] antworten){

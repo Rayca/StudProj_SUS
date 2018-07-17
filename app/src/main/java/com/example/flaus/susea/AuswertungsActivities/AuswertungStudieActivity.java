@@ -18,6 +18,8 @@ import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.TestActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 
+/* Übernimmmt die Auswertung und Darstellung der gesammelten Daten eines einzelnen Tests */
+
 public class AuswertungStudieActivity extends AppCompatActivity {
 
 

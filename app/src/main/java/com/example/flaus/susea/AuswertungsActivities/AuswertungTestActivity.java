@@ -16,6 +16,8 @@ import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.Statistik;
 
+
+/* Übernimmmt die Auswertung und Darstellung der gesammelten Daten eines einzelnen Tests */
 public class AuswertungTestActivity extends AppCompatActivity {
 
     TextView textViewScore, textViewGeschlecht, textViewAlter, textViewAntworten;

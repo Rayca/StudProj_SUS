@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+
+/* Verknüpft die Daten aus der Datenbank, die in dem Cursor entahlten sind
+    mit den Layout-Ressourcen des ListViews
+ */
+
 public class AdapterTests extends CursorAdapter {
 
 
@@ -35,6 +40,7 @@ public class AdapterTests extends CursorAdapter {
     }
 
     @Override
+    //Angezeigt wird das Datum, an dem der Test erstellt wurde und daneben der Score des Tests
     public void bindView(View view, Context context, Cursor cursor) {
 
         String datum = cursor.getString(cursor.getColumnIndexOrThrow(from[0]));

@@ -18,6 +18,7 @@ import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
 
+//Füllt und verwaltet das ListView, mit dem alle Tests aus der DB als Liste angezeigt werden können
 public class ListViewTestsActivity extends AppCompatActivity {
 
     ListView listView;
@@ -63,7 +64,6 @@ public class ListViewTestsActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-
 
 
 

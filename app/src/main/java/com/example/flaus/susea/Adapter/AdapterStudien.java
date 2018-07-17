@@ -9,6 +9,9 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 
+/* Verknüpft die Daten aus der Datenbank, die in dem Cursor entahlten sind
+    mit den Layout-Ressourcen des ListViews
+ */
 
 public class AdapterStudien extends CursorAdapter {
 
@@ -37,14 +40,15 @@ public class AdapterStudien extends CursorAdapter {
     }
 
     @Override
+    //Angezeigt werden in der Liste einmal der Name der Studie und daneben der Score der Studie
     public void bindView(View view, Context context, Cursor cursor) {
 
         String name = cursor.getString(cursor.getColumnIndexOrThrow(from[0]));
-        TextView textViewName = (TextView) view.findViewById(to[0]);
+        TextView textViewName = view.findViewById(to[0]);
         textViewName.setText(name);
 
         int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[1]));
-        TextView textViewScore = (TextView) view.findViewById(to[1]);
+        TextView textViewScore = view.findViewById(to[1]);
         textViewScore.setText(" " + score);
 
     }
