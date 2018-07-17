@@ -5,183 +5,195 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.flaus.susea.TestActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-       android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp">
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView_Ueberschrift"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/textView_Fragen"
-            android:layout_width="291dp"
-            android:layout_height="205dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@+id/radioGroup4"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup4"
-            android:paddingTop="10dp"
-            android:gravity="center"
-            android:textSize="24dp"/>
-<!-- Zustimmungs Layout -->
         <LinearLayout
-            android:id="@+id/layoutZustimmung"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/textView_Ablehnung"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView_Ueberschrift"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Starke Ablehnung" />
+                android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView_Zustimmung"
+                android:id="@+id/textView_Fragen"
+                android:layout_width="291dp"
+                android:layout_height="205dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="24dp"
+                app:layout_constraintEnd_toEndOf="@+id/radioGroup4"
+                app:layout_constraintStart_toStartOf="@+id/radioGroup4" />
+            <!-- Zustimmungs Layout -->
+            <LinearLayout
+                android:id="@+id/layoutZustimmung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Starke Zustimmung"
-                android:gravity="end"/>
-
-
-
-
-        </LinearLayout> <!-- Zustimmungslayout -->
-
-
-
-        <!-- Letzte seite -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout_letzeSeiteTest"
-            android:orientation="vertical"
-            android:visibility="gone">
-            <LinearLayout
-                android:id="@+id/linearLayout_Alter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/textView_Ablehnung"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Starke Ablehnung" />
+
+                <TextView
+                    android:id="@+id/textView_Zustimmung"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Starke Zustimmung" />
+
+
+            </LinearLayout> <!-- Zustimmungslayout -->
+
+
+            <!-- Letzte seite -->
+            <LinearLayout
+                android:id="@+id/linearLayout_letzeSeiteTest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_Alter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Alter: " />
+
+                    <EditText
+                        android:id="@+id/textEdit_alter"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:inputType="number" />
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Alter: "
-                    android:gravity="center"/>
-                <EditText
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Geschlecht:" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_Geschlecht"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:gravity="center"
-                    android:id="@+id/textEdit_alter"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:inputType="number" />
-            </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Geschlecht:"
-                android:layout_gravity="center"/>
+                    android:orientation="horizontal">
 
+                    <RadioButton
+                        android:id="@+id/radioButton_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="2dp"
+                        android:text="Männlich" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weiblich" />
+                </RadioGroup>
+
+
+            </LinearLayout>  <!--Letzte seite layout -->
+            <!-- RadioGroup -->
             <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioGroup_Geschlecht"
+                android:id="@+id/radioGroup_Antworten"
+                android:layout_width="294dp"
+                android:layout_height="54dp"
+                android:layout_margin="20dp"
+
                 android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_margin="10dp">
+                android:visibility="visible">
+
                 <RadioButton
+                    android:id="@+id/radioButton1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/radioButton_male"
-                    android:text="Männlich"
-                    android:paddingRight="2dp"/>
+                    android:layout_weight="1" />
+
                 <RadioButton
+                    android:id="@+id/radioButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/radioButton_female"
-                    android:text="Weiblich"/>
-            </RadioGroup>
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:id="@+id/radioButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </RadioGroup>  <!-- RadioGroup -->
 
 
-        </LinearLayout>  <!--Letzte seite layout -->
-<!-- RadioGroup -->
-        <RadioGroup
-            android:id="@+id/radioGroup_Antworten"
-            android:layout_width="294dp"
-            android:layout_height="54dp"
-            android:layout_margin="20dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <RadioButton
-                android:id="@+id/radioButton1"
+            <Button
+                android:id="@+id/button_naechsteFrage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:background="@drawable/button"
+                android:text="Nächste Frage"
+                android:textAppearance="@android:style/TextAppearance.Material.Widget.Button"
+                android:textColor="#FFFFFF">
 
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </RadioGroup>  <!-- RadioGroup -->
+            </Button>
 
 
-        <Button
-            android:id="@+id/button_naechsteFrage"
-            android:layout_width="wrap_content"
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Nächste Frage"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp" />
 
 
-    </LinearLayout>
-
-
-
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="5dp"
-        android:layout_alignParentBottom="true"/>
-
-
-
-</RelativeLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

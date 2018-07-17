@@ -8,10 +8,16 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/list_view_typ"
+        style="@android:style/Widget.Material.Light.ListView"
         android:layout_width="match_parent"
         android:layout_height="363dp"
         android:layout_centerVertical="true"
@@ -19,10 +25,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:choiceMode="singleChoice"
-        android:listSelector="@color/colorAccent"
+        android:drawSelectorOnTop="true"
+        android:duplicateParentState="true"
+        android:headerDividersEnabled="true"
+        android:listSelector="@color/bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+       >
 
     </ListView>
 
@@ -35,11 +45,33 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Weiter"
+        android:background="@drawable/button"
+        android:textAppearance="@android:style/TextAppearance.Material.Widget.Button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintHorizontal_bias="0.924"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_view_typ"
-        app:layout_constraintVertical_bias="0.482" />
+        app:layout_constraintVertical_bias="0.49" />
+
+    <Button
+        android:id="@+id/btnAbbrechen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button"
+        android:text="Abbrechen"
+        android:textAppearance="@android:style/TextAppearance.Material.Widget.Button"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_next"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_view_typ"
+        app:layout_constraintVertical_bias="0.49" />
 
 </android.support.constraint.ConstraintLayout>

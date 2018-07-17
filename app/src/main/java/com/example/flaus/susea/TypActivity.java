@@ -2,7 +2,6 @@ package com.example.flaus.susea;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.view.View;
 import android.widget.Toast;
@@ -28,6 +26,7 @@ public class TypActivity extends AppCompatActivity {
     AlertDialog studie_erstellen;
     String name_studie;
     Datenbank db;
+    Button button_next, btnAbbrechen;
 
     // Variabeln zur erstellung der studie
     int anzahlTests = 0;
@@ -35,6 +34,7 @@ public class TypActivity extends AppCompatActivity {
     long studienId = -1;
     boolean studie;
     Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class TypActivity extends AppCompatActivity {
 
         final ListView listview = findViewById(R.id.list_view_typ);
         String[] typen = {
-                "B2B", "B2C", "Web", "Cell", "HW", "Internal SW", "IVR", "Web/IVR"
+                "Hardware", "Software", "Mobile", "Tablet", "Enterprise Software", "Webseite"
         };
         final ArrayList<String> typenList = new ArrayList<String>();
         for (int i = 0; i < typen.length; ++i) {
@@ -67,6 +67,8 @@ public class TypActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // TODO: Schriftfarbe des ausgewählten items zu weiß ändern
                 String name = listview.getItemAtPosition(position).toString();
 
                 setTyp(name);
@@ -74,7 +76,7 @@ public class TypActivity extends AppCompatActivity {
             }
         });
 
-        Button button_next = (Button) findViewById(R.id.button_next);
+        button_next = (Button) findViewById(R.id.button_next);
         button_next.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View button_next) {
@@ -97,6 +99,18 @@ public class TypActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        btnAbbrechen = (Button) findViewById(R.id.btnAbbrechen);
+        btnAbbrechen.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(),StartActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -158,6 +172,8 @@ public class TypActivity extends AppCompatActivity {
 
         return;
     }
+
+
 
 }
 
