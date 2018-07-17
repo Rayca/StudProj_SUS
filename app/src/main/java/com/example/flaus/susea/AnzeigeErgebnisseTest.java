@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 /* Zeigt die Antworten aus einem einzelnen Test an */
+//TODO: Jede Menge zu tun
 public class AnzeigeErgebnisseTest extends AppCompatActivity {
     TextView anzeige_alter;
     TextView anzeige_geschlecht;

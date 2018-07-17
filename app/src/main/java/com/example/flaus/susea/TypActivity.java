@@ -28,7 +28,7 @@ public class TypActivity extends AppCompatActivity {
     Datenbank db;
     Button button_next, btnAbbrechen;
 
-    // Variabeln zur erstellung der studie
+    // Variabeln zur erstellung der neue_studie
     int anzahlTests = 0;
     int scoreGesamt = 0;
     long studienId = -1;
@@ -48,10 +48,12 @@ public class TypActivity extends AppCompatActivity {
 
         db = new Datenbank(this);
 
+        //Intent Empfangen und Daten daraus lesen
        Intent intent = this.getIntent();
         studie = intent.getBooleanExtra("Studie", false);
-        Log.d("studie", "TypActivity =" + studie);
+        Log.d("neue_studie", "TypActivity =" + studie);
 
+        // Auswahlliste Interfacetypen füllen
         final ListView listview = findViewById(R.id.list_view_typ);
         String[] typen = {
                 "Hardware", "Software", "Mobile", "Tablet", "Enterprise Software", "Webseite"
@@ -64,19 +66,20 @@ public class TypActivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
+        //Auswahl einer Interfacetypen aus der Liste
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // TODO: Schriftfarbe des ausgewählten items zu weiß ändern
+                //Übergibt den ausgewählten Interfacetyp als name
                 String name = listview.getItemAtPosition(position).toString();
-
                 setTyp(name);
 
             }
         });
 
-        button_next = (Button) findViewById(R.id.button_next);
+        button_next = findViewById(R.id.button_next);
         button_next.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View button_next) {
@@ -84,16 +87,16 @@ public class TypActivity extends AppCompatActivity {
                 if (typ != null) {
                     if ( studie == true) {
                         dialog_studie_erstellen_öffnen();
-                    } else {
+                    } else { //Schickt den Intent ab, gefüllt mit allen wichtigen Daten für die Anzeige der Studie
                         Intent intent1= new Intent(getBaseContext(), TestActivity.class);
                         intent1.putExtra("Name_der_Studie", name_studie);
                         intent1.putExtra("Interfacetyp", typ);
-                        intent1.putExtra("studienId", studienId);
-                        intent1.putExtra("studie", studie);
+                        intent1.putExtra("studienId",studienId);
+                        intent1.putExtra("neue_studie", studie);
                         startActivity(intent1);
                     }
 
-                }else{
+                }else{ //Wenn kein Interfacetyp vorher ausgewählt wurde
                     Toast toast = Toast.makeText(getApplicationContext(),"Bitte einen Typen wählen",Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -101,7 +104,7 @@ public class TypActivity extends AppCompatActivity {
         });
 
 
-        btnAbbrechen = (Button) findViewById(R.id.btnAbbrechen);
+        btnAbbrechen =  findViewById(R.id.btnAbbrechen);
         btnAbbrechen.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +124,8 @@ public class TypActivity extends AppCompatActivity {
     }
 
     // Öffnet und erstellt den Dialog um der neuen Studie einen Namen zu geben
+    //Bestätigt man den Dialog wird eine neue Studie in die DB eingefügt und
+    //man gelangt zur nächsten Activity (Übersicht über die Studie)
     public void dialog_studie_erstellen_öffnen(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         Log.d("Jule", "Funktion zum Erstellen des Dialogs wird aufgerufen");
@@ -139,7 +144,6 @@ public class TypActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 name_studie = eingabe_name.getText().toString();
                 Log.d("Jule", name_studie);
-
 
 
                 // Studie in Datenbank einfügen

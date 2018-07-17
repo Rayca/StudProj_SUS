@@ -28,7 +28,7 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_ALTER = "Proband_Alter";
     public static final String SPALTE_GESCHLECHT = "Proband_Geschlecht";
     public static final String SPALTE_SCORE = "Test_Score";
-    public static final String SPALTE_INTERFACE_TYP_TEST = "Test_Interfacetyp";
+    public static final String SPALTE_INTERFACE_TYP_TEST = "Test_Interfacetyp"; //TODO: Macht das Sinn den hier zu speichern? Reicht nicht bei der Studie?
 
     //Konstanten für die Studien-Datenbank
     public static final String TABELLE_STUDIE = "Studie";
@@ -91,15 +91,10 @@ public class Datenbank extends SQLiteOpenHelper {
 
 
 
-
-    //NUR ZUM TEST!!!
-    public Cursor selectAllTests(){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_TEST, null);
-        return  cursor;
-    }
-
-
+    /*------------------------------------------------------------------------------------------
+      Funktionen für die TABELLE_STUDIEN
+      ---------------------------------------------------------------------------------------------*/
+     //Gibt alle Studien in der Tabelle Studien in einem Cursor zurück
     public Cursor selectAllStudien() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_STUDIE_SCORE+" FROM " + TABELLE_STUDIE, null);
@@ -107,6 +102,7 @@ public class Datenbank extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //Gibt eine einzene Studie als Cursor zurück
     public Cursor getStudieById(long id){
         Log.d("Jule", "DB: übergebene Id " + id );
         SQLiteDatabase db = this.getWritableDatabase();
@@ -115,48 +111,42 @@ public class Datenbank extends SQLiteOpenHelper {
         return cursor;
     }
 
-
-    public Cursor getTestById(long id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELLE_TEST + " WHERE " + SPALTE_TEST_ID  + " = " + id, null);
-        cursor.moveToFirst();
-        return cursor;
-    }
-
-    public Cursor selectAllTestsbyStudienId (long studienId){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"";
-
-        Cursor cursor = db.rawQuery(query,null);
-        cursor.moveToFirst();
-        return cursor;
-    }
-
-
-
-    public long insertTest(int[] antworten, int alter, String geschlecht, String datum) {
+    //Fügt eine neue Studie in die DB ein
+    // Die ID der Studie wird automatisch beim Einfügen erzeugt und als long zurückgegeben
+    public long insertStudie(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){ //TODO: Macht doch keinen Sinn hier anzTests und Score zu übergeben, oder?
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
-        neueZeile.put(SPALTE_FRAGE1, antworten[0]);
-        neueZeile.put(SPALTE_FRAGE2, antworten[1]);
-        neueZeile.put(SPALTE_FRAGE3, antworten[2]);
-        neueZeile.put(SPALTE_FRAGE4, antworten[3]);
-        neueZeile.put(SPALTE_FRAGE5, antworten[4]);
-        neueZeile.put(SPALTE_FRAGE6, antworten[5]);
-        neueZeile.put(SPALTE_FRAGE7, antworten[6]);
-        neueZeile.put(SPALTE_FRAGE8, antworten[7]);
-        neueZeile.put(SPALTE_FRAGE9, antworten[8]);
-        neueZeile.put(SPALTE_FRAGE10, antworten[9]);
-        neueZeile.put(SPALTE_ALTER, alter);
-        neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
-        neueZeile.put(SPALTE_DATUM, datum);
+        neueZeile.put(SPALTE_STUDIE_NAME,name);
+        neueZeile.put(SPALTE_INTERFACE_TYP_STUDIE, interfaceTyp);
+        neueZeile.put(SPALTE_ANZAHL_TESTS,anzahlTests);
+        neueZeile.put(SPALTE_STUDIE_SCORE,scoreGesamt);
 
-        long id = db.insert(TABELLE_TEST, null, neueZeile);
-        Log.d("Jule", id + "");
+        long id = db.insert(TABELLE_STUDIE,null,neueZeile);
+        Log.d("Jule", "Studie_Id = " + id);
+
+
         return id;
 
     }
 
+
+
+
+      /*------------------------------------------------------------------------------------------
+    Funktionen für die TABELLE_TEST
+    ---------------------------------------------------------------------------------------------*/
+
+      //Gibt einen einzelnen Test in einem Cursor zurück
+      public Cursor getTestById(long id){
+          SQLiteDatabase db = this.getWritableDatabase();
+          Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELLE_TEST + " WHERE " + SPALTE_TEST_ID  + " = " + id, null);
+          cursor.moveToFirst();
+          return cursor;
+      }
+
+
+    //Fügt einen neuen Test in die DB ein
+    // Die ID des Tests wird automatisch beim Einfügen erzeugt und als long zurückgegeben
     public long insertTest(int[] antworten, int alter, String geschlecht, String datum, long studienId) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
@@ -181,9 +171,21 @@ public class Datenbank extends SQLiteOpenHelper {
 
     }
 
+    //Gibt alle Tests, die zu einer bestimmten Studie gehören, in einem Cursor zurück
+    public Cursor selectAllTestsbyStudienId (long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"";
+
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
 
 
 
+
+
+    /* Das sind noch so Überreste */
 
 
 
@@ -220,20 +222,5 @@ public class Datenbank extends SQLiteOpenHelper {
 
 
 
-    public long insertStudie(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues neueZeile = new ContentValues();
-        neueZeile.put(SPALTE_STUDIE_NAME,name);
-        neueZeile.put(SPALTE_INTERFACE_TYP_STUDIE, interfaceTyp);
-        neueZeile.put(SPALTE_ANZAHL_TESTS,anzahlTests);
-        neueZeile.put(SPALTE_STUDIE_SCORE,scoreGesamt);
-
-        long id = db.insert(TABELLE_STUDIE,null,neueZeile);
-        Log.d("Jule", "Studie_Id = " + id);
-
-
-        return id;
-
-    }
 
 }
