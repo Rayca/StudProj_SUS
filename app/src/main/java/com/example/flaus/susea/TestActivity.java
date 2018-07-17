@@ -116,10 +116,9 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void naechsteFrage() {
-    /* Je nachdem, welcher der RadioButtons angeklcikt wurde, wird der asugewählte Wert 1-5
+    /* Je nachdem, welcher der RadioButtons angeklcikt wurde, wird der ausgewählte Wert 1-5
     an der passenden Stelle im Array abgelegt
      */
-    public void naechsteFrage(){
 
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
         switch (radioButtonID) {

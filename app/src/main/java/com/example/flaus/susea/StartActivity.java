@@ -23,7 +23,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+        //actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
 
 
 
