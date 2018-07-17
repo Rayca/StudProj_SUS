@@ -3,10 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-android:id="@+id/actionStartseite"
+        android:id="@+id/actionStartseite"
         android:title="Startseite"
         android:icon="@drawable/ic_action_startseite"
         app:showAsAction="always"
         />
+
+
+    <item
+        android:id="@+id/action"
+        android:title="Einzelne Tests einsehen"
+        app:showAsAction="never"
+        />
+
+
+
 
 </menu>

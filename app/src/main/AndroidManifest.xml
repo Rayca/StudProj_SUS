@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".DatenbankTest" />
         <activity android:name=".TestActivity" />
-        <activity android:name=".TypActivity" />
+        <activity android:name=".TypActivity"/>
         <activity android:name=".AuswertungsActivities.AuswertungStudieActivity" />
         <activity android:name=".AuswertungsActivities.AuswertungTestActivity" />
         <activity android:name=".ListViewActivities.ListViewTestsActivity" />
