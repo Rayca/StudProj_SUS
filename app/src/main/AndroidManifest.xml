@@ -23,7 +23,7 @@
         <activity android:name=".AuswertungsActivities.AuswertungTestActivity" />
         <activity android:name=".ListViewActivities.ListViewTestsActivity" />
         <activity android:name=".ListViewActivities.ListViewStudienActivity" />
-        <activity android:name=".AnzeigeErgebnisseTest"
+        <activity android:name=".ListViewActivities.ListViewAntwortenTest"
             android:theme="@style/Campusboard"></activity>
     </application>
 

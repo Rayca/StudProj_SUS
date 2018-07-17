@@ -130,8 +130,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+                Intent intent1 = new Intent(getBaseContext(),ListViewTestsActivity.class);
+                startActivity(intent1);
                 return true;
 
             default:

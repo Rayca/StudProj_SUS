@@ -3,7 +3,6 @@ package com.example.flaus.susea.ListViewActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.flaus.susea.Adapter.AdapterTests;
-import com.example.flaus.susea.AnzeigeErgebnisseTest;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
@@ -57,7 +55,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent1 = new Intent(context, AnzeigeErgebnisseTest.class);
+                Intent intent1 = new Intent(context, ListViewAntwortenTest.class);
                 cursor.moveToPosition(position);
                 long test_id = cursor.getLong(0); //Test-Id aus dem Cursor holen
                 intent1.putExtra("testID", test_id);
