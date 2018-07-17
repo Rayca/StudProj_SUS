@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,7 +58,6 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         textViewGesamtScore = (TextView) findViewById(R.id.textViewScore);
         textViewAnzahlTests = (TextView) findViewById(R.id.textViewAnzahlTests);
         btnStatistik = (Button) findViewById(R.id.btnStatistik);
-        btnViewTests = (Button) findViewById(R.id.btnViewTests);
         btnZurStartseite = (Button) findViewById(R.id.btnZurStartseite);
         fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
@@ -87,32 +89,6 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
 
 
-        // Funktion für btnZurStartseite
-
-        btnZurStartseite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),StartActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
-        // Funktion für btnViewTests
-
-        btnViewTests.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), ListViewTestsActivity.class);
-                intent.putExtra("studienId", studienId);
-                startActivity(intent);
-            }
-        });
-
-
-
 
         // Funktion für fab
 
@@ -131,6 +107,39 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
 
     }
+
+
+@Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main,menu);
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.actionStartseite:
+                Intent intent = new Intent(getBaseContext(),StartActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 
 
 }
