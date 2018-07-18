@@ -40,16 +40,16 @@ public class AdapterStudien extends CursorAdapter {
     }
 
     @Override
-    //Angezeigt werden in der Liste einmal der Name der Studie und daneben der Score der Studie
+    //Angezeigt werden in der Liste einmal der Name der Studie und darunter die Anzahl Tests
     public void bindView(View view, Context context, Cursor cursor) {
 
         String name = cursor.getString(cursor.getColumnIndexOrThrow(from[0]));
         TextView textViewName = view.findViewById(to[0]);
         textViewName.setText(name);
 
-        int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[1]));
+        int anzahl_tests = cursor.getInt(cursor.getColumnIndexOrThrow(from[1]));
         TextView textViewScore = view.findViewById(to[1]);
-        textViewScore.setText(" " + score);
+        textViewScore.append(" " + anzahl_tests);
 
     }
 }

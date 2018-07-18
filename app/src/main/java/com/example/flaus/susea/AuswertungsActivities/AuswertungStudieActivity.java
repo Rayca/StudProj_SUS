@@ -60,6 +60,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         textViewGesamtScore = (TextView) findViewById(R.id.textViewScore);
         textViewAnzahlTests = (TextView) findViewById(R.id.textViewAnzahlTests);
         btnStatistik = (Button) findViewById(R.id.btnStatistik);
+        Button btnNeuerTest = findViewById(R.id.btnNeuerTest);
 
 
 
@@ -76,9 +77,10 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             textViewAnzahlTests.setText("Noch keine Tests");
         } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
             Cursor c = db.getStudieById(studienId);
+            c.moveToFirst();
             studienName = c.getString(1);
-             //int anzahl_tests = c.getInt(3); //TODO: Nachgucken, ob Anzahl Tests in der Db auch brav erhöht wird
-            // textViewAnzahlTests.setText(anzahl_tests);
+            int anzahl_tests = c.getInt(3); //TODO: Nachgucken, ob Anzahl Tests in der Db auch brav erhöht wird
+            textViewAnzahlTests.append(" " + anzahl_tests);
         }
 
 
@@ -87,6 +89,15 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         textViewNameStudie.setText(" " + studienName);
 
 
+        //Button um einen neuen Test zu starten und der Studie hinzuzufügen
+        btnNeuerTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), TestActivity.class);
+                i.putExtra("studienId", studienId);
+                startActivity(i);
+            }
+        });
 
 
 

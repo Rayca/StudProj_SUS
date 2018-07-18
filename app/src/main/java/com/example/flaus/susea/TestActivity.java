@@ -192,8 +192,11 @@ public class TestActivity extends AppCompatActivity {
                 // Datum hinzufügen
                 datum = getDatum();
 
+                //TODO: Das ist hier nur zum Test, nicht vergessen, nachher zu löschen
+                int score = Statistik.berechneScore(antworten);
+
                 //gesammelte Daten in die Datenbank schreiben
-                testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId);
+                testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId, score);
 
                 Log.d("TJ", "test_id vor intent" + testId);
                 Log.d("studId", "StudieId in TestActivity = " + studienId);

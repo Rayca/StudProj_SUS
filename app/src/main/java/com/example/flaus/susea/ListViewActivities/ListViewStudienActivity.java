@@ -60,8 +60,8 @@ public class ListViewStudienActivity extends AppCompatActivity {
         final Context context = this;
         int itemLayout = R.layout.studie_list_item_layout;
         final Cursor cursor = db.selectAllStudien();
-        final String[] from = new String[]{db.SPALTE_STUDIE_NAME, db.SPALTE_STUDIE_SCORE};
-        int[] to = new int[]{R.id.textViewName, R.id.textViewScore};
+        final String[] from = new String[]{db.SPALTE_STUDIE_NAME, db.SPALTE_ANZAHL_TESTS};
+        int[] to = new int[]{R.id.textView_StudieName, R.id.textView_AnzahlTests};
 
         final AdapterStudien adapterStudien = new AdapterStudien(context,itemLayout,cursor,from,to,0);
 

@@ -97,7 +97,7 @@ public class Datenbank extends SQLiteOpenHelper {
      //Gibt alle Studien in der Tabelle Studien in einem Cursor zurück
     public Cursor selectAllStudien() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_STUDIE_SCORE+" FROM " + TABELLE_STUDIE, null);
+        Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_ANZAHL_TESTS+" FROM " + TABELLE_STUDIE, null);
         cursor.moveToFirst();
         return cursor;
     }
@@ -129,6 +129,14 @@ public class Datenbank extends SQLiteOpenHelper {
 
     }
 
+    //Hilfsfunktion um die Anzahl der Tests in einer Studie verwalten zu können
+    public int getAnzhalTestsInStudie(long id){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + SPALTE_ANZAHL_TESTS + " FROM " + TABELLE_STUDIE + " WHERE "  + SPALTE_STUDIE_ID + " = " + id, null);
+        int anzahl_tests = cursor.getInt(0);
+        Log.d("Jule", "Anzahl Tests, die aus der Db geleesen wurde: "+ anzahl_tests);
+        return anzahl_tests;
+    }
 
 
 
@@ -147,7 +155,7 @@ public class Datenbank extends SQLiteOpenHelper {
 
     //Fügt einen neuen Test in die DB ein
     // Die ID des Tests wird automatisch beim Einfügen erzeugt und als long zurückgegeben
-    public long insertTest(int[] antworten, int alter, String geschlecht, String datum, long studienId) {
+    public long insertTest(int[] antworten, int alter, String geschlecht, String datum, long studienId, int score) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_FRAGE1, antworten[0]);
@@ -164,9 +172,24 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_GESCHLECHT, geschlecht);
         neueZeile.put(SPALTE_DATUM, datum);
         neueZeile.put(SPALTE_STUDIE_ID,studienId);
+        neueZeile.put(SPALTE_SCORE, score);
+        Log.d("jule", "score, der in die db geschrieben wird" +score);
 
+        //Neuen Test in die DB einfügen
         long id = db.insert(TABELLE_TEST, null, neueZeile);
         Log.d("Jule", id + "");
+
+        //Wichtig, dass die Anzahl Tests in der zugehörigen Studie erhöht wird.
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_STUDIE + " WHERE "  + SPALTE_STUDIE_ID + " = " + id, null);
+        cursor.moveToFirst();
+        int anzahl_tests = cursor.getInt(4);
+        anzahl_tests = anzahl_tests +1; // Da ja ein neuer dazu kommt
+        ContentValues neue_anz_tests = new ContentValues();
+        neue_anz_tests.put(SPALTE_ANZAHL_TESTS, anzahl_tests);
+        String[] arg = new String[]{Long.toString(studienId)};
+        //Anzahl der Tests in der Spalte SPALTE_ANZAHL_TESTS in der Zeile mit der passenden StudienID
+        db.update(TABELLE_STUDIE, neue_anz_tests, SPALTE_STUDIE_ID + " = ?",arg);
+
         return id;
 
     }
