@@ -45,8 +45,9 @@ public class ListViewTestsActivity extends AppCompatActivity {
         final Context context = this;
         int itemLayout = R.layout.test_list_item_layout;
         final Cursor cursor = db.selectAllTestsbyStudienId(studienId);
+        Log.d("Jule", " Länge des Cursor " + cursor.getCount());
         final String[] from = new String[]{db.SPALTE_DATUM, db.SPALTE_SCORE};
-        int[] to = new int[]{R.id.textViewDatum, R.id.textViewScore};
+        int[] to = new int[]{R.id.textView_TestDatum, R.id.textView_TestScore};
 
         final AdapterTests adapterTests = new AdapterTests(context,itemLayout,cursor,from,to,0);
 

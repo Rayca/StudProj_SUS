@@ -3,6 +3,7 @@ package com.example.flaus.susea.Adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class AdapterTests extends CursorAdapter {
         this.itemLayout = itemLayout;
         this.from = from;
         this.to = to;
-
+        Log.d("Jule", "Adapter konstruktor wird aufgerufen");
     }
 
 
@@ -43,13 +44,17 @@ public class AdapterTests extends CursorAdapter {
     //Angezeigt wird das Datum, an dem der Test erstellt wurde und daneben der Score des Tests
     public void bindView(View view, Context context, Cursor cursor) {
 
+        Log.d("Jule", "Binding wird aufgerufen");
+
         String datum = cursor.getString(cursor.getColumnIndexOrThrow(from[0]));
+        Log.d("jule", "Datum für Test Liste: " + datum);
         TextView textViewDatum = (TextView) view.findViewById(to[0]);
-        textViewDatum.setText(datum);
+        textViewDatum.append(datum);
 
         int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[1]));
         TextView textViewScore = (TextView) view.findViewById(to[1]);
-        textViewScore.setText(" " + score);
+        Log.d("jule", "Score für Test Liste: " + score);
+        textViewScore.append(" " + score);
 
     }
 }

@@ -129,6 +129,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
             case R.id.actionTestsEinsehen:
                 Intent intent1 = new Intent(getBaseContext(),ListViewTestsActivity.class);
+                intent1.putExtra("studienId", studienId);
                 startActivity(intent1);
                 return true;
 
