@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,6 +28,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
     ListView listView;
     Button btnZurueck;
     Toolbar toolbar;
+    boolean kommeVonDerStartseite;
     Datenbank db = new Datenbank(this);
 
     @Override
@@ -34,7 +38,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
         // Intent
         Intent intent = getIntent();
-        boolean kommeVonDerStartseite = intent.getBooleanExtra("kommeVonDerStartseite",true);
+         kommeVonDerStartseite = intent.getBooleanExtra("kommeVonDerStartseite",true);
 
 
         // Toolbar
@@ -46,9 +50,17 @@ public class ListViewStudienActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         if(kommeVonDerStartseite){
             ab.setDisplayHomeAsUpEnabled(true);
+           // MenuItem item = (MenuItem) findViewById(R.id.actionStartseite);
+           // item.setVisible(false);
         } else {
             ab.setDisplayHomeAsUpEnabled(false);
         }
+
+
+
+
+
+
 
         // View Binding
         listView = (ListView) findViewById(R.id.listView);
@@ -88,4 +100,35 @@ public class ListViewStudienActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_studie_listview,menu);
+        if(kommeVonDerStartseite){
+            MenuItem item = (MenuItem) menu.findItem(R.id.actionStartseite);
+            item.setVisible(false);
+        }
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.actionStartseite:
+                Intent intent = new Intent(getBaseContext(),StartActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+
 }

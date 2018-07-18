@@ -20,6 +20,7 @@ import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
+import com.example.flaus.susea.StatistikAuswertung;
 import com.example.flaus.susea.TestActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 
@@ -99,7 +100,14 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             }
         });
 
-
+        btnStatistik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: einmal alles mitschicken
+                Intent intent = new Intent(getBaseContext(), StatistikAuswertung.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -139,7 +147,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 intent2.putExtra("kommeVonDerStartseite",kommeVonderStartseite);
                 startActivity(intent2);
                 return true;
-
+            case android.R.id.home:
+                // TODO: Hier intent mitgeben, um auf auswertungsseite der studie zurück zu kommen
 
             default:
                 // If we got here, the user's action was not recognized.
