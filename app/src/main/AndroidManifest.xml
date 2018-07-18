@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity"
+        <activity
+            android:name=".StartActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,15 +19,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".TestActivity" />
-        <activity android:name=".TypActivity"
-            android:parentActivityName=".StartActivity"/>
-        <activity android:name=".AuswertungsActivities.AuswertungStudieActivity"/>
+        <activity
+            android:name=".TypActivity"
+            android:parentActivityName=".StartActivity" />
+        <activity android:name=".AuswertungsActivities.AuswertungStudieActivity" />
         <activity android:name=".AuswertungsActivities.AuswertungTestActivity" />
         <activity android:name=".ListViewActivities.ListViewTestsActivity" />
-        <activity android:name=".ListViewActivities.ListViewStudienActivity"
-            android:parentActivityName=".StartActivity"/>
-        <activity android:name=".ListViewActivities.ListViewAntwortenTest"
-            android:theme="@style/Campusboard"></activity>
+        <activity
+            android:name=".ListViewActivities.ListViewStudienActivity"
+            android:parentActivityName=".StartActivity" />
+        <activity
+            android:name=".ListViewActivities.ListViewAntwortenTest"
+            android:theme="@style/Campusboard" />
+        <activity android:name=".StatistikAuswertung"
+            android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"></activity>
     </application>
 
 </manifest>

@@ -9,23 +9,4 @@
         app:showAsAction="always"
         />
 
-
-    <item
-        android:id="@+id/actionTestsEinsehen"
-        android:title="Einzelne Tests einsehen"
-        app:showAsAction="never"
-        />
-
-
-    <item
-        android:id="@+id/actionAlleStudienEinsehen"
-        android:title="Alle Studien einsehen"
-        app:showAsAction="never"
-        />
-
-
-
-
-
-
 </menu>
