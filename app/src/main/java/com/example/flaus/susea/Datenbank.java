@@ -28,7 +28,7 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_ALTER = "Proband_Alter";
     public static final String SPALTE_GESCHLECHT = "Proband_Geschlecht";
     public static final String SPALTE_SCORE = "Test_Score";
-    public static final String SPALTE_INTERFACE_TYP_TEST = "Test_Interfacetyp"; //TODO: Macht das Sinn den hier zu speichern? Reicht nicht bei der Studie?
+    public static final String SPALTE_INTERFACE_TYP_TEST = "Test_Interfacetyp";
 
     //Konstanten für die Studien-Datenbank
     public static final String TABELLE_STUDIE = "Studie";

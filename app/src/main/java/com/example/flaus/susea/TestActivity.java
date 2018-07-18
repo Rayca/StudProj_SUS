@@ -1,9 +1,9 @@
 package com.example.flaus.susea;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +39,7 @@ public class TestActivity extends AppCompatActivity {
     int alterInt;
     boolean studie;
     long studienId;
+    Toolbar toolbar;
     String studienName;
     long testId;
     String datum;
@@ -55,10 +56,18 @@ public class TestActivity extends AppCompatActivity {
             "Ich weiß bei der Benutzung der Software zu jedem Zeitpunkt, was ich tue.",
             "Ich konnte die Software bedienen ohne zuvor Neues erlernen zu müssen."};
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+        // Toolbar
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Fragen beantworten");
 
 
         // Intent empfangen
@@ -187,7 +196,7 @@ public class TestActivity extends AppCompatActivity {
                 testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId);
 
                 Log.d("TJ", "test_id vor intent" + testId);
-                Log.d("studID", "StudieId in TestActivity = " + studienId);
+                Log.d("studId", "StudieId in TestActivity = " + studienId);
                 //Daten an die AuswertungsTestActivity übergeben
 
                 for (int i = 0; i < antworten.length; i++) {

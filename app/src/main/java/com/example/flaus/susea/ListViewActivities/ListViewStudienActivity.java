@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
     ListView listView;
     Button btnZurueck;
+    Toolbar toolbar;
     Datenbank db = new Datenbank(this);
 
     @Override
@@ -30,10 +32,28 @@ public class ListViewStudienActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_studien);
 
+        // Intent
+        Intent intent = getIntent();
+        boolean kommeVonDerStartseite = intent.getBooleanExtra("kommeVonDerStartseite",true);
+
+
+        // Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Alle Studien");
+        // Pfeil Action
+        // Pfeil für den User flow
+        ActionBar ab = getSupportActionBar();
+        if(kommeVonDerStartseite){
+            ab.setDisplayHomeAsUpEnabled(true);
+        } else {
+            ab.setDisplayHomeAsUpEnabled(false);
+        }
 
         // View Binding
         listView = (ListView) findViewById(R.id.listView);
         btnZurueck = (Button) findViewById(R.id.btnZurueck);
+
 
 
         // listView füllen
@@ -50,14 +70,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
 
 
-        // btnZurueck
-        btnZurueck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), StartActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         //Auswahl einer Studie aus der Liste
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

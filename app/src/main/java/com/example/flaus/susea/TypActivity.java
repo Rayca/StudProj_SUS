@@ -1,13 +1,19 @@
 package com.example.flaus.susea;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,8 +49,13 @@ public class TypActivity extends AppCompatActivity {
 
         // Toolbar
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Bitte einen Interfacetyp auswählen");
+        getSupportActionBar().setTitle("Interfacetyp auswählen");
+
+        // Pfeil für den User flow
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         db = new Datenbank(this);
 
@@ -104,14 +115,7 @@ public class TypActivity extends AppCompatActivity {
         });
 
 
-        btnAbbrechen =  findViewById(R.id.btnAbbrechen);
-        btnAbbrechen.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),StartActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 
@@ -176,6 +180,7 @@ public class TypActivity extends AppCompatActivity {
 
         return;
     }
+
 
 
 

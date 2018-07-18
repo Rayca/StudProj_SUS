@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flaus.susea.Datenbank;
+import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.TestActivity;
@@ -59,8 +60,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         textViewGesamtScore = (TextView) findViewById(R.id.textViewScore);
         textViewAnzahlTests = (TextView) findViewById(R.id.textViewAnzahlTests);
         btnStatistik = (Button) findViewById(R.id.btnStatistik);
-        btnZurStartseite = (Button) findViewById(R.id.btnZurStartseite);
-        fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+
+
 
 
         // Name und Id der Studie empfangen
@@ -91,20 +92,6 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
 
 
-        // Funktion für fab
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TestActivity.class);
-                Log.d("studID", "StudieId = " + studienId);
-                intent.putExtra("studienId", studienId);
-                intent.putExtra("studienName", studienName);
-                intent.putExtra("studie",studie);
-                startActivity(intent);
-            }
-        });
-
 
 
 
@@ -129,10 +116,18 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            case R.id.action:
+            case R.id.actionTestsEinsehen:
                 Intent intent1 = new Intent(getBaseContext(),ListViewTestsActivity.class);
                 startActivity(intent1);
                 return true;
+
+            case R.id.actionAlleStudienEinsehen:
+                boolean kommeVonderStartseite = false;
+                Intent intent2 = new Intent(getBaseContext(), ListViewStudienActivity.class);
+                intent2.putExtra("kommeVonDerStartseite",kommeVonderStartseite);
+                startActivity(intent2);
+                return true;
+
 
             default:
                 // If we got here, the user's action was not recognized.
