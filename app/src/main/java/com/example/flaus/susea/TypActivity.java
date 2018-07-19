@@ -147,13 +147,16 @@ public class TypActivity extends AppCompatActivity {
             //TODO: sicherstellen, dass auch etwas eingegeben wurde
             public void onClick(DialogInterface dialogInterface, int i) {
                 name_studie = eingabe_name.getText().toString();
-                Log.d("Jule", name_studie);
+                Log.d("Jule", "\""+name_studie+"\"");
 
-                if(name_studie!=""){
-                // Studie in Datenbank einfügen
-                studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
+
                Log.d("studID", "StudieId = " + studienId);
-               if(studienId != -1) {
+               if(studienId != -1&&!name_studie.isEmpty()) {
+
+
+                   // Studie in Datenbank einfügen
+                   studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
+
                    Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
                    Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
                    intent.putExtra("studienName", name_studie);
@@ -163,12 +166,10 @@ public class TypActivity extends AppCompatActivity {
                    startActivity(intent);
 
                } else {
-                   Toast.makeText(TypActivity.this, "Ups, da lief was schief!",Toast.LENGTH_SHORT).show();
+                   Toast.makeText(TypActivity.this, "Bitte geben Sie der Studie einen Namen!",Toast.LENGTH_SHORT).show();
                }
-            }else{
-                    Toast.makeText(TypActivity.this,"Bitte geben Sie den Studiennamen ein.",Toast.LENGTH_SHORT).show();
-                }
             }
+
         });
         builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
             @Override
