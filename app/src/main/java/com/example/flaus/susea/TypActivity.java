@@ -149,7 +149,7 @@ public class TypActivity extends AppCompatActivity {
                 name_studie = eingabe_name.getText().toString();
                 Log.d("Jule", name_studie);
 
-
+                if(name_studie!=""){
                 // Studie in Datenbank einfügen
                 studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
                Log.d("studID", "StudieId = " + studienId);
@@ -165,6 +165,9 @@ public class TypActivity extends AppCompatActivity {
                } else {
                    Toast.makeText(TypActivity.this, "Ups, da lief was schief!",Toast.LENGTH_SHORT).show();
                }
+            }else{
+                    Toast.makeText(TypActivity.this,"Bitte geben Sie den Studiennamen ein.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {

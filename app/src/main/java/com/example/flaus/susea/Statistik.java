@@ -2,6 +2,10 @@ package com.example.flaus.susea;
 
 import android.util.Log;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 //GANZ VIEL MATHEMATIK UND STATISTIK !! DANGER !!
 /* Stellt die mathematischen Funktionen zu Verfügung um Kennzahlen für Studien zu berechnen */
 public class Statistik {
@@ -31,6 +35,19 @@ public class Statistik {
 
     public static int median(int[]antworten){
         int median=0;
+
+        for(int i = 0;i<antworten.length;i++){
+            Log.d("median","Unsortiert: "+i+ ". = "+antworten[i]);
+        }
+
+        Arrays.sort(antworten);
+
+        for(int i = 0;i<antworten.length;i++){
+            Log.d("median","Sortiert: "+i+ ". = "+antworten[i]);
+        }
+
+        median= (antworten[4]+antworten[5])/2;
+        Log.d("median","Median: "+median);
         return median;
     }
 

@@ -208,6 +208,9 @@ public class TestActivity extends AppCompatActivity {
                 }
                 // Endscreen
 
+                //Test ob median funktion funktioniert.
+                // Statistik.median(antworten);
+
                 endScreen();
             }else{
                 Toast.makeText(TestActivity.this, "Bitte geben Sie Ihr Alter ein.", Toast.LENGTH_SHORT).show();
