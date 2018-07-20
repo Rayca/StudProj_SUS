@@ -180,15 +180,17 @@ public class Datenbank extends SQLiteOpenHelper {
         Log.d("Jule", id + "");
 
         //Wichtig, dass die Anzahl Tests in der zugehörigen Studie erhöht wird.
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_STUDIE + " WHERE "  + SPALTE_STUDIE_ID + " = " + id, null);
-        cursor.moveToFirst();
-        int anzahl_tests = cursor.getInt(4);
-        anzahl_tests = anzahl_tests +1; // Da ja ein neuer dazu kommt
-        ContentValues neue_anz_tests = new ContentValues();
-        neue_anz_tests.put(SPALTE_ANZAHL_TESTS, anzahl_tests);
-        String[] arg = new String[]{Long.toString(studienId)};
-        //Anzahl der Tests in der Spalte SPALTE_ANZAHL_TESTS in der Zeile mit der passenden StudienID
-        db.update(TABELLE_STUDIE, neue_anz_tests, SPALTE_STUDIE_ID + " = ?",arg);
+        if(studienId != -1) {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID + " = " + id, null);
+            cursor.moveToFirst();
+            int anzahl_tests = cursor.getInt(4);
+            anzahl_tests = anzahl_tests + 1; // Da ja ein neuer dazu kommt
+            ContentValues neue_anz_tests = new ContentValues();
+            neue_anz_tests.put(SPALTE_ANZAHL_TESTS, anzahl_tests);
+            String[] arg = new String[]{Long.toString(studienId)};
+            //Anzahl der Tests in der Spalte SPALTE_ANZAHL_TESTS in der Zeile mit der passenden StudienID
+            db.update(TABELLE_STUDIE, neue_anz_tests, SPALTE_STUDIE_ID + " = ?", arg);
+        }
 
         return id;
 

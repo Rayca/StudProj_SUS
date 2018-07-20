@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +44,7 @@ public class TestActivity extends AppCompatActivity {
     String studienName;
     long testId;
     String datum;
+    String interfacetyp;
     Datenbank manager = new Datenbank(this);
     //Aussagen des SUS-Fragebogens
     String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
@@ -75,6 +77,9 @@ public class TestActivity extends AppCompatActivity {
         studie = intent.getBooleanExtra("neue_studie", false);
         studienId = intent.getLongExtra("studienId",-1);
         studienName = intent.getStringExtra("studienName");
+        interfacetyp = intent.getStringExtra("interfacetyp");
+
+
 
 
         Log.d("studie", "testActivity : " + studie);
@@ -261,15 +266,24 @@ public class TestActivity extends AppCompatActivity {
                     intent.putExtra("testId",testId);
 
                     if(studie) {
+                        //Das sind alles Werte, die man für die Auswertung einer Studie braucht
                         intent.putExtra("neue_studie", true);
+                        intent.putExtra("studienId", studienId);
+                        Log.d("Jule", "Id, die mitgeschickt wird: " + studienId);
+                        intent.putExtra("studienName", studienName);
+                        intent.putExtra("interfacetyp", interfacetyp);
+                        startActivity(intent);
                     } else {
-                        intent.putExtra("neue_studie", false);
-                    }
-                    intent.putExtra("studienId", studienId);
-                    Log.d("Jule", "Id, die mitgeschickt wird: " + studienId);
-                    intent.putExtra("studienName", studienName);
+                        //Das sind die Werte, die mitgeschickt werden, wenn nur ein einzelner Test gestartet wurde
+                        Intent intent1 = new Intent( getBaseContext(), AuswertungTestActivity.class);
+                        intent1.putExtra("testId",testId);
+                        intent1.putExtra("neue_studie", false);
+                        intent1.putExtra("antworten", antworten);
+                        intent1.putExtra("interfacetyp", interfacetyp);
+                        startActivity(intent1);
 
-                    startActivity(intent);
+                    }
+
                 }
             });
     }

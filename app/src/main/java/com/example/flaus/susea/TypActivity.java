@@ -100,8 +100,8 @@ public class TypActivity extends AppCompatActivity {
                         dialog_studie_erstellen_öffnen();
                     } else { //Schickt den Intent ab, gefüllt mit allen wichtigen Daten für die Anzeige der Studie
                         Intent intent1= new Intent(getBaseContext(), TestActivity.class);
-                        intent1.putExtra("Name_der_Studie", name_studie);
-                        intent1.putExtra("Interfacetyp", typ);
+                        intent1.putExtra("studienName", name_studie);
+                        intent1.putExtra("interfacetyp", typ);
                         intent1.putExtra("studienId",studienId);
                         intent1.putExtra("neue_studie", studie);
                         startActivity(intent1);

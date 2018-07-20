@@ -57,7 +57,7 @@ public class AuswertungTestActivity extends AppCompatActivity {
         // Intent empfangen
         Intent intent = getIntent();
         testId = intent.getLongExtra("testId",-1);
-        studie = intent.getBooleanExtra("studie", false);
+        studie = intent.getBooleanExtra("neue_studie", false);
         antworten = intent.getIntArrayExtra("antworten");
         studienName = intent.getStringExtra("studienName");
         studienId = intent.getLongExtra("studienId",-1);
@@ -112,7 +112,7 @@ public class AuswertungTestActivity extends AppCompatActivity {
 
 
         // TextViews füllen
-        textViewScore.setText(" " + Statistik.berechneScore(antworten));
+        textViewScore.append(" " + Statistik.berechneScore(antworten));
 
 
         // TODO : geschlecht und alter angeben und antworten einzelner fragen
