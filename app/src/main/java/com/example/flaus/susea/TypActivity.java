@@ -151,7 +151,7 @@ public class TypActivity extends AppCompatActivity {
 
 
                Log.d("studID", "StudieId = " + studienId);
-               if(studienId != -1&&!name_studie.isEmpty()) {
+               if(name_studie.isEmpty() != true) {
 
 
                    // Studie in Datenbank einfügen

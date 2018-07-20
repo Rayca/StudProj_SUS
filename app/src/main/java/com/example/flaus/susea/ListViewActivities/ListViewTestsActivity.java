@@ -3,9 +3,14 @@ package com.example.flaus.susea.ListViewActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,14 +20,17 @@ import com.example.flaus.susea.Adapter.AdapterTests;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
+import com.example.flaus.susea.StartActivity;
 
 //Füllt und verwaltet das ListView, mit dem alle Tests aus der DB als Liste angezeigt werden können
 public class ListViewTestsActivity extends AppCompatActivity {
 
     ListView listView;
-    Button btnZurueck;
     Datenbank db = new Datenbank(this);
-
+    Toolbar toolbar;
+    long studienId;
+    String studienName;
+    boolean studie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +38,26 @@ public class ListViewTestsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_view_tests);
 
 
+        // Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Tests der Studie ");
+
+        // Pfeil für den User flow
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
 
         // View - Binding
         listView = (ListView) findViewById(R.id.listViewTests);
-        btnZurueck = (Button) findViewById(R.id.btnZurueck);
+
 
         // Intent empfangen
-        final Intent intent = getIntent();
-        final long studienId = intent.getLongExtra("studienId", -1);
+        Intent intent = getIntent();
+        studienId = intent.getLongExtra("studienId", -1);
+        studienName = intent.getStringExtra("studienName");
+        studie = intent.getBooleanExtra("studie",false);
         Log.d("studID", "Empfangene Studien-ID: "+ studienId);
 
 
@@ -67,18 +87,36 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
 
 
-        // Funktion für btnZurueck
 
-        btnZurueck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),AuswertungStudieActivity.class);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_studie_listview,menu);
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.home:
+                Intent intent = new Intent(getBaseContext(),StartActivity.class);
                 intent.putExtra("studienId", studienId);
+                intent.putExtra("studie",studie);
+                intent.putExtra("studienName", studienName);
                 startActivity(intent);
-            }
-        });
+                return true;
 
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
 
-
+        }
     }
 }

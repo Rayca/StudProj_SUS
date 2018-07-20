@@ -46,7 +46,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Alle Studien");
         // Pfeil Action
-        // Pfeil für den User flow
+
         ActionBar ab = getSupportActionBar();
         if(kommeVonDerStartseite){
             ab.setDisplayHomeAsUpEnabled(true);
@@ -64,7 +64,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
         // View Binding
         listView = (ListView) findViewById(R.id.listView);
-        btnZurueck = (Button) findViewById(R.id.btnZurueck);
+
 
 
 
@@ -92,6 +92,8 @@ public class ListViewStudienActivity extends AppCompatActivity {
                 //ID der Studie raussuchen, die angeklickt wurde
                 cursor.moveToPosition(position);
                 long studie_id = cursor.getLong(0);
+
+                // TODO: Hier muss noch Name und der boolean studie mitgeschickt werden
                 Log.d("Jule", "Id der ausgewählten Studie: " + studie_id);
                 //Id der Studie mitschicken um die Tests darin in der nächsten Activity anzuzeigen
                 intent.putExtra("studienId", studie_id);
