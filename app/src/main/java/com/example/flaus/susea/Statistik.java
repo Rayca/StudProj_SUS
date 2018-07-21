@@ -62,10 +62,18 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             Log.d("median","Sortiert: "+i+ ". = "+scoreList.get(i));
         }
-
-        median= (scoreList.get(scoreList.size()/2)+scoreList.get(scoreList.size()/2+1))/2;
-        Log.d("median","Median: "+median);
-        return median;
+        if((scoreList.size()%2)==0) {
+            Log.d("median","Gerade");
+            median = (scoreList.get(scoreList.size() / 2) + (scoreList.get(((scoreList.size() + 1) / 2)-1))) / 2;
+            Log.d("median", "Median: " + median);
+            return median;
+        }
+        else{
+            Log.d("median","Ungerade");
+            median = (scoreList.get(((scoreList.size() + 1) / 2)-1));
+            Log.d("median", "Median: " + median);
+            return median;
+        }
     }
 
     public static int berechneUsability(int[]antworten){
