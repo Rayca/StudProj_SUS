@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 public class Datenbank extends SQLiteOpenHelper {
@@ -207,6 +208,14 @@ public class Datenbank extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor selectScoresByStudienId(long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_SCORE+" FROM "+ TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";
+        Log.d("median","StudienId = "+studienId);
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
 
 
 
