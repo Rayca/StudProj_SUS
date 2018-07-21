@@ -46,8 +46,8 @@ public class Statistik {
         while(!cursor.isAfterLast()){
             Log.d("median","scoreList wird gefüllt.");
 
-            scoreList.add(cursor.getColumnIndex(Datenbank.SPALTE_SCORE));
-            Log.d("median","scoreList SPALTE: "+cursor.getColumnIndex(Datenbank.SPALTE_SCORE));
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
+            Log.d("median","scoreList SPALTE: "+cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
 
             cursor.moveToNext();
         }
