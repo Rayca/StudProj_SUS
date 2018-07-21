@@ -147,7 +147,7 @@ public class Datenbank extends SQLiteOpenHelper {
       //Gibt einen einzelnen Test in einem Cursor zurück
       public Cursor getTestById(long id){
           SQLiteDatabase db = this.getWritableDatabase();
-          Cursor cursor = db.rawQuery("SELECT " + SPALTE_TEST_ID+" as _id" + SPALTE_FRAGE1 + SPALTE_FRAGE2 + SPALTE_FRAGE3 + SPALTE_FRAGE4 + SPALTE_FRAGE5+ SPALTE_FRAGE6+ SPALTE_FRAGE7 +SPALTE_FRAGE8 + SPALTE_FRAGE9 + SPALTE_FRAGE10 + SPALTE_ALTER + SPALTE_GESCHLECHT +  " FROM "+ TABELLE_TEST + " WHERE " + SPALTE_TEST_ID  + " = " + id, null);
+          Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELLE_TEST + " WHERE " + SPALTE_TEST_ID  + " = " + id, null);
           cursor.moveToFirst();
           return cursor;
       }
@@ -181,8 +181,9 @@ public class Datenbank extends SQLiteOpenHelper {
 
         //Wichtig, dass die Anzahl Tests in der zugehörigen Studie erhöht wird.
         if(studienId != -1) {
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID + " = " + id, null);
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId, null);
             cursor.moveToFirst();
+            Log.d("Jule", "Id bei insert-Test: " + id);
             int anzahl_tests = cursor.getInt(4);
             anzahl_tests = anzahl_tests + 1; // Da ja ein neuer dazu kommt
             ContentValues neue_anz_tests = new ContentValues();

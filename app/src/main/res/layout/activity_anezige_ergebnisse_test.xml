@@ -6,40 +6,200 @@
     android:layout_height="match_parent"
     tools:context=".ListViewActivities.ListViewAntwortenTest">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Alter: "
+        android:id="@+id/textView_ergF9"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:text="Frage 9: "
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_ergF8"
+        tools:background="@drawable/selector_gradient" />
 
     <TextView
-        android:id="@+id/textView_geschlecht"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textView_ergF10"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="14dp"
+        android:text="Frage 10: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ergF9"
+        tools:background="@drawable/selector_gradient" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="93dp"
-        android:text="Geschlecht: "
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView_geschlecht"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/textView_ergF8"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="84dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:text="Frage 8: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="@drawable/selector_gradient" />
+
+    <TextView
+        android:id="@+id/textView_ergF7"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="32dp"
+        android:text="Frage 7: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_ergF8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_ergF6"
+        tools:background="@drawable/selector_gradient" />
+
+    <TextView
+        android:id="@+id/textView_ergF6"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="63dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="62dp"
+        android:text="Frage 6: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_ergF8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_ergF4"
+        tools:background="@drawable/selector_gradient" />
+
+    <TextView
+        android:id="@+id/textView_ergF5"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="31dp"
+        android:text="Frage 5: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_ergF6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_ergF4"
+        tools:background="@drawable/selector_gradient" />
+
+    <TextView
+        android:id="@+id/textView_ergF4"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="133dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="132dp"
+        android:text="Frage 4: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView_ergF9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_alter"
+        tools:background="@drawable/selector_gradient" />
+
+    <TextView
+        android:id="@+id/textView_ergF3"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="39dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="39dp"
+        android:text="Frage 3: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView_ergF5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ergF1"
+        tools:background="@drawable/selector_gradient" />
+
+    <TextView
+        android:id="@+id/textView_ergF2"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="31dp"
+        android:text="Frage 2: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_ergF3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_ergF1"
+        tools:background="@drawable/selector_gradient" />
 
     <TextView
         android:id="@+id/textView_alter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="14dp"
+        android:text="Alter: "
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/textView_ergF1"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ergScore" />
+
+    <TextView
+        android:id="@+id/textView_geschlecht"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="209dp"
+        android:text="Geschlecht: "
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/textView_ergScore"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_ergScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginStart="10dp"
+        android:text="Score: "
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView_geschlecht"
+        app:layout_constraintStart_toEndOf="@+id/textView_alter" />
+
+    <TextView
+        android:id="@+id/textView_ergF1"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="70dp"
+        android:text="Frage 1: "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView_ergF4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ergScore"
+        tools:background="@drawable/selector_gradient" />
+
 </android.support.constraint.ConstraintLayout>

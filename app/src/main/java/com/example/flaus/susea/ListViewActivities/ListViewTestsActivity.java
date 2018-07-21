@@ -105,7 +105,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case R.id.home:
-                Intent intent = new Intent(getBaseContext(),StartActivity.class);
+                Intent intent = new Intent(getBaseContext(),AuswertungStudieActivity.class);
                 intent.putExtra("studienId", studienId);
                 intent.putExtra("studie",studie);
                 intent.putExtra("studienName", studienName);
@@ -113,9 +113,13 @@ public class ListViewTestsActivity extends AppCompatActivity {
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
+                Intent intent1 = new Intent(getBaseContext(),AuswertungStudieActivity.class);
+                intent1.putExtra("studienId", studienId);
+                intent1.putExtra("studie",studie);
+                intent1.putExtra("studienName", studienName);
+                startActivity(intent1);
+                return true;
+
 
         }
     }
