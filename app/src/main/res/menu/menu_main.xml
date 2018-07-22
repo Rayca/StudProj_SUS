@@ -23,6 +23,11 @@
         app:showAsAction="never"
         />
 
+    <item
+        android:id="@+id/actionStatistik"
+        android:title="Statistik"
+        app:showAsAction="never" />
+
 
 
 

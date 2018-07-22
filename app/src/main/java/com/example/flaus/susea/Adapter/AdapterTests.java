@@ -49,12 +49,12 @@ public class AdapterTests extends CursorAdapter {
         String datum = cursor.getString(cursor.getColumnIndexOrThrow(from[0]));
         Log.d("jule", "Datum für Test Liste: " + datum);
         TextView textViewDatum = (TextView) view.findViewById(to[0]);
-        textViewDatum.append(datum);
+        textViewDatum.setText("Erstellt am: " + datum);
 
         int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[1]));
         TextView textViewScore = (TextView) view.findViewById(to[1]);
         Log.d("jule", "Score für Test Liste: " + score);
-        textViewScore.append(" " + score);
+        textViewScore.setText("Score: " + score);
 
     }
 }

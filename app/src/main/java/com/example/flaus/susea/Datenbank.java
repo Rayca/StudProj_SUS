@@ -182,11 +182,11 @@ public class Datenbank extends SQLiteOpenHelper {
 
         //Wichtig, dass die Anzahl Tests in der zugehörigen Studie erhöht wird.
         if(studienId != -1) {
-            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId, null);
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId, null); //addierte alle Zeilen auf, in denen die tsud id gleich ist
             cursor.moveToFirst();
             Log.d("Jule", "Id bei insert-Test: " + id);
-            int anzahl_tests = cursor.getInt(4);
-            anzahl_tests = anzahl_tests + 1; // Da ja ein neuer dazu kommt
+            int anzahl_tests = cursor.getCount();
+            Log.d("Jule", "Anzahl Tests in der Studie:  " + anzahl_tests);
             ContentValues neue_anz_tests = new ContentValues();
             neue_anz_tests.put(SPALTE_ANZAHL_TESTS, anzahl_tests);
             String[] arg = new String[]{Long.toString(studienId)};
