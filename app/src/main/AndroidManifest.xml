@@ -24,7 +24,7 @@
             android:parentActivityName=".StartActivity" />
         <activity android:name=".AuswertungsActivities.AuswertungStudieActivity" />
         <activity android:name=".AuswertungsActivities.AuswertungTestActivity" />
-        <activity android:name=".ListViewActivities.ListViewTestsActivity"
+        <activity android:name=".AuswertungsActivities.LöschenAuswertungTest"
             android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"/>
         <activity
             android:name=".ListViewActivities.ListViewStudienActivity"

@@ -42,16 +42,16 @@ public class AuswertungTestActivity extends AppCompatActivity {
 
         // Toolbar
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Auswertung Test");
+        getSupportActionBar().setTitle("Tests der Studie ");
 
         // View-Binding
         textViewScore = (TextView) findViewById(R.id.textViewScore);
         textViewGeschlecht = (TextView) findViewById(R.id.textViewGeschlecht);
         textViewAlter = (TextView)findViewById(R.id.textViewAlter);
         textViewAntworten = (TextView) findViewById(R.id.textViewAntworten);
-        btnZurStudie = (Button) findViewById(R.id.btnStudie);
-        btnZurStartseite = (Button) findViewById(R.id.btnZurStartseite);
+
 
 
         // Intent empfangen
@@ -63,51 +63,20 @@ public class AuswertungTestActivity extends AppCompatActivity {
         studienId = intent.getLongExtra("studienId",-1);
 
 
-        Log.d("studie", "AuswertungTest =" + studie);
-
-
-
-        // Button Text ändert sich je nach dem, ob es einzelner Test war oder ob man von einer Studie kommt
-
-        if(studie){
-            btnZurStudie.setText("Zurück zur Studien Activity");
-        } else {
-            btnZurStudie.setText("Test einer Studie zuordnen");
-        }
-
-
-        // Funktion für btnZurStudie
-
-        btnZurStudie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(studie){
-                    Intent intent1 = new Intent(getApplicationContext(),AuswertungStudieActivity.class);
-                    intent1.putExtra("testId", testId);
-                    intent1.putExtra("studie",studie);
-                    intent1.putExtra("studienName", studienName);
-                    intent1.putExtra("studienId", studienId);
-                    startActivity(intent1);
-                } else {
-                    Intent intent2 = new Intent(getApplicationContext(),ListViewStudienActivity.class);
-                    intent2.putExtra("testId", testId);
-                    intent2.putExtra("studie",studie);
-                    startActivity(intent2);
-                }
-            }
-        });
+        Log.d("studie", "LöschenAuswertungTest =" + studie);
 
 
 
 
-        // Funktion für btnStartseite
-        btnZurStartseite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), StartActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
+
+
+
+
+
+
+
 
 
 

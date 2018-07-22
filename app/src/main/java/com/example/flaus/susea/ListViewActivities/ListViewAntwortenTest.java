@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,12 +17,20 @@ public class ListViewAntwortenTest extends AppCompatActivity {
     TextView anzeige_alter;
     TextView anzeige_geschlecht;
     ListView listView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anezige_ergebnisse_test);
+        setContentView(R.layout.loeschen_activity_anezige_ergebnisse_test);
         Datenbank db = new Datenbank(this);
+
+        // Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Auswertung Test");
+
+
 
         //View-Binding
         anzeige_alter = findViewById(R.id.textView_alter);

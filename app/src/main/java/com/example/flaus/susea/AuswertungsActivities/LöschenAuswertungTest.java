@@ -1,9 +1,8 @@
-package com.example.flaus.susea.ListViewActivities;
+package com.example.flaus.susea.AuswertungsActivities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,17 +12,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.flaus.susea.Adapter.AdapterTests;
-import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.Datenbank;
+import com.example.flaus.susea.ListViewActivities.ListViewAntwortenTest;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.Statistik;
 
 //Füllt und verwaltet das ListView, mit dem alle Tests aus der DB als Liste angezeigt werden können
-public class ListViewTestsActivity extends AppCompatActivity {
+public class LöschenAuswertungTest extends AppCompatActivity {
 
     ListView listView;
     Datenbank db = new Datenbank(this);
@@ -43,10 +41,6 @@ public class ListViewTestsActivity extends AppCompatActivity {
         toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Tests der Studie ");
-
-        // Pfeil für den User flow
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
 
 
         // View - Binding

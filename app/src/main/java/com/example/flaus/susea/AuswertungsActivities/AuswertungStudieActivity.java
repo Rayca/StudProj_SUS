@@ -3,7 +3,6 @@ package com.example.flaus.susea.AuswertungsActivities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
@@ -22,7 +20,6 @@ import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.StatistikAuswertung;
 import com.example.flaus.susea.TestActivity;
-import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 
 /* Übernimmmt die Auswertung und Darstellung der gesammelten Daten eines einzelnen Tests */
 
@@ -31,7 +28,6 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
     Datenbank manager = new Datenbank(this);
     TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests;
-    Button btnStatistik, btnViewTests, btnZurStartseite;
     FloatingActionButton fab;
     long studienId;
     int score = 0;
@@ -60,7 +56,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         textViewNameStudie = (TextView) findViewById(R.id.textViewNameStudie);
         textViewGesamtScore = (TextView) findViewById(R.id.textViewScore);
         textViewAnzahlTests = (TextView) findViewById(R.id.textViewAnzahlTests);
-        btnStatistik = (Button) findViewById(R.id.btnStatistik);
+
         Button btnNeuerTest = findViewById(R.id.btnNeuerTest);
 
 
@@ -100,14 +96,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             }
         });
 
-        btnStatistik.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: einmal alles mitschicken
-                Intent intent = new Intent(getBaseContext(), StatistikAuswertung.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 
@@ -136,7 +125,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 return true;
 
             case R.id.actionTestsEinsehen:
-                Intent intent1 = new Intent(getBaseContext(),ListViewTestsActivity.class);
+                Intent intent1 = new Intent(getBaseContext(),LöschenAuswertungTest.class);
                 intent1.putExtra("studienId", studienId);
                 startActivity(intent1);
                 return true;
