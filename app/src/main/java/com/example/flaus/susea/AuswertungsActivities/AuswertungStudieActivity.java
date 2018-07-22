@@ -147,8 +147,13 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 intent2.putExtra("kommeVonDerStartseite",kommeVonderStartseite);
                 startActivity(intent2);
                 return true;
+            case R.id.actionStatistik:
+                //TODO: hier auch noch alle Daten an die Statistik-Klasse mitschicken
+                Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
+                startActivity(intent3);
             case android.R.id.home:
                 // TODO: Hier intent mitgeben, um auf auswertungsseite der studie zurück zu kommen
+
 
             default:
                 // If we got here, the user's action was not recognized.
