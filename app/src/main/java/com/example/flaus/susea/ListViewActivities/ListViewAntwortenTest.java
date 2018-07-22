@@ -49,16 +49,16 @@ public class ListViewAntwortenTest extends AppCompatActivity {
         String geschlecht = c.getString(13);
         anzeige_geschlecht.append(geschlecht);
         anzeige_score.append(c.getString(14));
-        f1.append(c.getInt(0) + "");
-        f2.append(c.getInt(1) + "");
-        f3.append(c.getInt(2) + "");
-        f4.append(c.getInt(3) + "");
-        f5.append(c.getInt(4) + "");
-        f6.append(c.getInt(5) + "");
-        f7.append(c.getInt(6) + "");
-        f8.append(c.getInt(7) + "");
-        f9.append(c.getInt(8) + "");
-        f10.append(c.getInt(9) + "");
+        f1.append(c.getInt(2) + "");
+        f2.append(c.getInt(3) + "");
+        f3.append(c.getInt(4) + "");
+        f4.append(c.getInt(5) + "");
+        f5.append(c.getInt(6) + "");
+        f6.append(c.getInt(7) + "");
+        f7.append(c.getInt(8) + "");
+        f8.append(c.getInt(9) + "");
+        f9.append(c.getInt(10) + "");
+        f10.append(c.getInt(11) + "");
 
 
 
