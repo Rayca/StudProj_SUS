@@ -14,26 +14,45 @@ public class Statistik {
 
 
 
-    public static double berechneStandardabweichung(int[] antworten){
+    public static double berechneStandardabweichung(Cursor cursor){
         double varianz = 0;
         double standardAbweichung = 0;
-        double mittelWert = mittelWert(antworten);
-        for(int i = 0;i<antworten.length;i++){
-            varianz+=antworten[i] - mittelWert;
+        double mittelWert = mittelWert(cursor);
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
+            cursor.moveToNext();
         }
-        varianz = varianz/antworten.length;
+
+        for(int i = 0;i<scoreList.size();i++){
+            varianz+=scoreList.get(i) - mittelWert;
+        }
+        varianz = varianz/scoreList.size();
         standardAbweichung = Math.sqrt(varianz);
 
         return standardAbweichung;
     }
 
-    public static double mittelWert(int[] antworten){
+    public static double mittelWert(Cursor cursor){
         double result;
         int wert = 0;
-        for(int i = 0;i<antworten.length;i++){
-            wert+=antworten[i];
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
+            cursor.moveToNext();
         }
-        result = wert/antworten.length;
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
         return result;
     }
 
