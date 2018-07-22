@@ -20,7 +20,7 @@ import com.example.flaus.susea.Adapter.AdapterTests;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
-import com.example.flaus.susea.StartActivity;
+import com.example.flaus.susea.Statistik;
 
 //Füllt und verwaltet das ListView, mit dem alle Tests aus der DB als Liste angezeigt werden können
 public class ListViewTestsActivity extends AppCompatActivity {
@@ -61,6 +61,10 @@ public class ListViewTestsActivity extends AppCompatActivity {
         Log.d("studID", "Empfangene Studien-ID: "+ studienId);
 
 
+        Cursor testCursor = db.selectScoresByStudienId(studienId);
+        int median = Statistik.getMedian(testCursor);
+
+
         // ListView füllen
         final Context context = this;
         int itemLayout = R.layout.test_list_item_layout;
@@ -87,6 +91,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
 
 
+        // Funktion für btnZurueck
 
     }
 
