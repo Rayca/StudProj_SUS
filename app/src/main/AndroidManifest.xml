@@ -23,14 +23,13 @@
             android:name=".TypActivity"
             android:parentActivityName=".StartActivity" />
         <activity android:name=".AuswertungsActivities.AuswertungStudieActivity" />
-        <activity android:name=".AuswertungsActivities.AuswertungTestActivity" />
-        <activity android:name=".AuswertungsActivities.LöschenAuswertungTest"
+        <activity android:name=".ListViewActivities.ListViewTestsActivity"
             android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"/>
         <activity
             android:name=".ListViewActivities.ListViewStudienActivity"
             android:parentActivityName=".StartActivity" />
         <activity
-            android:name=".ListViewActivities.ListViewAntwortenTest"
+            android:name=".AuswertungsActivities.AuswertungTestActivity"
             android:theme="@style/Campusboard" />
         <activity android:name=".StatistikAuswertung"
             android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"></activity>

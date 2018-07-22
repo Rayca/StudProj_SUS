@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
+import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.StatistikAuswertung;
@@ -32,7 +33,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
     long studienId;
     int score = 0;
     String studienName;
-    boolean studie;
+    int anzahl_tests;
 
     Toolbar toolbar;
     Datenbank db = new Datenbank(this);
@@ -66,18 +67,19 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         Intent intent = getIntent();
         studienId = intent.getLongExtra("studienId", -1);
         Log.d("Jule", "Id der neuen Studie empfangen:  " + studienId);
-        studie = intent.getBooleanExtra("studie",false);
-        if(studie){
+        Cursor c = db.getStudieById(studienId);
+        c.moveToFirst();
+        anzahl_tests = c.getInt(3);
+        if( anzahl_tests == 0){
             //Wenn eine neue Studie erstellt wurde, wird der Name gleich mit dem Intent mitgeschickt
             studienName = intent.getStringExtra("studienName");
             //Und es sind noch keine Tests drin
-            textViewAnzahlTests.setText("Noch keine Tests");
+            textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
+            textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
         } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
-            Cursor c = db.getStudieById(studienId);
-            c.moveToFirst();
             studienName = c.getString(1);
-            int anzahl_tests = c.getInt(3); //TODO: Nachgucken, ob Anzahl Tests in der Db auch brav erhöht wird
             textViewAnzahlTests.append(" " + anzahl_tests);
+            textViewGesamtScore.setText("Score: "+ c.getInt(4));
         }
 
 
@@ -124,10 +126,13 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            case R.id.actionTestsEinsehen:
-                Intent intent1 = new Intent(getBaseContext(),LöschenAuswertungTest.class);
+            case R.id.actionTestsEinsehen: //TODO Diese Option nicht anzeigen, wenn die Studie leer ist
+                if(anzahl_tests ==0){
+                    item.setVisible(false);
+                } else {
+                Intent intent1 = new Intent(getBaseContext(),ListViewTestsActivity.class);
                 intent1.putExtra("studienId", studienId);
-                startActivity(intent1);
+                startActivity(intent1); }
                 return true;
 
             case R.id.actionAlleStudienEinsehen:

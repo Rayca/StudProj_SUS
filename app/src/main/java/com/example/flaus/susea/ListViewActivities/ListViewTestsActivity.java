@@ -1,4 +1,4 @@
-package com.example.flaus.susea.AuswertungsActivities;
+package com.example.flaus.susea.ListViewActivities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +15,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.flaus.susea.Adapter.AdapterTests;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
 import com.example.flaus.susea.Datenbank;
-import com.example.flaus.susea.ListViewActivities.ListViewAntwortenTest;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.Statistik;
 
 //Füllt und verwaltet das ListView, mit dem alle Tests aus der DB als Liste angezeigt werden können
-public class LöschenAuswertungTest extends AppCompatActivity {
+public class ListViewTestsActivity extends AppCompatActivity {
 
     ListView listView;
     Datenbank db = new Datenbank(this);
@@ -74,7 +75,7 @@ public class LöschenAuswertungTest extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent1 = new Intent(context, ListViewAntwortenTest.class);
+                Intent intent1 = new Intent(context, AuswertungTestActivity.class);
                 cursor.moveToPosition(position);
                 long test_id = cursor.getLong(0); //Test-Id aus dem Cursor holen
                 intent1.putExtra("testID", test_id);

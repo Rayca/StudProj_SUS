@@ -13,8 +13,6 @@ import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 //Controller, der nur vorgibt, was als nächstes getan werden soll
 public class StartActivity extends AppCompatActivity {
 
-    boolean neue_studie; //Wird gebraucht um später entscheiden zu können, ob gerade eine neue Studie eingefügt wurde
-    boolean studie;
     Toolbar toolbar;
 
     @Override
@@ -37,18 +35,14 @@ public class StartActivity extends AppCompatActivity {
     Das Boolean neue_studie wird als Flag mitgeschickt, dass eine neue Studie erstellt
     werden soll und keine vorhandene aus der Db geladen werden soll */
     public void studie_starten(View v){
-        neue_studie = true;
         Intent intent = new Intent(this, TypActivity.class);
-        intent.putExtra("Studie", neue_studie);
         startActivity(intent);
 
     }
 
     //Startet einen einzelnen  Test
     public void start(View view){
-        neue_studie = false;
         Intent intent = new Intent(this, TypActivity.class);
-        intent.putExtra("Studie", neue_studie);
         startActivity(intent);
     }
 

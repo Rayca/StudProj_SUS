@@ -38,7 +38,6 @@ public class TypActivity extends AppCompatActivity {
     int anzahlTests = 0;
     int scoreGesamt = 0;
     long studienId = -1;
-    boolean studie;
     Toolbar toolbar;
 
 
@@ -61,8 +60,7 @@ public class TypActivity extends AppCompatActivity {
 
         //Intent Empfangen und Daten daraus lesen
        Intent intent = this.getIntent();
-        studie = intent.getBooleanExtra("Studie", false);
-        Log.d("neue_studie", "TypActivity =" + studie);
+
 
         // Auswahlliste Interfacetypen füllen
         final ListView listview = findViewById(R.id.list_view_typ);
@@ -96,18 +94,16 @@ public class TypActivity extends AppCompatActivity {
             public void onClick(View button_next) {
 
                 if (typ != null) {
-                    if ( studie == true) {
                         dialog_studie_erstellen_öffnen();
-                    } else { //Schickt den Intent ab, gefüllt mit allen wichtigen Daten für die Anzeige der Studie
-                        Intent intent1= new Intent(getBaseContext(), TestActivity.class);
+                         //Schickt den Intent ab, gefüllt mit allen wichtigen Daten für die Anzeige der Studie
+                     /*   Intent intent1= new Intent(getBaseContext(), TestActivity.class);
                         intent1.putExtra("studienName", name_studie);
                         intent1.putExtra("interfacetyp", typ);
-                        intent1.putExtra("studienId",studienId);
-                        intent1.putExtra("neue_studie", studie);
-                        startActivity(intent1);
+                        intent1.putExtra("studienId",studienId); //TODO müssen wir die wirklich als -1 mitschicken?
+                        startActivity(intent1); */
                     }
 
-                }else{ //Wenn kein Interfacetyp vorher ausgewählt wurde
+                else{ //Wenn kein Interfacetyp vorher ausgewählt wurde
                     Toast toast = Toast.makeText(getApplicationContext(),"Bitte einen Typen wählen",Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -162,7 +158,6 @@ public class TypActivity extends AppCompatActivity {
                    intent.putExtra("studienName", name_studie);
                    intent.putExtra("Interfacetyp", typ);
                    intent.putExtra("studienId", studienId);
-                   intent.putExtra("studie", studie);
                    startActivity(intent);
 
                } else {
