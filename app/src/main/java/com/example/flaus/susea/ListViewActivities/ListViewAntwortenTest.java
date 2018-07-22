@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.flaus.susea.Adapter.AdapterAntworten;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
 
