@@ -3,6 +3,7 @@ package com.example.flaus.susea.ListViewActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
+import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.Statistik;
 
 //Füllt und verwaltet das ListView, mit dem alle Tests aus der DB als Liste angezeigt werden können
@@ -41,7 +43,11 @@ public class ListViewTestsActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Tests der Studie ");
+        getSupportActionBar().setTitle("Alle Tests");
+
+        // Pfeil für den User flow
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
 
         // View - Binding
@@ -79,6 +85,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
                 cursor.moveToPosition(position);
                 long test_id = cursor.getLong(0); //Test-Id aus dem Cursor holen
                 intent1.putExtra("testID", test_id);
+                intent1.putExtra("studienId", studienId);
                 startActivity(intent1);
             }
         });
@@ -105,11 +112,17 @@ public class ListViewTestsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case R.id.home:
-                Intent intent = new Intent(getBaseContext(),AuswertungStudieActivity.class);
+                Intent intent = new Intent(getBaseContext(),StartActivity.class);
                 intent.putExtra("studienId", studienId);
                 intent.putExtra("studie",studie);
                 intent.putExtra("studienName", studienName);
                 startActivity(intent);
+                Log.d("thomas", "pfeil wurde gedrückt");
+                return true;
+
+            case R.id.actionStartseite:
+                Intent intent2 = new Intent(getBaseContext(),StartActivity.class);
+                startActivity(intent2);
                 return true;
 
             default:
@@ -118,6 +131,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
                 intent1.putExtra("studie",studie);
                 intent1.putExtra("studienName", studienName);
                 startActivity(intent1);
+                Log.d("thomas", "Default");
                 return true;
 
 

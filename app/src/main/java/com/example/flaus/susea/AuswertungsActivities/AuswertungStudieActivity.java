@@ -48,7 +48,14 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         // Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Auswertung Studie");
+        getSupportActionBar().setTitle("Studie");
+
+        Intent intent = getIntent();
+        studienId = intent.getLongExtra("studienId", -1);
+        Log.d("Jule", "Id der neuen Studie empfangen:  " + studienId);
+        Cursor c = db.getStudieById(studienId);
+        c.moveToFirst();
+        anzahl_tests = c.getInt(3);
 
 
 
@@ -63,13 +70,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
 
 
-        // Name und Id der Studie empfangen
-        Intent intent = getIntent();
-        studienId = intent.getLongExtra("studienId", -1);
-        Log.d("Jule", "Id der neuen Studie empfangen:  " + studienId);
-        Cursor c = db.getStudieById(studienId);
-        c.moveToFirst();
-        anzahl_tests = c.getInt(3);
+
+
         if( anzahl_tests == 0){
             //Wenn eine neue Studie erstellt wurde, wird der Name gleich mit dem Intent mitgeschickt
             studienName = intent.getStringExtra("studienName");
@@ -114,6 +116,10 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main,menu);
 
+        if(anzahl_tests == 0){
+            menu.findItem(R.id.actionTestsEinsehen).setVisible(false);
+        }
+
         return true;
     }
 
@@ -127,12 +133,10 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 return true;
 
             case R.id.actionTestsEinsehen: //TODO Diese Option nicht anzeigen, wenn die Studie leer ist
-                if(anzahl_tests ==0){
-                    item.setVisible(false);
-                } else {
+
                 Intent intent1 = new Intent(getBaseContext(),ListViewTestsActivity.class);
                 intent1.putExtra("studienId", studienId);
-                startActivity(intent1); }
+                startActivity(intent1);
                 return true;
 
             case R.id.actionAlleStudienEinsehen:
@@ -145,8 +149,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 //TODO: hier auch noch alle Daten an die Statistik-Klasse mitschicken
                 Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
                 startActivity(intent3);
-            case android.R.id.home:
-                // TODO: Hier intent mitgeben, um auf auswertungsseite der studie zurück zu kommen
+
 
 
             default:

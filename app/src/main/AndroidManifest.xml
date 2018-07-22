@@ -30,6 +30,7 @@
             android:parentActivityName=".StartActivity" />
         <activity
             android:name=".AuswertungsActivities.AuswertungTestActivity"
+            android:parentActivityName=".ListViewActivities.ListViewTestsActivity"
             android:theme="@style/Campusboard" />
         <activity android:name=".StatistikAuswertung"
             android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"></activity>

@@ -2,22 +2,35 @@ package com.example.flaus.susea.AuswertungsActivities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.flaus.susea.Datenbank;
+import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 import com.example.flaus.susea.R;
+import com.example.flaus.susea.StartActivity;
 
 /* Zeigt die Antworten aus einem einzelnen Test an */
 //TODO: Jede Menge zu tun
 public class AuswertungTestActivity extends AppCompatActivity {
-    TextView anzeige_alter;
-    TextView anzeige_geschlecht;
-    ListView listView;
+
+
+
+    Button btnZurStudie;
+
     Toolbar toolbar;
+    long studienId, test_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +43,16 @@ public class AuswertungTestActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Auswertung Test");
 
+        // Pfeil für den User flow
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
+
+
+        Intent intent = getIntent();
+        test_id = intent.getLongExtra("testID", -1);
+        studienId = intent.getLongExtra("studienId", -1);
+        Cursor c = db.getTestById(test_id);
 
 
         //View-Binding
@@ -48,9 +71,19 @@ public class AuswertungTestActivity extends AppCompatActivity {
         TextView f10 = findViewById(R.id.textView_ergF10); */
 
 
-        Intent intent = getIntent();
-        long test_id = intent.getLongExtra("testID", -1);
-        Cursor c = db.getTestById(test_id);
+       btnZurStudie = findViewById(R.id.btnZurStudie);
+
+       btnZurStudie.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(getBaseContext(),AuswertungStudieActivity.class);
+               intent.putExtra("studienId",studienId);
+               startActivity(intent);
+           }
+       });
+
+
+
 
         //Die TextViews alle füllen
        /* int alter = c.getInt(12);
@@ -69,8 +102,44 @@ public class AuswertungTestActivity extends AppCompatActivity {
         f9.append(c.getInt(10) + "");
         f10.append(c.getInt(11) + ""); */
 
-
-
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_studie_listview,menu);
+
+        return true;
+    }
+
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                Intent intent = new Intent(getBaseContext(), ListViewTestsActivity.class);
+                intent.putExtra("studienId",studienId);
+                startActivity(intent);
+                Log.d("thomas", "pfeil wurde gedrückt");
+                return true;
+
+            case R.id.actionStartseite:
+                Intent intent1 = new Intent(getBaseContext(),StartActivity.class);
+                startActivity(intent1);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 }
 
