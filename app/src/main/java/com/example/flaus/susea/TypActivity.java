@@ -194,7 +194,7 @@ public class TypActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.home:
+            case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 Log.d("thomas", "home wurde gedrückt");
                 if(kommeVonListeStudien){
@@ -212,6 +212,7 @@ public class TypActivity extends AppCompatActivity {
 
 
             default:
+                Log.d("thomas", "home wurde gedrückt");
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
