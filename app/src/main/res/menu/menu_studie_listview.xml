@@ -9,4 +9,12 @@
         app:showAsAction="always"
         />
 
+    <item
+    android:id="@+id/actionNeueStudieanlegen"
+        android:icon="@drawable/baseline_library_add_white_36"
+        android:title="Studie anlegen"
+        app:showAsAction="always"
+
+        />
+
 </menu>

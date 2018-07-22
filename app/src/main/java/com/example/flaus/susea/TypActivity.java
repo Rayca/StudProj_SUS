@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -24,6 +26,8 @@ import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
+import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 
 import java.util.ArrayList;
 
@@ -39,6 +43,7 @@ public class TypActivity extends AppCompatActivity {
     int scoreGesamt = 0;
     long studienId = -1;
     Toolbar toolbar;
+    boolean kommeVonListeStudien;
 
 
     @Override
@@ -60,6 +65,7 @@ public class TypActivity extends AppCompatActivity {
 
         //Intent Empfangen und Daten daraus lesen
        Intent intent = this.getIntent();
+       kommeVonListeStudien = intent.getBooleanExtra("kommeVonListeStudien",false);
 
 
         // Auswahlliste Interfacetypen füllen
@@ -180,6 +186,38 @@ public class TypActivity extends AppCompatActivity {
         return;
     }
 
+
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                Log.d("thomas", "home wurde gedrückt");
+                if(kommeVonListeStudien){
+                    Intent intent = new Intent(getBaseContext(), ListViewStudienActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getBaseContext(), StartActivity.class);
+                    startActivity(intent);
+
+                }
+
+                return true;
+
+
+
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 
 
 

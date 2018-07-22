@@ -103,6 +103,11 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_studie_listview,menu);
+        MenuItem item1 = menu.findItem(R.id.actionStartseite);
+        item1.setVisible(false);
+
+        MenuItem item2 = menu.findItem(R.id.actionNeueStudieanlegen);
+        item2.setVisible(false);
 
         return true;
     }

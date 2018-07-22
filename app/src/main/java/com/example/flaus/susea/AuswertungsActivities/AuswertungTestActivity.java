@@ -112,6 +112,9 @@ public class AuswertungTestActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_studie_listview,menu);
 
+        MenuItem item1 = menu.findItem(R.id.actionNeueStudieanlegen);
+        item1.setVisible(false);
+
         return true;
     }
 

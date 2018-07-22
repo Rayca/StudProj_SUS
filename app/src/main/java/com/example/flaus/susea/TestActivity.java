@@ -39,7 +39,7 @@ public class TestActivity extends AppCompatActivity {
     String alter;
     int alterInt;
     boolean studie;
-    long studienId;
+    long studienId = -1;
     Toolbar toolbar;
     String studienName;
     long testId;
@@ -265,24 +265,14 @@ public class TestActivity extends AppCompatActivity {
                     intent.putExtra("antworten", antworten);
                     intent.putExtra("testId",testId);
 
-                    if(studie) {
+
                         //Das sind alles Werte, die man für die Auswertung einer Studie braucht
-                        intent.putExtra("neue_studie", true);
                         intent.putExtra("studienId", studienId);
                         Log.d("Jule", "Id, die mitgeschickt wird: " + studienId);
                         intent.putExtra("studienName", studienName);
                         intent.putExtra("interfacetyp", interfacetyp);
                         startActivity(intent);
-                    } else {
-                        //Das sind die Werte, die mitgeschickt werden, wenn nur ein einzelner Test gestartet wurde
-                        Intent intent1 = new Intent( getBaseContext(), AuswertungTestActivity.class);
-                        intent1.putExtra("testId",testId);
-                        intent1.putExtra("neue_studie", false);
-                        intent1.putExtra("antworten", antworten);
-                        intent1.putExtra("interfacetyp", interfacetyp);
-                        startActivity(intent1);
 
-                    }
 
                 }
             });

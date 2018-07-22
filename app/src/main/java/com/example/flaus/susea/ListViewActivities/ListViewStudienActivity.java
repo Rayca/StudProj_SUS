@@ -21,6 +21,7 @@ import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
+import com.example.flaus.susea.TypActivity;
 
 //Füllt und verwaltet das ListView, mit dem alle Studien aus der DB als Liste angezeigt werden können
 public class ListViewStudienActivity extends AppCompatActivity {
@@ -63,7 +64,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
 
         // View Binding
-        listView = (ListView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
 
 
 
@@ -72,7 +73,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
         final Context context = this;
         int itemLayout = R.layout.studie_list_item_layout;
         final Cursor cursor = db.selectAllStudien();
-        final String[] from = new String[]{db.SPALTE_STUDIE_NAME, db.SPALTE_ANZAHL_TESTS};
+        final String[] from = new String[]{Datenbank.SPALTE_STUDIE_NAME, Datenbank.SPALTE_ANZAHL_TESTS};
         int[] to = new int[]{R.id.textView_StudieName, R.id.textView_AnzahlTests};
 
         final AdapterStudien adapterStudien = new AdapterStudien(context,itemLayout,cursor,from,to,0);
@@ -109,7 +110,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_studie_listview,menu);
         if(kommeVonDerStartseite){
-            MenuItem item = (MenuItem) menu.findItem(R.id.actionStartseite);
+            MenuItem item = menu.findItem(R.id.actionStartseite);
             item.setVisible(false);
         }
         return true;
@@ -117,11 +118,19 @@ public class ListViewStudienActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.actionStartseite:
-                Intent intent = new Intent(getBaseContext(),StartActivity.class);
+                Intent intent = new Intent(getBaseContext(), StartActivity.class);
                 startActivity(intent);
+                return true;
+
+
+            case R.id.actionNeueStudieanlegen:
+                Intent intent1 = new Intent(getBaseContext(), TypActivity.class);
+                boolean kommeVonListeStudien = true;
+                intent1.putExtra("kommeVonListeStudien",kommeVonListeStudien);
+                startActivity(intent1);
                 return true;
 
             default:

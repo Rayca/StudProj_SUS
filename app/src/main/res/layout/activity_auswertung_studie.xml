@@ -13,20 +13,20 @@
 
     <TextView
         android:id="@+id/textViewScore"
-        android:layout_width="wrap_content"
+        android:layout_width="189dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="172dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Score:"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintHorizontal_bias="0.252"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNameStudie"
-        app:layout_constraintVertical_bias="0.124" />
+        app:layout_constraintVertical_bias="0.093" />
 
     <TextView
         android:id="@+id/textViewAnzahlTests"
@@ -51,14 +51,16 @@
 
     <Button
         android:id="@+id/btnNeuerTest"
-        android:layout_width="wrap_content"
+        android:layout_width="221dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button"
         android:text="Neuen Test hinzufügen"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -81,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.363" />
 
     <TextView
         android:id="@+id/textView11"
