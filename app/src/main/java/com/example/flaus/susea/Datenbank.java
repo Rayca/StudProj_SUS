@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 public class Datenbank extends SQLiteOpenHelper {
-    public static final int DATENBANK_VERSION = 3;
+    public static final int DATENBANK_VERSION = 4;
     public static final String DATENBANK_NAMEN = "Datenbank.db";
 
     //Konstanten für die Test-Datenbank
@@ -38,6 +38,8 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_INTERFACE_TYP_STUDIE = "Studie_Interfacetyp";
     public static final String SPALTE_ANZAHL_TESTS = "Studie_Anzahl_Tests";
     public static final String SPALTE_STUDIE_SCORE = "Studie_Score_gesamt";
+    public static final String SPALTE_STUDIE_USABILITY = "Studie_Usability_gesamt";
+    public static final String SPALTE_STUDIE_LEARNABILITY = "Studie_Learnability_gesamt";
 
     public Datenbank(Context cxt) {
         super(cxt, DATENBANK_NAMEN, null, DATENBANK_VERSION);
@@ -74,7 +76,9 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_STUDIE_NAME + " TEXT," +
                         SPALTE_INTERFACE_TYP_STUDIE + " TEXT," +
                         SPALTE_ANZAHL_TESTS + " INTEGER," +
-                        SPALTE_STUDIE_SCORE + " INTEGER" +
+                        SPALTE_STUDIE_SCORE + " INTEGER," +
+                        SPALTE_STUDIE_USABILITY + " INTEGER," +
+                        SPALTE_STUDIE_LEARNABILITY + " INTEGER" +
                         ")"
         );
    }
@@ -121,6 +125,8 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_INTERFACE_TYP_STUDIE, interfaceTyp);
         neueZeile.put(SPALTE_ANZAHL_TESTS,anzahlTests);
         neueZeile.put(SPALTE_STUDIE_SCORE,scoreGesamt);
+        neueZeile.put(SPALTE_STUDIE_USABILITY, 0); // Als Anfansgwert
+        neueZeile.put(SPALTE_STUDIE_LEARNABILITY, 0); //Als Anfangswert
 
         long id = db.insert(TABELLE_STUDIE,null,neueZeile);
         Log.d("Jule", "Studie_Id = " + id);
