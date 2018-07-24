@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 public class Datenbank extends SQLiteOpenHelper {
-    public static final int DATENBANK_VERSION = 4;
+    public static final int DATENBANK_VERSION = 5;
     public static final String DATENBANK_NAMEN = "Datenbank.db";
 
     //Konstanten für die Test-Datenbank
@@ -30,6 +30,8 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_GESCHLECHT = "Proband_Geschlecht";
     public static final String SPALTE_SCORE = "Test_Score";
     public static final String SPALTE_INTERFACE_TYP_TEST = "Test_Interfacetyp";
+    public static final String SPALTE_TEST_USABILITY = "Test_Usability";
+    public static final String SPALTE_TEST_LEARNABILITY = "Test_Learnability";
 
     //Konstanten für die Studien-Datenbank
     public static final String TABELLE_STUDIE = "Studie";
@@ -66,7 +68,9 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_GESCHLECHT + " TEXT," +
                         SPALTE_SCORE + " INTEGER," +
                         SPALTE_STUDIE_ID + " INTEGER," +
-                        SPALTE_INTERFACE_TYP_TEST + " TEXT" +
+                        SPALTE_INTERFACE_TYP_TEST + " TEXT," +
+                        SPALTE_TEST_USABILITY + " TEXT," +
+                        SPALTE_TEST_LEARNABILITY + " TEXT" +
                         ")"
         );
 
@@ -162,7 +166,7 @@ public class Datenbank extends SQLiteOpenHelper {
 
     //Fügt einen neuen Test in die DB ein
     // Die ID des Tests wird automatisch beim Einfügen erzeugt und als long zurückgegeben
-    public long insertTest(int[] antworten, int alter, String geschlecht, String datum, long studienId, int score) {
+    public long insertTest(int[] antworten, int alter, String geschlecht, String datum, long studienId, int score,int usability,int learnability) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_FRAGE1, antworten[0]);
@@ -180,6 +184,8 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_DATUM, datum);
         neueZeile.put(SPALTE_STUDIE_ID,studienId);
         neueZeile.put(SPALTE_SCORE, score);
+        neueZeile.put(SPALTE_TEST_LEARNABILITY,learnability);
+        neueZeile.put(SPALTE_TEST_USABILITY,usability);
         Log.d("jule", "score, der in die db geschrieben wird" +score);
 
         //Neuen Test in die DB einfügen
@@ -222,33 +228,28 @@ public class Datenbank extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor;
     }
-
-
+    public Cursor selectUsabilityByStudienId(long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_TEST_USABILITY+" FROM "+ TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";
+        Log.d("median","StudienId = "+studienId);
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+    public Cursor selectLearnabilityByStudienId(long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_TEST_LEARNABILITY+" FROM "+ TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";
+        Log.d("median","StudienId = "+studienId);
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
 
 
     /* Das sind noch so Überreste */
 
 
-
-    public String getData(String string){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT "+string+" FROM " + TABELLE_TEST,null);
-
-        if(c!=null){
-            c.moveToFirst();
-            String data = c.getString(0);
-            Log.d("jule",data);
-            return data;
-        }
-
-        return null;
-    }
-
-
-
-
-
-    public void setScore(long id, int score){
+    public void setSubscale(long id, int score){
 
         SQLiteDatabase db = getWritableDatabase();
         //Cursor c = db.rawQuery("SELECT * FROM " + TABELLE_TEST+" WHERE "+SPALTE_TEST_ID+" = "+studienId,null);

@@ -63,7 +63,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
 
         Cursor testCursor = db.selectScoresByStudienId(studienId);
-        int median = Statistik.getMedian(testCursor);
+        int median = Statistik.berechneMedian(testCursor);
 
 
         // ListView füllen

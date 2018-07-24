@@ -13,7 +13,7 @@ import java.util.List;
 public class Statistik {
 
 
-
+    //Berechnet Standartabweichung des Scores in einer Studie
     public static double berechneStandardabweichung(Cursor cursor){
         double varianz = 0;
         double standardAbweichung = 0;
@@ -36,6 +36,7 @@ public class Statistik {
         return standardAbweichung;
     }
 
+    //Berechnet Mittelwert der Scores einer Studie
     public static double mittelWert(Cursor cursor){
         double result;
         int wert = 0;
@@ -56,7 +57,88 @@ public class Statistik {
         return result;
     }
 
-    public static int getMedian(Cursor cursor){
+    //Berechnet Learnability Median einer Studie
+    public static int berechneLearnability(Cursor cursor){
+        int median=0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+        Log.d("median","scoreList wurde erstellt.");
+        while(!cursor.isAfterLast()){
+            Log.d("median","scoreList wird gefüllt.");
+
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LEARNABILITY)));
+            Log.d("median","scoreList SPALTE: "+cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LEARNABILITY)));
+
+            cursor.moveToNext();
+        }
+        Log.d("median","List.size = "+ scoreList.size());
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            Log.d("median","Unsortiert: "+i+ ". = "+scoreList.get(i));
+        }
+        Collections.sort(scoreList);
+
+        for(int i = 0;i<scoreList.size();i++){
+            Log.d("median","Sortiert: "+i+ ". = "+scoreList.get(i));
+        }
+        if((scoreList.size()%2)==0) {
+            Log.d("median","Gerade");
+            median = (scoreList.get(scoreList.size() / 2) + (scoreList.get(((scoreList.size() + 1) / 2)-1))) / 2;
+            Log.d("median", "Median: " + median);
+            return median;
+        }
+        else{
+            Log.d("median","Ungerade");
+            median = (scoreList.get(((scoreList.size() + 1) / 2)-1));
+            Log.d("median", "Median: " + median);
+            return median;
+        }
+    }
+
+    //Berechnet Usability Median einer Studie
+    public static int berechneUsability(Cursor cursor){
+        int median=0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+        Log.d("median","scoreList wurde erstellt.");
+        while(!cursor.isAfterLast()){
+            Log.d("median","scoreList wird gefüllt.");
+
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_USABILITY)));
+            Log.d("median","scoreList SPALTE: "+cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_USABILITY)));
+
+            cursor.moveToNext();
+        }
+        Log.d("median","List.size = "+ scoreList.size());
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            Log.d("median","Unsortiert: "+i+ ". = "+scoreList.get(i));
+        }
+        Collections.sort(scoreList);
+
+        for(int i = 0;i<scoreList.size();i++){
+            Log.d("median","Sortiert: "+i+ ". = "+scoreList.get(i));
+        }
+        if((scoreList.size()%2)==0) {
+            Log.d("median","Gerade");
+            median = (scoreList.get(scoreList.size() / 2) + (scoreList.get(((scoreList.size() + 1) / 2)-1))) / 2;
+            Log.d("median", "Median: " + median);
+            return median;
+        }
+        else{
+            Log.d("median","Ungerade");
+            median = (scoreList.get(((scoreList.size() + 1) / 2)-1));
+            Log.d("median", "Median: " + median);
+            return median;
+        }
+    }
+
+    //Berechnet Median einer Studie
+    public static int berechneMedian(Cursor cursor){
         int median=0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -95,6 +177,7 @@ public class Statistik {
         }
     }
 
+    //Berechnet das Usability Ergebnis eines Tests
     public static int berechneUsability(int[]antworten){
         int usability=0;
         for(int i = 0; i<antworten.length;i++){
@@ -108,12 +191,14 @@ public class Statistik {
         return usability;
     }
 
+    //Berechnet das Learnability Ergebnis eines Tests
     public static int berechneLearnability(int[]antworten){
         double learnability;
         learnability=(12.5)*(antworten[3]+antworten[9]);
         return (int) learnability;
     }
 
+    //Berechnet den Score eines Tests
     public static int berechneScore(int[] antworten){
         double score = 0;
 

@@ -199,9 +199,11 @@ public class TestActivity extends AppCompatActivity {
 
                 //TODO: Das ist hier nur zum Test, nicht vergessen, nachher zu löschen
                 int score = Statistik.berechneScore(antworten);
+                int usability = Statistik.berechneUsability(antworten);
+                int learnability = Statistik.berechneLearnability(antworten);
 
                 //gesammelte Daten in die Datenbank schreiben
-                testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId, score);
+                testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId, score,usability,learnability);
 
                 Log.d("TJ", "test_id vor intent" + testId);
                 Log.d("studId", "StudieId in TestActivity = " + studienId);
@@ -212,9 +214,6 @@ public class TestActivity extends AppCompatActivity {
                     Log.d("test", " antworten = " + antworten[i]);
                 }
                 // Endscreen
-
-                //Test ob median funktion funktioniert.
-                // Statistik.median(antworten);
 
                 endScreen();
             }else{

@@ -19,6 +19,7 @@ import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
+import com.example.flaus.susea.Statistik;
 import com.example.flaus.susea.StatistikAuswertung;
 import com.example.flaus.susea.TestActivity;
 
@@ -27,7 +28,6 @@ import com.example.flaus.susea.TestActivity;
 public class AuswertungStudieActivity extends AppCompatActivity {
 
 
-    Datenbank manager = new Datenbank(this);
     TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests;
     FloatingActionButton fab;
     long studienId;
@@ -75,6 +75,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         if( anzahl_tests == 0){
             //Wenn eine neue Studie erstellt wurde, wird der Name gleich mit dem Intent mitgeschickt
             studienName = intent.getStringExtra("studienName");
+
+
             //Und es sind noch keine Tests drin
             textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
             textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
@@ -89,7 +91,11 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         // TextViews füllen
         textViewNameStudie.setText(" " + studienName);
 
-
+        //Cursor mit allen Scores
+        if(anzahl_tests!=0) {
+            Cursor scoreCursor = db.selectScoresByStudienId(studienId);
+            textViewGesamtScore.setText(" " + Statistik.mittelWert(scoreCursor));
+        }
         //Button um einen neuen Test zu starten und der Studie hinzuzufügen
         btnNeuerTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +154,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             case R.id.actionStatistik:
                 //TODO: hier auch noch alle Daten an die Statistik-Klasse mitschicken
                 Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
+                intent3.putExtra("studienId",studienId);
                 startActivity(intent3);
 
 
