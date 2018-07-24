@@ -220,6 +220,15 @@ public class Datenbank extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor selectTestsByStudienIdSorted( long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"" + " ORDER BY " + SPALTE_DATUM + " DESC ";
+
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
     public Cursor selectScoresByStudienId(long studienId){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT "+SPALTE_SCORE+" FROM "+ TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";
