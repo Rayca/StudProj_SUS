@@ -67,35 +67,31 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
         Button btnNeuerTest = findViewById(R.id.btnNeuerTest);
 
+        //Cursor für die Scores der einzelnen Tests
+        Cursor scoreCursor = db.selectScoresByStudienId(studienId);
 
 
 
-
-
-        if( anzahl_tests == 0){
+        if( anzahl_tests == 0 ){
             //Wenn eine neue Studie erstellt wurde, wird der Name gleich mit dem Intent mitgeschickt
             studienName = intent.getStringExtra("studienName");
-
-
             //Und es sind noch keine Tests drin
             textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
             textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
-        } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
-            studienName = c.getString(1);
+        } else if(anzahl_tests < 3) {
+            textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
             textViewAnzahlTests.append(" " + anzahl_tests);
-            textViewGesamtScore.setText("Score: "+ c.getInt(4));
+            studienName = c.getString(1);
         }
-
+        else { //Ansonten Name und Daten der Studie aus der Datenbank holen
+                studienName = c.getString(1);
+                textViewAnzahlTests.append(" " + anzahl_tests);
+                textViewGesamtScore.setText("Score: "+ Statistik.mittelWert(scoreCursor)); }
 
 
         // TextViews füllen
         textViewNameStudie.setText(" " + studienName);
 
-        //Cursor mit allen Scores
-        if(anzahl_tests!=0) {
-            Cursor scoreCursor = db.selectScoresByStudienId(studienId);
-            textViewGesamtScore.setText(" " + Statistik.mittelWert(scoreCursor));
-        }
         //Button um einen neuen Test zu starten und der Studie hinzuzufügen
         btnNeuerTest.setOnClickListener(new View.OnClickListener() {
             @Override
