@@ -48,8 +48,12 @@ public class AdapterStudien extends CursorAdapter {
         textViewName.setText(name);
 
         int anzahl_tests = cursor.getInt(cursor.getColumnIndexOrThrow(from[1]));
-        TextView textViewScore = view.findViewById(to[1]);
-        textViewScore.setText("Anzahl Tests: " + anzahl_tests);
+        TextView textViewAnzTests = view.findViewById(to[1]);
+        textViewAnzTests.setText("Anzahl Tests: " + anzahl_tests);
+
+        int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[2]));
+        TextView textViewScore = view.findViewById(to[2]);
+        textViewScore.setText(("Score: " + score));
 
     }
 }
