@@ -90,16 +90,16 @@ public class AuswertungTestActivity extends AppCompatActivity {
         anzeige_alter.setText("Alter: " + c.getInt(12));
         anzeige_geschlecht.setText("Geschlecht: "+ c.getString(13));
         anzeige_score.setText("Score: "+ c.getInt(14));
-        f1.setText("Frage 1: " + c.getInt(2));
-        f2.setText("Frage 2: " + c.getInt(3));
-        f3.setText("Frage 3: " + c.getInt(4));
-        f4.setText("Frage 4: " + c.getInt(5));
-        f5.setText("Frage 5: " + c.getInt(6));
-        f6.setText("Frage 6: " + c.getInt(7));
-        f7.setText("Frage 7: " + c.getInt(8));
-        f8.setText("Frage 8: " + c.getInt(9));
-        f9.setText("Frage 9: " + c.getInt(10));
-        f10.setText("Frage 10: " + c.getInt(11));
+        f1.setText("Frage 1:  " + c.getInt(2));
+        f2.setText("Frage 2:  " + c.getInt(3));
+        f3.setText("Frage 3:  " + c.getInt(4));
+        f4.setText("Frage 4:  " + c.getInt(5));
+        f5.setText("Frage 5:  " + c.getInt(6));
+        f6.setText("Frage 6:  " + c.getInt(7));
+        f7.setText("Frage 7:  " + c.getInt(8));
+        f8.setText("Frage 8:  " + c.getInt(9));
+        f9.setText("Frage 9:  " + c.getInt(10));
+        f10.setText("Frage 10:  " + c.getInt(11));
         anzeige_usability.setText("Usability: " + c.getInt(15));
         anzeige_learnability.setText("Learnability: " + c.getInt(16));
 
