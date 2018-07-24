@@ -51,10 +51,10 @@ public class StatistikAuswertung extends AppCompatActivity {
         Cursor usabilityCursor = db.selectUsabilityByStudienId(studienId);
 
         //TextViews füllen
-        textMittelwert.setText(" " + Statistik.mittelWert(scoreCursor));
-        textStandardAbweichung.setText(" " + Statistik.berechneStandardabweichung(scoreCursor));
-        textUsability.setText(" " + Statistik.berechneUsability(usabilityCursor));
-        textLearnability.setText(" " + Statistik.berechneLearnability(learnAbilityCursor));
-        textMedian.setText(" " + Statistik.berechneMedian(scoreCursor));
+        textMittelwert.setText(textMittelwert.getText() +": " + Statistik.mittelWert(scoreCursor));
+        textStandardAbweichung.setText(textStandardAbweichung.getText() +": " + Statistik.berechneStandardabweichung(scoreCursor));
+        textUsability.setText(textUsability.getText()+ ": " + Statistik.berechneUsability(usabilityCursor));
+        textLearnability.setText(textLearnability.getText()+": " + Statistik.berechneLearnability(learnAbilityCursor));
+        textMedian.setText(textMedian.getText()+": " + Statistik.berechneMedian(scoreCursor));
     }
 }
