@@ -73,8 +73,8 @@ public class Statistik {
     }
 
     //Berechnet Learnability Median einer Studie
-    public static double berechneLearnability(Cursor cursor){
-        double result;
+    public static int berechneLearnability(Cursor cursor){
+        int result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -95,8 +95,8 @@ public class Statistik {
     }
 
     //Berechnet Usability Median einer Studie
-    public static double berechneUsability(Cursor cursor){
-        double result;
+    public static int berechneUsability(Cursor cursor){
+        int result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -175,6 +175,33 @@ public class Statistik {
 
         return usability;
     }
+
+    public static int berechneMin(Cursor cursor){
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
+        }
+
+        Collections.sort(scoreList);
+        return scoreList.get(0);
+    }
+    public static int berechneMax(Cursor cursor){
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
+        }
+
+        Collections.sort(scoreList);
+        int length = scoreList.size()-1;
+        return scoreList.get(length);
+    }
+
 
     //Berechnet das Learnability Ergebnis eines Tests
     public static int berechneLearnability(int[]antworten){

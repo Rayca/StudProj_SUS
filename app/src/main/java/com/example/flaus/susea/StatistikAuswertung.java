@@ -16,13 +16,15 @@ import android.widget.TextView;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 
+import org.w3c.dom.Text;
+
 public class StatistikAuswertung extends AppCompatActivity {
 
     Toolbar toolbar;
     Datenbank db = new Datenbank(this);
     long studienId;
     String studienName;
-    TextView textMittelwert,textStandardAbweichung,textUsability,textLearnability,textMedian,textViewNameStudie, textViewKonfidenzIntervall;
+    TextView textMittelwert,textStandardAbweichung,textUsability,textLearnability,textMedian,textViewNameStudie, textViewKonfidenzIntervall,textViewMinimum,textViewMaximum;
     Button btnkonfidenzIntervall;
     double standartabweichung=0;
     double mittelwert=0;

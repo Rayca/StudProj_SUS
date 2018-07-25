@@ -185,8 +185,8 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_DATUM, datum);
         neueZeile.put(SPALTE_STUDIE_ID,studienId);
         neueZeile.put(SPALTE_SCORE, score);
-        neueZeile.put(SPALTE_TEST_LEARNABILITY,learnability);
         neueZeile.put(SPALTE_TEST_USABILITY,usability);
+        neueZeile.put(SPALTE_TEST_LEARNABILITY,learnability);
         Log.d("jule", "score, der in die db geschrieben wird" +score);
 
         //Neuen Test in die DB einfügen
@@ -254,6 +254,7 @@ public class Datenbank extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor;
     }
+
 
     public void insertScoreStudie(long studienID, int score){
         SQLiteDatabase db = getWritableDatabase();

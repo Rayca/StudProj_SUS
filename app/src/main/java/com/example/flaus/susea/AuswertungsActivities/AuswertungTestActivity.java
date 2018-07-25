@@ -20,6 +20,7 @@ import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
+import com.example.flaus.susea.Statistik;
 
 /* Zeigt die Antworten aus einem einzelnen Test an */
 //TODO: Jede Menge zu tun
@@ -100,8 +101,10 @@ public class AuswertungTestActivity extends AppCompatActivity {
         f8.setText("Frage 8:  " + c.getInt(9));
         f9.setText("Frage 9:  " + c.getInt(10));
         f10.setText("Frage 10:  " + c.getInt(11));
-        anzeige_usability.setText("Usability: " + c.getInt(15));
-        anzeige_learnability.setText("Learnability: " + c.getInt(16));
+        anzeige_usability.setText("Usability: " + c.getInt(17));
+        anzeige_learnability.setText("Learnability: " + c.getInt(18));
+        Log.d("subscales","Usability: "+c.getInt(17));
+        Log.d("subscales","Learnability: "+c.getInt(18));
 
     }
 

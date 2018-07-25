@@ -76,21 +76,13 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
         studienName = intent.getStringExtra("studienName");
         studienName = c.getString(1);
-
         if( anzahl_tests == 0) {
             //Wenn eine neue Studie erstellt wurde, wird der Name gleich mit dem Intent mitgeschickt
 
 
             //Und es sind noch keine Tests drin
             textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
-            textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
-            textViewUsabilityScore.setText("Usability: Wert erst ab 3 Tests sinnvoll");
-            textViewLearnabilityScore.setText("Learnability: Wert erst ab 3 Tests sinnvoll");
-        }else if (anzahl_tests < 3){
-            textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
-            textViewUsabilityScore.setText("Usability: Wert erst ab 3 Tests sinnvoll");
-            textViewLearnabilityScore.setText("Learnability: Wert erst ab 3 Tests sinnvoll");
-            textViewAnzahlTests.append(" " + anzahl_tests);
+
         } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
             textViewAnzahlTests.append(" " + anzahl_tests);
             textViewGesamtScore.setText("Score: "+ c.getInt(4));
@@ -179,8 +171,8 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 return true;
             case R.id.actionStatistik:
                 //TODO: hier auch noch alle Daten an die Statistik-Klasse mitschicken
-                if(anzahl_tests < 3){
-                    Toast.makeText(AuswertungStudieActivity.this,"Statistische Auswertung erst ab 3 Tests sinnvoll!",Toast.LENGTH_SHORT).show();
+                if(anzahl_tests == 0){
+                    Toast.makeText(AuswertungStudieActivity.this,"Noch keine Tests innerhalb der Studie!",Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
                     intent3.putExtra("studienId", studienId);
