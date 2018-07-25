@@ -258,7 +258,7 @@ public class Datenbank extends SQLiteOpenHelper {
     public void insertScoreStudie(long studienID, int score){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
-        neueZeile.put(SPALTE_STUDIE_SCORE, score);
+        neueZeile.put(SPALTE_STUDIE_SCORE , score);
         String[] arg = new String[]{Long.toString(studienID)};
         db.update(TABELLE_STUDIE, neueZeile, SPALTE_STUDIE_ID + " = ?", arg);
 

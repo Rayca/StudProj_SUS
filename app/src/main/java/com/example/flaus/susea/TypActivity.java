@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.Window;
@@ -144,11 +145,14 @@ public class TypActivity extends AppCompatActivity {
 
         final EditText eingabe_name = (EditText) v.findViewById(R.id.editText_name);
 
+
+
         builder.setPositiveButton("Studie erstellen", new DialogInterface.OnClickListener() {
             @Override
             //TODO: sicherstellen, dass auch etwas eingegeben wurde
             public void onClick(DialogInterface dialogInterface, int i) {
                 name_studie = eingabe_name.getText().toString();
+
                 Log.d("Jule", "\""+name_studie+"\"");
 
 
@@ -181,6 +185,32 @@ public class TypActivity extends AppCompatActivity {
 
         studie_erstellen = builder.create();
         studie_erstellen.show();
+
+
+
+
+        eingabe_name.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Daten werden in die DB geschrieben und der Intent an die AuswertungStudieActivity geschickt
+                    studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
+
+                    Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(getBaseContext(), AuswertungStudieActivity.class);
+                    intent1.putExtra("studienName", name_studie);
+                    intent1.putExtra("Interfacetyp", typ);
+                    intent1.putExtra("studienId", studienId);
+                    startActivity(intent1);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
 
 
         return;
