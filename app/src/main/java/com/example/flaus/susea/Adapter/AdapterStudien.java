@@ -2,6 +2,7 @@ package com.example.flaus.susea.Adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,8 @@ public class AdapterStudien extends CursorAdapter {
         textViewAnzTests.setText("Anzahl Tests: " + anzahl_tests);
 
         int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[2]));
+        Log.d("Jule", "Score im Binding:" + score);
+
         TextView textViewScore = view.findViewById(to[2]);
         textViewScore.setText(("Score: " + score));
 

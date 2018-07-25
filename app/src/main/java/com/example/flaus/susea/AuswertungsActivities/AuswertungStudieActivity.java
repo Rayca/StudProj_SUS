@@ -97,7 +97,9 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
             //Cursor mit allen Scores
             Cursor scoreCursor = db.selectScoresByStudienId(studienId);
-            textViewGesamtScore.setText("Score: " + Statistik.mittelWert(scoreCursor));
+            int scoreStudie =  (int) Statistik.mittelWert(scoreCursor);
+            textViewGesamtScore.setText("Score: " + scoreStudie);
+            db.insertScoreStudie(studienId, scoreStudie);
 
             Cursor usabilityCursor = db.selectUsabilityByStudienId(studienId);
             textViewUsabilityScore.setText("Usability: " + Statistik.berechneUsability(usabilityCursor));
