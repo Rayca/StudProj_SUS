@@ -194,6 +194,7 @@ public class TypActivity extends AppCompatActivity {
                 // If the event is a key-down event on the "enter" button
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    eingabe_name.setSelected(false);
                     // Daten werden in die DB geschrieben und der Intent an die AuswertungStudieActivity geschickt
                     name_studie = eingabe_name.getText().toString();
                     studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
