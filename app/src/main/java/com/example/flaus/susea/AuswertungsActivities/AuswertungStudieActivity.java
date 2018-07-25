@@ -83,6 +83,9 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
             //Und es sind noch keine Tests drin
             textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
+            textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
+            textViewUsabilityScore.setText("Usability: Wert erst ab 3 Tests sinnvoll");
+            textViewLearnabilityScore.setText("Learnability: Wert erst ab 3 Tests sinnvoll");
         }else if (anzahl_tests < 3){
             textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
             textViewUsabilityScore.setText("Usability: Wert erst ab 3 Tests sinnvoll");
