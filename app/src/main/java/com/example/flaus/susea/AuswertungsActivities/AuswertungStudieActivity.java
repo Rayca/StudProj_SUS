@@ -185,6 +185,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                     Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
                     intent3.putExtra("studienId", studienId);
                     intent3.putExtra("studienName", studienName);
+                    intent3.putExtra("anzahlTests",anzahl_tests);
                     startActivity(intent3);
                 }
 

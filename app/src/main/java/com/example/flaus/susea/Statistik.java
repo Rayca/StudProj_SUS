@@ -12,6 +12,18 @@ import java.util.List;
 /* Stellt die mathematischen Funktionen zu Verfügung um Kennzahlen für Studien zu berechnen */
 public class Statistik {
 
+  static double[] table = new double[] {12.706,4.303,3.182,2.776,2.571,2.447,2.365,2.306,2.262,2.228,2.201,2.179,2.160,2.145,2.131,2.120,2.110,2.101,2.098,2.086,2.080,2.074,2.069,2.064,2.060,2.056,2.052,2.048,2.045,2.042,2.040,2.037,2.035,2.032,2.030,2.028,2.026,2.024,2.023,2.021,2.018,2.015,2.013,2.011,2.009,2.009,2.009,2.009,2.009,2.009,2.009,2.009,2.009,2.009,2.000,2.000,2.000,2.000,2.000,2.000,2.000,2.000,2.000,2.000,1.994,1.994,1.994,1.994,1.994,1.994,1.994,1.994,1.994,1.994,1.990,1.990,1.990,1.990,1.990,1.990,1.990,1.990,1.990,1.990,1.987,1.987,1.987,1.987,1.987,1.987,1.987,1.987,1.987,1.987,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.984,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.980,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976,1.976};
+
+  static double[]testTable = new double[500];
+
+
+
+
+
+
+
+
+    // table befüllen
 
     //Berechnet Standartabweichung des Scores in einer Studie
     public static double berechneStandardabweichung(Cursor cursor){
@@ -191,13 +203,34 @@ public class Statistik {
 
     // Berechnet Konfidenzintervall
 
-    public static double[] berechneKonfiIntervall(double mittelwert, double standardabweichung, double anzahlTests, double konfidenzLevel){
+    public static double[] berechneKonfiIntervall(double mittelwert, double standardabweichung, int anzahlTests) {
+
+        for(int i = 0;i<table.length; i++){
+            testTable[i] = table[i];
+        }
+
+        for(int i = 200; i<299;i++){
+            testTable[i] = 1.972;
+        }
+
+        for(int i = 300  ; i<498;i++){
+            testTable[i] = 1.968;
+        }
+
+        testTable[499] = 1.965;
+
+
+
+
+
 
         double standardError = 0;
 
-        standardError = konfidenzLevel * standardabweichung / Math.sqrt(anzahlTests);
+        standardError = testTable[anzahlTests] * standardabweichung / Math.sqrt(anzahlTests);
 
-        return new double[]{mittelwert-standardError,mittelwert+standardError};
+        double untereGrenze= mittelwert-standardError;
+        double obereGrenze = mittelwert+standardError;
+        return new double[]{Math.round(untereGrenze),Math.round(obereGrenze)};
     }
 
 }

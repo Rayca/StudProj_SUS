@@ -26,7 +26,7 @@ public class StatistikAuswertung extends AppCompatActivity {
     Button btnkonfidenzIntervall;
     double standartabweichung=0;
     double mittelwert=0;
-    int usability = 0,learnabilty = 0,median = 0;
+    int usability = 0,learnabilty = 0,median = 0, anzahlTests = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,8 @@ public class StatistikAuswertung extends AppCompatActivity {
         Intent intent = getIntent();
         studienId = intent.getLongExtra("studienId",-1);
         studienName = intent.getStringExtra("studienName");
+        anzahlTests = intent.getIntExtra("anzahlTests",0);
+
 
         Log.d("thomas", "studieName= " + studienName + " studienId= " + studienId);
 
@@ -66,19 +68,27 @@ public class StatistikAuswertung extends AppCompatActivity {
         Cursor learnAbilityCursor = db.selectLearnabilityByStudienId(studienId);
         Cursor usabilityCursor = db.selectUsabilityByStudienId(studienId);
 
+
+        mittelwert = Statistik.mittelWert(scoreCursor);
+        standartabweichung = Statistik.berechneStandardabweichung(scoreCursor);
+        usability = Statistik.berechneUsability(usabilityCursor);
+        learnabilty = Statistik.berechneLearnability(learnAbilityCursor);
+        median = Statistik.berechneMedian(scoreCursor);
+
         //TextViews füllen
         textViewNameStudie.setText(studienName);
-        textMittelwert.setText(textMittelwert.getText() +": " + Statistik.mittelWert(scoreCursor));
-        textStandardAbweichung.setText(textStandardAbweichung.getText() +": " + Statistik.berechneStandardabweichung(scoreCursor));
-        textUsability.setText(textUsability.getText()+ ": " + Statistik.berechneUsability(usabilityCursor));
-        textLearnability.setText(textLearnability.getText()+": " + Statistik.berechneLearnability(learnAbilityCursor));
-        textMedian.setText(textMedian.getText()+": " + Statistik.berechneMedian(scoreCursor));
+        textMittelwert.setText(textMittelwert.getText() +": " + mittelwert);
+        textStandardAbweichung.setText(textStandardAbweichung.getText() +": " + standartabweichung);
+        textUsability.setText(textUsability.getText()+ ": " + usability);
+        textLearnability.setText(textLearnability.getText()+": " + learnabilty);
+        textMedian.setText(textMedian.getText()+": " + median);
 
 
         btnkonfidenzIntervall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textViewKonfidenzIntervall.setText("Zu 95% wird der Mittelwert der Grundgesamtheit im Intervall von       liegen");
+                double[] intervall = Statistik.berechneKonfiIntervall(mittelwert,standartabweichung, anzahlTests);
+                textViewKonfidenzIntervall.setText("Zu 95% wird der Mittelwert der Grundgesamtheit im Intervall von" + intervall[0] + "und" + intervall[1] + " liegen");
             }
         });
 
