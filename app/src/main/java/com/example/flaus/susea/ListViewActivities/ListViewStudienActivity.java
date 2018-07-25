@@ -93,12 +93,14 @@ public class ListViewStudienActivity extends AppCompatActivity {
                 //ID der Studie raussuchen, die angeklickt wurde
                 cursor.moveToPosition(position);
                 long studie_id = cursor.getLong(0);
-
-                // TODO: Hier muss noch Name und der boolean studie mitgeschickt werden
-                Log.d("Jule", "Id der ausgewählten Studie: " + studie_id);
-                //Id der Studie mitschicken um die Tests darin in der nächsten Activity anzuzeigen
                 intent.putExtra("studienId", studie_id);
+                String studienName = cursor.getString(1);
+                Log.d("thomas", "studienName: " + studienName);
+                intent.putExtra("studienName",studienName);
                 startActivity(intent);
+
+
+
             }
         });
 

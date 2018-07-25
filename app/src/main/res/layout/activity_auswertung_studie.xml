@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/textViewScore"
-        android:layout_width="189dp"
+        android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -23,14 +23,13 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.252"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNameStudie"
         app:layout_constraintVertical_bias="0.093" />
 
     <TextView
         android:id="@+id/textViewAnzahlTests"
-        android:layout_width="250dp"
+        android:layout_width="296dp"
         android:layout_height="23dp"
         android:layout_marginBottom="300dp"
         android:layout_marginEnd="8dp"
@@ -39,10 +38,10 @@
         android:text="Anzahl Tests:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewScore"
-        app:layout_constraintVertical_bias="0.928" />
+        app:layout_constraintVertical_bias="0.547" />
 
     <View
         android:layout_width="match_parent"
@@ -51,7 +50,7 @@
 
     <Button
         android:id="@+id/btnNeuerTest"
-        android:layout_width="221dp"
+        android:layout_width="255dp"
         android:layout_height="54dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -87,7 +86,7 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -96,14 +95,13 @@
         android:text="Learnability:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAnzahlTests"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.117" />
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
+        android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -112,14 +110,13 @@
         android:text="Usability:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="wrap_content"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -128,9 +125,9 @@
         android:text="Interfacetyp:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.137" />
 
 </android.support.constraint.ConstraintLayout>

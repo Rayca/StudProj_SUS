@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
@@ -79,11 +80,11 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
             //Und es sind noch keine Tests drin
             textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
-            textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
+            textViewGesamtScore.setText("Score: Noch keine Tests");
         } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
             studienName = c.getString(1);
             textViewAnzahlTests.append(" " + anzahl_tests);
-            textViewGesamtScore.setText("Score: "+ c.getInt(4));
+            textViewGesamtScore.append(" " + c.getInt(4));
         }
 
 
@@ -122,9 +123,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main,menu);
 
-        if(anzahl_tests == 0){
-            menu.findItem(R.id.actionTestsEinsehen).setVisible(false);
-        }
+
 
         return true;
     }
@@ -139,10 +138,13 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 return true;
 
             case R.id.actionTestsEinsehen: //TODO Diese Option nicht anzeigen, wenn die Studie leer ist
-
-                Intent intent1 = new Intent(getBaseContext(),ListViewTestsActivity.class);
-                intent1.putExtra("studienId", studienId);
-                startActivity(intent1);
+                if(anzahl_tests == 0){
+                    Toast.makeText(AuswertungStudieActivity.this,"Noch keine Tests innerhalb der Studie!",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent1 = new Intent(getBaseContext(), ListViewTestsActivity.class);
+                    intent1.putExtra("studienId", studienId);
+                    startActivity(intent1);
+                }
                 return true;
 
             case R.id.actionAlleStudienEinsehen:
@@ -153,12 +155,16 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 return true;
             case R.id.actionStatistik:
                 //TODO: hier auch noch alle Daten an die Statistik-Klasse mitschicken
-                Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
-                intent3.putExtra("studienId",studienId);
-                startActivity(intent3);
+                if(anzahl_tests < 3){
+                    Toast.makeText(AuswertungStudieActivity.this,"Statistische Auswertung erst ab 3 Tests sinnvoll!",Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
+                    intent3.putExtra("studienId", studienId);
+                    intent3.putExtra("studienName", studienName);
+                    startActivity(intent3);
+                }
 
-
-
+            return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

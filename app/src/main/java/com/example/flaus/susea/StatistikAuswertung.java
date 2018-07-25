@@ -2,17 +2,24 @@ package com.example.flaus.susea;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 
 public class StatistikAuswertung extends AppCompatActivity {
 
     Toolbar toolbar;
     Datenbank db = new Datenbank(this);
     long studienId;
+    String studienName;
     TextView textMittelwert,textStandardAbweichung,textUsability,textLearnability,textMedian;
     double standartabweichung=0;
     double mittelwert=0;
@@ -27,7 +34,7 @@ public class StatistikAuswertung extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Statistik");
+        getSupportActionBar().setTitle("Statistische Auswertung");
 
         // Pfeil für den User flow
         ActionBar ab = getSupportActionBar();
@@ -36,6 +43,9 @@ public class StatistikAuswertung extends AppCompatActivity {
         //Studien ID empfangen
         Intent intent = getIntent();
         studienId = intent.getLongExtra("studienId",-1);
+        studienName = intent.getStringExtra("studienName");
+
+        Log.d("thomas", "studieName= " + studienName + " studienId= " + studienId);
 
 
         // View-Binding
@@ -57,4 +67,36 @@ public class StatistikAuswertung extends AppCompatActivity {
         textLearnability.setText(textLearnability.getText()+": " + Statistik.berechneLearnability(learnAbilityCursor));
         textMedian.setText(textMedian.getText()+": " + Statistik.berechneMedian(scoreCursor));
     }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                Log.d("thomas", "home wurde gedrückt");
+                Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
+                intent.putExtra("studienName", studienName);
+                intent.putExtra("studienId", studienId);
+                startActivity(intent);
+
+                return true;
+
+
+
+
+            default:
+                Log.d("thomas", "home wurde gedrückt");
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+
+
+
 }
