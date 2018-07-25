@@ -102,10 +102,12 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             db.insertScoreStudie(studienId, scoreStudie);
 
             Cursor usabilityCursor = db.selectUsabilityByStudienId(studienId);
-            textViewUsabilityScore.setText("Usability: " + Statistik.berechneUsability(usabilityCursor));
+            double usabilityStudie = Statistik.berechneUsability(usabilityCursor);
+            textViewUsabilityScore.setText("Usability: " + usabilityStudie);
 
-            Cursor learnabilityCursor = db.selectUsabilityByStudienId(studienId);
-            textViewLearnabilityScore.setText("Learnability: " + Statistik.berechneUsability(learnabilityCursor));
+            Cursor learnabilityCursor = db.selectLearnabilityByStudienId(studienId);
+            double learnabilityStudie = Statistik.berechneLearnability(learnabilityCursor);
+            textViewLearnabilityScore.setText("Learnability: " + learnabilityStudie);
         }
 
 
