@@ -230,9 +230,8 @@ public class Statistik {
 
         standardError = testTable[anzahlTests] * standardabweichung / Math.sqrt(anzahlTests);
 
-        double untereGrenze= mittelwert-standardError;
-        double obereGrenze = mittelwert+standardError;
-        return new double[]{Math.round(untereGrenze),Math.round(obereGrenze)};
+
+        return new double[]{mittelwert-standardError,mittelwert+standardError};
     }
 
 }
