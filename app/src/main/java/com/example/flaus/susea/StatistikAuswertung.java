@@ -2,6 +2,7 @@ package com.example.flaus.susea;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -80,11 +81,13 @@ public class StatistikAuswertung extends AppCompatActivity {
 
         //TextViews füllen
         textViewNameStudie.setText(studienName);
+        textViewNameStudie.setPaintFlags(textViewNameStudie.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
         textMittelwert.setText(textMittelwert.getText() +" " + mittelwert);
         textStandardAbweichung.setText(textStandardAbweichung.getText() +" " + standartabweichung);
         textUsability.setText(textUsability.getText()+ " " + usability);
         textLearnability.setText(textLearnability.getText()+" " + learnabilty);
         textMedian.setText(textMedian.getText()+" " + median);
+
 
 
         btnkonfidenzIntervall.setOnClickListener(new View.OnClickListener() {

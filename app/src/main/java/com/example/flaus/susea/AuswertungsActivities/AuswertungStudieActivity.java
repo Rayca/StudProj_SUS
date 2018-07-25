@@ -2,6 +2,7 @@ package com.example.flaus.susea.AuswertungsActivities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -84,33 +85,34 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
 
         } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
-            textViewAnzahlTests.append(" " + anzahl_tests);
-            textViewGesamtScore.setText("Score: "+ c.getInt(4));
+            textViewAnzahlTests.append("" + anzahl_tests);
+            textViewGesamtScore.setText("" + c.getInt(4));
 
             //Cursor mit allen Scores
             Cursor scoreCursor = db.selectScoresByStudienId(studienId);
             int scoreStudie =  (int) Statistik.mittelWert(scoreCursor);
-            textViewGesamtScore.setText("Score: " + scoreStudie);
+            textViewGesamtScore.setText(""+scoreStudie);
             db.insertScoreStudie(studienId, scoreStudie);
 
             Cursor usabilityCursor = db.selectUsabilityByStudienId(studienId);
             double usabilityStudie = Statistik.berechneUsability(usabilityCursor);
-            textViewUsabilityScore.setText("Usability: " + usabilityStudie);
+            textViewUsabilityScore.setText("" + usabilityStudie);
 
             Cursor learnabilityCursor = db.selectLearnabilityByStudienId(studienId);
             double learnabilityStudie = Statistik.berechneLearnability(learnabilityCursor);
-            textViewLearnabilityScore.setText("Learnability: " + learnabilityStudie);
+            textViewLearnabilityScore.setText("" + learnabilityStudie);
         }
 
 
 
         // TextViews füllen
         textViewNameStudie.setText(" " + studienName);
+        textViewNameStudie.setPaintFlags(textViewNameStudie.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
 
 
         String interfaceString = db.selectInterfaceByStudienId(studienId);
-        textViewInterface.setText("Interfacetyp: " + interfaceString);
+        textViewInterface.setText("" + interfaceString);
 
 
         //Button um einen neuen Test zu starten und der Studie hinzuzufügen

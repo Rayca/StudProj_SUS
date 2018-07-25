@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/actionTestsEinsehen"
-        android:title="Einzelne Tests einsehen"
+        android:title="Tests der Studie einsehen"
         app:showAsAction="never"
         />
 
@@ -25,7 +25,7 @@
 
     <item
         android:id="@+id/actionStatistik"
-        android:title="Statistik"
+        android:title="Statistische Auswertung"
         app:showAsAction="never" />
 
 
