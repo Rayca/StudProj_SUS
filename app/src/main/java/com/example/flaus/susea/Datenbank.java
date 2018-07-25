@@ -149,6 +149,14 @@ public class Datenbank extends SQLiteOpenHelper {
         return anzahl_tests;
     }
 
+    public String selectInterfaceByStudienId(long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_INTERFACE_TYP_STUDIE+" FROM "+ TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        String ausgabe = cursor.getString(0);
+        return ausgabe;
+    }
 
 
       /*------------------------------------------------------------------------------------------
@@ -266,18 +274,6 @@ public class Datenbank extends SQLiteOpenHelper {
 
     }
 
-
-    /* Das sind noch so Überreste */
-
-
-    public String selectInterfaceByStudienId(long studienId){
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT "+SPALTE_INTERFACE_TYP_STUDIE+" FROM "+ TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";
-        Cursor cursor = db.rawQuery(query,null);
-        cursor.moveToFirst();
-        String ausgabe = cursor.getString(0);
-        return ausgabe;
-    }
 
 
 
