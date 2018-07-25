@@ -199,7 +199,9 @@ public class TestActivity extends AppCompatActivity {
 
                 int score = Statistik.berechneScore(antworten);
                 int usability = Statistik.berechneUsability(antworten);
+                Log.d("subscale","Usability: "+usability);
                 int learnability = Statistik.berechneLearnability(antworten);
+                Log.d("subscale","Learnability: "+learnability);
                 Log.d("subscale","Usabilit: "+usability+" Learnability: "+learnability);
                 //gesammelte Daten in die Datenbank schreiben
                 testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId, score,usability,learnability);
