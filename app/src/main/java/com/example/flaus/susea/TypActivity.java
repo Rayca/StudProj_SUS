@@ -38,7 +38,7 @@ public class TypActivity extends AppCompatActivity {
     Datenbank db;
     Button button_next, btnAbbrechen;
 
-    // Variabeln zur erstellung der neue_studie
+        // Variabeln zur erstellung der neue_studie
     int anzahlTests = 0;
     int scoreGesamt = 0;
     long studienId = -1;

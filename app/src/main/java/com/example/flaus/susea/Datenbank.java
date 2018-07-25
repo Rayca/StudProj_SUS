@@ -139,7 +139,7 @@ public class Datenbank extends SQLiteOpenHelper {
         return id;
 
     }
-
+    //TODO:: Get AnzahlTestsinStudie entfernen?
     //Hilfsfunktion um die Anzahl der Tests in einer Studie verwalten zu können
     public int getAnzhalTestsInStudie(long id){
         SQLiteDatabase db = getWritableDatabase();
@@ -166,6 +166,7 @@ public class Datenbank extends SQLiteOpenHelper {
 
     //Fügt einen neuen Test in die DB ein
     // Die ID des Tests wird automatisch beim Einfügen erzeugt und als long zurückgegeben
+    //TODO:: int usabilty und int learnability und int score in der Doku beschreiben?
     public long insertTest(int[] antworten, int alter, String geschlecht, String datum, long studienId, int score,int usability,int learnability) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
@@ -258,15 +259,13 @@ public class Datenbank extends SQLiteOpenHelper {
     /* Das sind noch so Überreste */
 
 
-    public void setSubscale(long id, int score){
-
+    public String selectInterfaceByStudienId(long studienId){
         SQLiteDatabase db = getWritableDatabase();
-        //Cursor c = db.rawQuery("SELECT * FROM " + TABELLE_TEST+" WHERE "+SPALTE_TEST_ID+" = "+studienId,null);
-        ContentValues neueZeile = new ContentValues();
-        neueZeile.put(SPALTE_SCORE,score);
-        String[] arg = new String[]{Long.toString(id)};
-        Log.d("Jule", "In die DB geschr. "+score+" "+id);
-        db.update(TABELLE_TEST,neueZeile,SPALTE_TEST_ID + " = ?",arg);
+        String query = "SELECT "+SPALTE_INTERFACE_TYP_STUDIE+" FROM "+ TABELLE_STUDIE + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        String ausgabe = cursor.getString(0);
+        return ausgabe;
     }
 
 

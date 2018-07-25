@@ -28,11 +28,14 @@ public class Statistik {
         }
 
         for(int i = 0;i<scoreList.size();i++){
-            varianz+=scoreList.get(i) - mittelWert;
+            varianz+=(scoreList.get(i) - mittelWert)*(scoreList.get(i) - mittelWert);
         }
-        varianz = varianz/scoreList.size();
+        varianz = varianz/(scoreList.size()-1);
         standardAbweichung = Math.sqrt(varianz);
 
+        double zwischenErgebnis = standardAbweichung*100;
+        zwischenErgebnis = (int) zwischenErgebnis;
+        standardAbweichung= zwischenErgebnis/100;
         return standardAbweichung;
     }
 
@@ -63,12 +66,12 @@ public class Statistik {
 
         ArrayList<Integer> scoreList = new ArrayList<>();
         cursor.moveToFirst();
-        Log.d("median","scoreList wurde erstellt.");
+        Log.d("median","scoreList learn wurde erstellt.");
         while(!cursor.isAfterLast()){
-            Log.d("median","scoreList wird gefüllt.");
+            Log.d("median","scoreList Learn wird gefüllt.");
 
             scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LEARNABILITY)));
-            Log.d("median","scoreList SPALTE: "+cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LEARNABILITY)));
+            Log.d("median","scoreList Learn SPALTE: "+cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LEARNABILITY)));
 
             cursor.moveToNext();
         }
@@ -76,23 +79,23 @@ public class Statistik {
 
 
         for(int i = 0;i<scoreList.size();i++){
-            Log.d("median","Unsortiert: "+i+ ". = "+scoreList.get(i));
+            Log.d("median","LearnabilityUnsortiert: "+i+ ". = "+scoreList.get(i));
         }
         Collections.sort(scoreList);
 
         for(int i = 0;i<scoreList.size();i++){
-            Log.d("median","Sortiert: "+i+ ". = "+scoreList.get(i));
+            Log.d("median","LearnabilitySortiert: "+i+ ". = "+scoreList.get(i));
         }
         if((scoreList.size()%2)==0) {
             Log.d("median","Gerade");
             median = (scoreList.get(scoreList.size() / 2) + (scoreList.get(((scoreList.size() + 1) / 2)-1))) / 2;
-            Log.d("median", "Median: " + median);
+            Log.d("median", "Medianlearnability: " + median);
             return median;
         }
         else{
             Log.d("median","Ungerade");
             median = (scoreList.get(((scoreList.size() + 1) / 2)-1));
-            Log.d("median", "Median: " + median);
+            Log.d("median", "Medianlearnability: " + median);
             return median;
         }
     }
@@ -185,8 +188,15 @@ public class Statistik {
             usability += antworten[i] - 1;
 
         }
-        usability-=(antworten[3]+antworten[9]);
+        Log.d("subscale","Usability - 4 und 10: "+usability +" - " +antworten[3]+" "+antworten[9]);
+
+        usability-=(antworten[3]-1+antworten[9]-1);
+
+        Log.d("subscale","Usability: "+usability);
+
         usability*=3.125;
+
+        Log.d("subscale","Usability: "+usability);
 
         return usability;
     }
@@ -194,7 +204,8 @@ public class Statistik {
     //Berechnet das Learnability Ergebnis eines Tests
     public static int berechneLearnability(int[]antworten){
         double learnability;
-        learnability=(12.5)*(antworten[3]+antworten[9]);
+        Log.d("subscale","learnability an 4 und 10: "+antworten[3]+" "+antworten[9]);
+        learnability=(12.5)*(antworten[3]-1+antworten[9]-1);
         return (int) learnability;
     }
 

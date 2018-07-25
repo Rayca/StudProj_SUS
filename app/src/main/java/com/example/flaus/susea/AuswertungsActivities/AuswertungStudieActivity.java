@@ -29,7 +29,7 @@ import com.example.flaus.susea.TestActivity;
 public class AuswertungStudieActivity extends AppCompatActivity {
 
 
-    TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests;
+    TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests,textViewInterface,textViewUsabilityScore,textViewLearnabilityScore;
     FloatingActionButton fab;
     long studienId;
     int score = 0;
@@ -65,26 +65,42 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         textViewNameStudie = (TextView) findViewById(R.id.textViewNameStudie);
         textViewGesamtScore = (TextView) findViewById(R.id.textViewScore);
         textViewAnzahlTests = (TextView) findViewById(R.id.textViewAnzahlTests);
-
+        textViewInterface = (TextView) findViewById(R.id.textViewInterfacetyp);
+        textViewLearnabilityScore = (TextView) findViewById(R.id.textViewUsability);
+        textViewUsabilityScore = (TextView) findViewById(R.id.textViewLearnability);
         Button btnNeuerTest = findViewById(R.id.btnNeuerTest);
 
 
 
 
 
+        studienName = intent.getStringExtra("studienName");
+        studienName = c.getString(1);
 
-        if( anzahl_tests == 0){
+        if( anzahl_tests == 0) {
             //Wenn eine neue Studie erstellt wurde, wird der Name gleich mit dem Intent mitgeschickt
-            studienName = intent.getStringExtra("studienName");
 
 
             //Und es sind noch keine Tests drin
             textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
-            textViewGesamtScore.setText("Score: Noch keine Tests");
-        } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
-            studienName = c.getString(1);
+        }else if (anzahl_tests < 3){
+            textViewGesamtScore.setText("Score: Wert erst ab 3 Tests sinnvoll");
+            textViewUsabilityScore.setText("Usability: Wert erst ab 3 Tests sinnvoll");
+            textViewLearnabilityScore.setText("Learnability: Wert erst ab 3 Tests sinnvoll");
             textViewAnzahlTests.append(" " + anzahl_tests);
-            textViewGesamtScore.append(" " + c.getInt(4));
+        } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
+            textViewAnzahlTests.append(" " + anzahl_tests);
+            textViewGesamtScore.setText("Score: "+ c.getInt(4));
+
+            //Cursor mit allen Scores
+            Cursor scoreCursor = db.selectScoresByStudienId(studienId);
+            textViewGesamtScore.setText("Score: " + Statistik.mittelWert(scoreCursor));
+
+            Cursor usabilityCursor = db.selectUsabilityByStudienId(studienId);
+            textViewUsabilityScore.setText("Usability: " + Statistik.berechneUsability(usabilityCursor));
+
+            Cursor learnabilityCursor = db.selectUsabilityByStudienId(studienId);
+            textViewLearnabilityScore.setText("Learnability: " + Statistik.berechneUsability(learnabilityCursor));
         }
 
 
@@ -92,11 +108,12 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         // TextViews füllen
         textViewNameStudie.setText(" " + studienName);
 
-        //Cursor mit allen Scores
-        if(anzahl_tests!=0) {
-            Cursor scoreCursor = db.selectScoresByStudienId(studienId);
-            textViewGesamtScore.setText(" " + Statistik.mittelWert(scoreCursor));
-        }
+
+
+        String interfaceString = db.selectInterfaceByStudienId(studienId);
+        textViewInterface.setText("Interfacetyp: " + interfaceString);
+
+
         //Button um einen neuen Test zu starten und der Studie hinzuzufügen
         btnNeuerTest.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -197,11 +197,10 @@ public class TestActivity extends AppCompatActivity {
                 // Datum hinzufügen
                 datum = getDatum();
 
-                //TODO: Das ist hier nur zum Test, nicht vergessen, nachher zu löschen
                 int score = Statistik.berechneScore(antworten);
                 int usability = Statistik.berechneUsability(antworten);
                 int learnability = Statistik.berechneLearnability(antworten);
-
+                Log.d("subscale","Usabilit: "+usability+" Learnability: "+learnability);
                 //gesammelte Daten in die Datenbank schreiben
                 testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId, score,usability,learnability);
 
