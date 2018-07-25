@@ -106,7 +106,7 @@ public class Datenbank extends SQLiteOpenHelper {
      //Gibt alle Studien in der Tabelle Studien in einem Cursor zurück
     public Cursor selectAllStudien() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_ANZAHL_TESTS+" FROM " + TABELLE_STUDIE, null);
+        Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_ANZAHL_TESTS+ " , "+ SPALTE_STUDIE_SCORE + " FROM " + TABELLE_STUDIE, null);
         cursor.moveToFirst();
         return cursor;
     }
@@ -214,6 +214,15 @@ public class Datenbank extends SQLiteOpenHelper {
     public Cursor selectAllTestsbyStudienId (long studienId){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"";
+
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
+    public Cursor selectTestsByStudienIdSorted( long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"" + " ORDER BY " + SPALTE_DATUM + " DESC ";
 
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
