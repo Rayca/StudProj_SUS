@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
@@ -20,7 +22,8 @@ public class StatistikAuswertung extends AppCompatActivity {
     Datenbank db = new Datenbank(this);
     long studienId;
     String studienName;
-    TextView textMittelwert,textStandardAbweichung,textUsability,textLearnability,textMedian,textViewNameStudie;
+    TextView textMittelwert,textStandardAbweichung,textUsability,textLearnability,textMedian,textViewNameStudie, textViewKonfidenzIntervall;
+    Button btnkonfidenzIntervall;
     double standartabweichung=0;
     double mittelwert=0;
     int usability = 0,learnabilty = 0,median = 0;
@@ -55,6 +58,8 @@ public class StatistikAuswertung extends AppCompatActivity {
         textUsability = (TextView) findViewById(R.id.textUsability);        // View-Binding
         textLearnability = (TextView) findViewById(R.id.textLearnability);
         textMedian = (TextView) findViewById(R.id.textMedian);
+        textViewKonfidenzIntervall = (TextView) findViewById(R.id.textViewKonfidenzInter);
+        btnkonfidenzIntervall = (Button) findViewById(R.id.btnKonfidenzIntervall);
 
         //Cursor mit Daten holen
         Cursor scoreCursor = db.selectScoresByStudienId(studienId);
@@ -68,6 +73,17 @@ public class StatistikAuswertung extends AppCompatActivity {
         textUsability.setText(textUsability.getText()+ ": " + Statistik.berechneUsability(usabilityCursor));
         textLearnability.setText(textLearnability.getText()+": " + Statistik.berechneLearnability(learnAbilityCursor));
         textMedian.setText(textMedian.getText()+": " + Statistik.berechneMedian(scoreCursor));
+
+
+        btnkonfidenzIntervall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewKonfidenzIntervall.setText("Zu 95% wird der Mittelwert der Grundgesamtheit im Intervall von       liegen");
+            }
+        });
+
+
+
     }
 
 
