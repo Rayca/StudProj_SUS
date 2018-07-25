@@ -203,7 +203,6 @@ public class TypActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(getBaseContext(), StartActivity.class);
                     startActivity(intent);
-
                 }
 
                 return true;

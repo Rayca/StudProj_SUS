@@ -213,4 +213,17 @@ public class Statistik {
         Log.d("Jule", "Berechneter Score: " + score);
         return (int) score;
     }
+
+
+    // Berechnet Konfidenzintervall
+
+    public static double[] berechneKonfiIntervall(double mittelwert, double standardabweichung, double anzahlTests, double konfidenzLevel){
+
+        double standardError = 0;
+
+        standardError = konfidenzLevel * standardabweichung / Math.sqrt(anzahlTests);
+
+        return new double[]{mittelwert-standardError,mittelwert+standardError};
+    }
+
 }

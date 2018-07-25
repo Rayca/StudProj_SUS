@@ -20,7 +20,7 @@ public class StatistikAuswertung extends AppCompatActivity {
     Datenbank db = new Datenbank(this);
     long studienId;
     String studienName;
-    TextView textMittelwert,textStandardAbweichung,textUsability,textLearnability,textMedian;
+    TextView textMittelwert,textStandardAbweichung,textUsability,textLearnability,textMedian,textViewNameStudie;
     double standartabweichung=0;
     double mittelwert=0;
     int usability = 0,learnabilty = 0,median = 0;
@@ -49,6 +49,7 @@ public class StatistikAuswertung extends AppCompatActivity {
 
 
         // View-Binding
+        textViewNameStudie = (TextView) findViewById(R.id.textViewNameStudie);
         textMittelwert = (TextView) findViewById(R.id.textMittelwert);
         textStandardAbweichung = (TextView) findViewById(R.id.textStandardabweichung);
         textUsability = (TextView) findViewById(R.id.textUsability);        // View-Binding
@@ -61,6 +62,7 @@ public class StatistikAuswertung extends AppCompatActivity {
         Cursor usabilityCursor = db.selectUsabilityByStudienId(studienId);
 
         //TextViews füllen
+        textViewNameStudie.setText(studienName);
         textMittelwert.setText(textMittelwert.getText() +": " + Statistik.mittelWert(scoreCursor));
         textStandardAbweichung.setText(textStandardAbweichung.getText() +": " + Statistik.berechneStandardabweichung(scoreCursor));
         textUsability.setText(textUsability.getText()+ ": " + Statistik.berechneUsability(usabilityCursor));
