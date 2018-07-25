@@ -195,8 +195,8 @@ public class TypActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Daten werden in die DB geschrieben und der Intent an die AuswertungStudieActivity geschickt
+                    name_studie = eingabe_name.getText().toString();
                     studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
-
                     Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(getBaseContext(), AuswertungStudieActivity.class);
                     intent1.putExtra("studienName", name_studie);
