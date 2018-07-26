@@ -23,7 +23,6 @@ import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.Statistik;
 
 /* Zeigt die Antworten aus einem einzelnen Test an */
-//TODO: Jede Menge zu tun
 public class AuswertungTestActivity extends AppCompatActivity {
 
 

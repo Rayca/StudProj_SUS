@@ -155,7 +155,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            case R.id.actionTestsEinsehen: //TODO Diese Option nicht anzeigen, wenn die Studie leer ist
+            case R.id.actionTestsEinsehen:
                 if(anzahl_tests == 0){
                     Toast.makeText(AuswertungStudieActivity.this,"Noch keine Tests innerhalb der Studie!",Toast.LENGTH_SHORT).show();
                 }else {

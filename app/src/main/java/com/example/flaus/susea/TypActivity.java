@@ -101,29 +101,14 @@ public class TypActivity extends AppCompatActivity {
             public void onClick(View button_next) {
 
                 if (typ != null) {
-                        dialog_studie_erstellen_öffnen();
-                         //Schickt den Intent ab, gefüllt mit allen wichtigen Daten für die Anzeige der Studie
-                     /*   Intent intent1= new Intent(getBaseContext(), TestActivity.class);
-                        intent1.putExtra("studienName", name_studie);
-                        intent1.putExtra("interfacetyp", typ);
-                        intent1.putExtra("studienId",studienId); //TODO müssen wir die wirklich als -1 mitschicken?
-                        startActivity(intent1); */
-                    }
-
+                    dialog_studie_erstellen_öffnen();
+                }
                 else{ //Wenn kein Interfacetyp vorher ausgewählt wurde
                     Toast toast = Toast.makeText(getApplicationContext(),"Bitte einen Typen wählen",Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
         });
-
-
-
-
-
-
-
-
     }
 
     public void setTyp(String typ){
@@ -149,7 +134,6 @@ public class TypActivity extends AppCompatActivity {
 
         builder.setPositiveButton("Studie erstellen", new DialogInterface.OnClickListener() {
             @Override
-            //TODO: sicherstellen, dass auch etwas eingegeben wurde
             public void onClick(DialogInterface dialogInterface, int i) {
                 name_studie = eingabe_name.getText().toString();
 

@@ -122,7 +122,7 @@ public class Datenbank extends SQLiteOpenHelper {
 
     //Fügt eine neue Studie in die DB ein
     // Die ID der Studie wird automatisch beim Einfügen erzeugt und als long zurückgegeben
-    public long insertStudie(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){ //TODO: Macht doch keinen Sinn hier anzTests und Score zu übergeben, oder?
+    public long insertStudie(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_STUDIE_NAME,name);
@@ -139,15 +139,7 @@ public class Datenbank extends SQLiteOpenHelper {
         return id;
 
     }
-    //TODO:: Get AnzahlTestsinStudie entfernen?
-    //Hilfsfunktion um die Anzahl der Tests in einer Studie verwalten zu können
-    public int getAnzhalTestsInStudie(long id){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + SPALTE_ANZAHL_TESTS + " FROM " + TABELLE_STUDIE + " WHERE "  + SPALTE_STUDIE_ID + " = " + id, null);
-        int anzahl_tests = cursor.getInt(0);
-        Log.d("Jule", "Anzahl Tests, die aus der Db geleesen wurde: "+ anzahl_tests);
-        return anzahl_tests;
-    }
+
 
     public String selectInterfaceByStudienId(long studienId){
         SQLiteDatabase db = getWritableDatabase();
