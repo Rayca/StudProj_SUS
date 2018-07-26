@@ -30,13 +30,13 @@ import com.example.flaus.susea.TestActivity;
 public class AuswertungStudieActivity extends AppCompatActivity {
 
 
-    TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests,textViewInterface,textViewUsabilityScore,textViewLearnabilityScore;
+    TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests,textViewInterface,textViewUsabilityScore,textViewLearnabilityScore,textViewStandardAbweichung;
     FloatingActionButton fab;
     long studienId;
     int score = 0;
     String studienName;
     int anzahl_tests;
-
+    double standartabweichung=0;
     Toolbar toolbar;
     Datenbank db = new Datenbank(this);
 
@@ -70,6 +70,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
         textViewLearnabilityScore = (TextView) findViewById(R.id.textViewUsability);
         textViewUsabilityScore = (TextView) findViewById(R.id.textViewLearnability);
         Button btnNeuerTest = findViewById(R.id.btnNeuerTest);
+        textViewStandardAbweichung = (TextView) findViewById(R.id.textStandardabweichung);
 
 
 
@@ -101,6 +102,9 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             Cursor learnabilityCursor = db.selectLearnabilityByStudienId(studienId);
             double learnabilityStudie = Statistik.berechneLearnability(learnabilityCursor);
             textViewLearnabilityScore.setText("" + learnabilityStudie);
+
+            standartabweichung = Statistik.berechneStandardabweichung(scoreCursor);
+            textViewStandardAbweichung.setText(textViewStandardAbweichung.getText() +" " + standartabweichung);
         }
 
 

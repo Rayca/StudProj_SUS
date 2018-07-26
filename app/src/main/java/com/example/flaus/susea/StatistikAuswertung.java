@@ -99,9 +99,25 @@ public class StatistikAuswertung extends AppCompatActivity {
                 ergebnis2 = intervall[1];
                 if (ergebnis1<0){
                     ergebnis1 = 0;
+                }else{
+                    //Kommastelle wird um 4 stellen nach rechts verschoben
+                    ergebnis1=ergebnis1*10000;
+                    //Wert wird hinter der Kommastelle abgeschnitten
+                    ergebnis1=(int)ergebnis1;
+                    //Kommastelle wird um 4 stellen nach links verschoben
+                    ergebnis1=ergebnis1/10000;
+                    //Ergebnis1 hat jetzt nur noch 4 Nachkommastellen.
                 }
                 if(ergebnis2>100){
                     ergebnis2 = 100;
+                }else{
+                    //Kommastelle wird um 4 stellen nach rechts verschoben
+                    ergebnis2=ergebnis2*10000;
+                    //Wert wird hinter der Kommastelle abgeschnitten
+                    ergebnis2=(int)ergebnis2;
+                    //Kommastelle wird um 4 stellen nach links verschoben
+                    ergebnis2=ergebnis2/10000;
+                    //Ergebnis1 hat jetzt nur noch 4 Nachkommastellen
                 }
                 textViewKonfidenzIntervall.setText("Zu 95% wird der Mittelwert der Grundgesamtheit im Intervall von " + ergebnis1 + " und " + ergebnis2 + " liegen");
             }
