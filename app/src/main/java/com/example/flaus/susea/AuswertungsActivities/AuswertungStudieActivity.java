@@ -82,7 +82,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
 
             //Und es sind noch keine Tests drin
-            textViewAnzahlTests.setText("Anzahl Tests: Noch keine Tests");
+            textViewAnzahlTests.setText("Noch keine Tests");
 
         } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
             textViewAnzahlTests.append("" + anzahl_tests);
