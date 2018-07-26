@@ -94,7 +94,16 @@ public class StatistikAuswertung extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 double[] intervall = Statistik.berechneKonfiIntervall(mittelwert,standartabweichung, anzahlTests);
-                textViewKonfidenzIntervall.setText("Zu 95% wird der Mittelwert der Grundgesamtheit im Intervall von " + intervall[0] + " und " + intervall[1] + " liegen");
+                double ergebnis1,ergebnis2;
+                ergebnis1 = intervall[0];
+                ergebnis2 = intervall[1];
+                if (ergebnis1<0){
+                    ergebnis1 = 0;
+                }
+                if(ergebnis2>100){
+                    ergebnis2 = 100;
+                }
+                textViewKonfidenzIntervall.setText("Zu 95% wird der Mittelwert der Grundgesamtheit im Intervall von " + ergebnis1 + " und " + ergebnis2 + " liegen");
             }
         });
 
@@ -130,7 +139,10 @@ public class StatistikAuswertung extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed(){
 
+    }
 
 
 }

@@ -191,8 +191,10 @@ public class AuswertungStudieActivity extends AppCompatActivity {
 
         }
     }
+    @Override
+    public void onBackPressed(){
 
-
+    }
 
 }
 

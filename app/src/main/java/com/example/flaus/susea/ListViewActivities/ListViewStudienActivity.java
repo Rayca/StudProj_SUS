@@ -143,5 +143,8 @@ public class ListViewStudienActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed(){
 
+    }
 }

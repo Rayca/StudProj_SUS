@@ -142,4 +142,8 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
         }
     }
+    @Override
+    public void onBackPressed(){
+
+    }
 }
