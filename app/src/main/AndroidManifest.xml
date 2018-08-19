@@ -11,30 +11,38 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".StartActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity" />
+        <activity android:name=".TestActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TypActivity"
             android:parentActivityName=".StartActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".AuswertungsActivities.AuswertungStudieActivity" />
+        <activity android:name=".AuswertungsActivities.AuswertungStudieActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ListViewActivities.ListViewTestsActivity"
-            android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"/>
+            android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ListViewActivities.ListViewStudienActivity"
-            android:parentActivityName=".StartActivity" />
+            android:parentActivityName=".StartActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AuswertungsActivities.AuswertungTestActivity"
             android:parentActivityName=".ListViewActivities.ListViewTestsActivity"
-            android:theme="@style/Campusboard" />
+            android:theme="@style/Campusboard"
+            android:screenOrientation="portrait"/>
         <activity android:name=".StatistikAuswertung"
-            android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"></activity>
+            android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
