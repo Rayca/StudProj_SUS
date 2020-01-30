@@ -43,6 +43,10 @@
         <activity android:name=".StatistikAuswertung"
             android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".AuswertungsActivities.AuswertungStudieISONORMActivity"
+        android:screenOrientation="portrait"></activity>
+        <activity android:name=".TestActivity_ISO"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

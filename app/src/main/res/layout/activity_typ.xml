@@ -19,9 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="363dp"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
         android:choiceMode="singleChoice"
         android:drawSelectorOnTop="true"
         android:duplicateParentState="true"
@@ -29,28 +29,67 @@
         android:listSelector="@color/bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-       >
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
     </ListView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/list_view_typ"
+        tools:layout_editor_absoluteX="0dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Fragebogen auswählen:" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_fragebogen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="530dp">
+
+            <RadioButton
+                android:id="@+id/radioButton_SUS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="System Usability Scale"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/radioButton_ISONORM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ISONORM"></RadioButton>
+
+        </RadioGroup>
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button"
         android:text="Weiter"
         android:textAppearance="@android:style/TextAppearance.Material.Widget.Button"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_view_typ"
-        app:layout_constraintVertical_bias="0.472" />
+        app:layout_constraintVertical_bias="0.911" />
 
 
 </android.support.constraint.ConstraintLayout>

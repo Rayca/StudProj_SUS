@@ -23,10 +23,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieISONORMActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 
@@ -45,6 +47,8 @@ public class TypActivity extends AppCompatActivity {
     long studienId = -1;
     Toolbar toolbar;
     boolean kommeVonListeStudien;
+    RadioGroup typFragebogen;
+    String fragebogen;
 
 
     @Override
@@ -82,7 +86,7 @@ public class TypActivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
-        //Auswahl einer Interfacetypen aus der Liste
+        //Auswahl eines Interfacetypen aus der Liste
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -95,12 +99,31 @@ public class TypActivity extends AppCompatActivity {
             }
         });
 
+        //Auswahl des Fragebogens
+        typFragebogen = (RadioGroup) findViewById(R.id.radioGroup_fragebogen);
+
+
+
+
+
+
+
         button_next = findViewById(R.id.button_next);
         button_next.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View button_next) {
 
                 if (typ != null) {
+                    int radioButtonID = typFragebogen.getCheckedRadioButtonId();
+                    switch (radioButtonID) {
+                        case R.id.radioButton_ISONORM:
+                            fragebogen="I";
+                            break;
+                        case R.id.radioButton_SUS:
+                            fragebogen="S";
+                            break;
+                    }
+                    Log.d("Jule", "Ausgewählter Fragebogen " + fragebogen);
                     dialog_studie_erstellen_öffnen();
                 }
                 else{ //Wenn kein Interfacetyp vorher ausgewählt wurde
@@ -144,15 +167,27 @@ public class TypActivity extends AppCompatActivity {
                if(name_studie.isEmpty() != true) {
 
 
-                   // Studie in Datenbank einfügen
-                   studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);
-
                    Toast.makeText(TypActivity.this, "Studie wurde erfolgreich erstellt!", Toast.LENGTH_SHORT).show();
-                   Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
-                   intent.putExtra("studienName", name_studie);
-                   intent.putExtra("Interfacetyp", typ);
-                   intent.putExtra("studienId", studienId);
-                   startActivity(intent);
+
+                   if(fragebogen.equals("S")) {
+                       // Studie in Datenbank einfügen
+                       studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);//Schickt den Intent ab, um eine Studie mit SUS zu starten
+                       Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
+                       intent.putExtra("studienName", name_studie);
+                       intent.putExtra("Interfacetyp", typ);
+                       intent.putExtra("studienId", studienId);
+                       startActivity(intent);
+                   } else if(fragebogen.equals("I")){
+                       Log.d("Jule", "Intent soll abgeschickt werden");
+                       // Studie in Datenbank einfügen
+                       studienId =  db.insertStudieISO(name_studie,typ,anzahlTests,scoreGesamt);//Schickt den Intent ab, um eine Studie mit ISONORM zu starten
+                       Intent intent = new Intent(getBaseContext(), AuswertungStudieISONORMActivity.class);
+                       intent.putExtra("studienName", name_studie);
+                       intent.putExtra("Interfacetyp", typ);
+                       intent.putExtra("studienId", studienId);
+                       startActivity(intent);
+                   }
+                   //TODO: hier sollte noch eine gute Fehlermeldung kommen
 
                } else {
                    Toast.makeText(TypActivity.this, "Bitte geben Sie der Studie einen Namen!",Toast.LENGTH_SHORT).show();

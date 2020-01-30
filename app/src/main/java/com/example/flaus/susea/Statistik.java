@@ -115,6 +115,150 @@ public class Statistik {
         return result;
     }
 
+    //Funktionen für ISONORM
+    public static int berechneAufgabenangemessenheit(Cursor cursor){
+        int result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_AUFGABENANGEMESSENHEIT)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
+        return result;
+    }
+
+
+    public static int berechneSelbstbeschreibungsfaehigkeit(Cursor cursor){
+        int result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_SELBSTBESCHREIBUNGSFAEHIGKEIT)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
+        return result;
+    }
+
+    public static int berechneSteuerbarkeit(Cursor cursor){
+        int result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_STEUERBARKEIT)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
+        return result;
+    }
+
+
+    public static int berechneErwartungskonf(Cursor cursor){
+        int result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_ERWARTUNGSKONFORMITAET)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
+        return result;
+    }
+
+    public static int berechneFehlertoleranz(Cursor cursor){
+        int result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_FEHLERTOLERANZ)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
+        return result;
+    }
+
+
+    public static int berechneIndividualisierbarkeit(Cursor cursor){
+        int result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_INDIVIDUALISIERBARKEIT)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
+        return result;
+    }
+
+    public static int berechneLernfoerderlichkeit(Cursor cursor){
+        int result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LERNFOERDLICHKEIT)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = wert/scoreList.size();
+        return result;
+    }
+
     //Berechnet Median einer Studie
     public static int berechneMedian(Cursor cursor){
         int median=0;
@@ -232,6 +376,24 @@ public class Statistik {
 
 
         return new double[]{mittelwert-standardError,mittelwert+standardError};
+    }
+
+
+    //Funktion zum berechnen des Wertes für Dialogprinzip für ISONORM
+
+    public static int berechneMittelwert3(int a, int b, int c){
+        int mittelwert = (a+b+c)/3;
+        return  mittelwert;
+    }
+
+    public static int berechneGesamtScore(int[] antworten){
+        int wert =0 ;
+        for (int i =0; i < antworten.length; i++){
+            wert = wert + antworten[i];
+        }
+
+        int gesamtScore = wert/antworten.length;
+        return gesamtScore;
     }
 
 }

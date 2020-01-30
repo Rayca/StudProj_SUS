@@ -1,8 +1,8 @@
 package com.example.flaus.susea;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -15,26 +15,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
-import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.lang.Integer.parseInt;
 import static java.lang.Integer.valueOf;
 
 /* Implementiert den eigentlichen SUS-Fragebogen */
-public class TestActivity extends AppCompatActivity {
+public class TestActivity_ISO extends AppCompatActivity {
 
 
     EditText eingabe_alter;
     TextView textViewUeberschrift;
-    TextView textViewFrage;
+    TextView textViewFrageLinks;
+    TextView textViewFrageRechts;
     ProgressBar progessBar;
     RadioGroup radioGroup;
     RadioGroup radioGroup_geschlecht;
     Button btnWeiter;
-    int[] antworten = new int[10];
+    int[] antworten = new int[21];
     int index = 0;
     String alter;
     int alterInt;
@@ -46,12 +45,33 @@ public class TestActivity extends AppCompatActivity {
     String datum;
     String interfacetyp;
     Datenbank manager = new Datenbank(this);
-    //Aussagen des SUS-Fragebogens
-    String[] texteFragen = {"Ich benutze die Software gerne regelmäßig.",
-            "Die Software wirkt auf mich recht einfach aufgebaut.",
-            "Ich finde die Software leicht zu benutzen.",
-            "Ich kann die Software ohne Unterstützung durch Fachpersonal direkt benutzen.",
-            "Ich finde, dass die angebotenen Funktionen gut in die Software integriert sind.",
+    //Fragen aus dem ISONORM Fragebogen
+    String[] texteFragen_links = {"bietet nicht alle Funktionen, um die anfallenden Aufgaben effizient zu bewältigen.",
+            "erfordert überflüssige Eingaben.",
+            "ist schlecht auf die Anforderungen der Arbeit zugeschnitten",
+            "liefert in unzureichendem Maße Informationen darüber, welche Eingaben zuverlässig oder nötig sind.",
+            "bietet auf Verlangen keine situationsspezifischen Erklärungen, die konkret weiterhelfen.",
+            "erzwingt eine unnötig starre Einhaltung von Berarbeitungsschritten.",
+            "ermöglicht keinen leichten Wechsel zwischen einzelnen Menüs oder Masken",
+            "erzwingt unnötige Unterbrechungen der Arbeit.",
+            "erschwert die Orientierung durch eine uneinheitliche Gestaltung.",
+            "informiert in unzureichendem Maße über das, was er gerade macht.",
+            "lässt sich nicht durchgehend nach einem einheitlichen Prinzip bedienen.",
+            "liefert schlecht verständliche Fehlermeldungen.",
+            "erdordert bei Fehlern im Großen und Ganzen keinen Korrekturaufwand.",
+            "gibt keine konkreten Hinweise zur Fehlerbehebung.",
+            "lässt sich von mir schwer erweitern, wenn für mich neue Aufgaben entstehen",
+            "lässt sich von mir schlecht an meine persänliche, individuelle Art der Arbeitserledigung anpassen.",
+            "lässt sich - im Rahmen ihrem Leistungsumfangs von mir schlecht für unterschiedliche Aufgaben passend einrichten.",
+            "erfordert viel Zeit zum Erlernen.",
+            "erfordert, dass man sich viele Details merken muss",
+            "ist schlecht ohen fremde Hilfe oder Handbuch erlernbar"};
+
+    String[] texteFragen_rechts = {"bietet alle Funktionen, um die anfallenden Aufgaben effizient zu bewältigen.",
+            "erfordert keine überflüssigen Eingaben.",
+            "ist gut auf die Anforderungen der Arbeit zugeschnitten.",
+            "liefert in zureichendem Maße Informationen darüber, welche Eingaben zulässig oder nötig sind.",
+            "bietet auf Verlangen situationsspezifische Erklärungen, die konkret weiterhelfen.",
             "Ich finde, dass die Software einheitlich aufgebaut ist.",
             "Ich denke, dass die meisten Nutzer sehr schnell mit der Software zurecht kommen.",
             "Ich finde die Software in der Benutzung sehr intuitiv.",
@@ -60,11 +80,10 @@ public class TestActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_test_iso);
 
         // Toolbar
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -91,11 +110,14 @@ public class TestActivity extends AppCompatActivity {
         textViewUeberschrift.setText("Frage " + (index + 1));
 
 
-        textViewFrage = (TextView) findViewById(R.id.textView_Fragen);
-        textViewFrage.setText(texteFragen[index]);
+        textViewFrageLinks = (TextView) findViewById(R.id.textView_FrageLinks);
+        textViewFrageLinks.setText(texteFragen_links[index]);
+
+        textViewFrageRechts = (TextView) findViewById(R.id.textView_FrageRechts);
+        textViewFrageRechts.setText(texteFragen_rechts[index]);
 
         progessBar = (ProgressBar) findViewById(R.id.progressBar);
-        progessBar.setMax(texteFragen.length);
+        progessBar.setMax(texteFragen_links.length);
 
         btnWeiter = (Button) findViewById(R.id.button_naechsteFrage);
         btnWeiter.setEnabled(false);
@@ -137,20 +159,27 @@ public class TestActivity extends AppCompatActivity {
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
         switch (radioButtonID) {
             case R.id.radioButton1:
-                antworten[index] = 1;
+                antworten[index] = -3;
                 break;
             case R.id.radioButton2:
-                antworten[index] = 2;
+                antworten[index] = -2;
                 break;
             case R.id.radioButton3:
-                antworten[index] = 3;
+                antworten[index] = -1;
                 break;
             case R.id.radioButton4:
-                antworten[index] = 4;
+                antworten[index] = 0;
                 break;
             case R.id.radioButton5:
-                antworten[index] = 5;
+                antworten[index] = 1;
                 break;
+            case R.id.radioButton6:
+                antworten[index] = 2;
+                break;
+            case R.id.radioButton7:
+                antworten[index] = 3;
+                break;
+
 
         }
         //Setzt wieder alle RadioButtons auf unchecked
@@ -158,14 +187,15 @@ public class TestActivity extends AppCompatActivity {
         index = index + 1;
         textViewUeberschrift.setText("Frage " + (index + 1));
         progessBar.incrementProgressBy(1);
-        if (index < texteFragen.length) {
-            textViewFrage.setText(texteFragen[index]);
+        if (index < texteFragen_links.length) {
+            textViewFrageLinks.setText(texteFragen_links[index]);
+            textViewFrageRechts.setText(texteFragen_rechts[index]);
             btnWeiter.setEnabled(false);
-        } else if (index == texteFragen.length) {
+        } else if (index == texteFragen_links.length) {
             //Ui ändern für die letzen beiden Fragen (Geschlecht/Alter)
             changeUi();
 
-        } else if (index > texteFragen.length) {
+        } else if (index > texteFragen_links.length) {
             btnWeiter.setEnabled(false);
 
             //Eingegebne Daten sammeln
@@ -197,17 +227,22 @@ public class TestActivity extends AppCompatActivity {
                 // Datum hinzufügen
                 datum = getDatum();
 
-                int score = Statistik.berechneScore(antworten);
-                int usability = Statistik.berechneUsability(antworten);
-                Log.d("subscale","Usability: "+usability);
-                int learnability = Statistik.berechneLearnability(antworten);
-                Log.d("subscale","Learnability: "+learnability);
-                Log.d("subscale","Usabilit: "+usability+" Learnability: "+learnability);
+                //Berechnung der Werte für die einzelnen Dialogprinzipinen
+                int score_gesamt = Statistik.berechneGesamtScore(antworten);
+                int aufgabenangemessenheit = Statistik.berechneMittelwert3(antworten[1], antworten[2], antworten[3]);
+                int selbstbeschreibungsfaehigkeit = Statistik.berechneMittelwert3(antworten[4], antworten[5], antworten[6]);
+                int steuerbarkeit = Statistik.berechneMittelwert3(antworten[7], antworten[8], antworten[9]);
+                int erwartungskonformitaet = Statistik.berechneMittelwert3(antworten[10], antworten[11], antworten[12]);
+                int fehlertoleranz = Statistik.berechneMittelwert3(antworten[13], antworten[14], antworten[15]);
+                int individualisierbarkeit = Statistik.berechneMittelwert3(antworten[16], antworten[17], antworten[18]);
+                int lernfoerderlichkeit = Statistik.berechneMittelwert3(antworten[19], antworten[20], antworten[21]);
+
+
                 //gesammelte Daten in die Datenbank schreiben
-                testId = manager.insertTest(antworten, alterInt, geschlecht, datum, studienId, score,usability,learnability);
+                testId = manager.insertTestISO(antworten, alterInt, geschlecht, datum, studienId, score_gesamt, aufgabenangemessenheit, selbstbeschreibungsfaehigkeit, steuerbarkeit, erwartungskonformitaet, fehlertoleranz, individualisierbarkeit, lernfoerderlichkeit);
 
                 Log.d("TJ", "test_id vor intent" + testId);
-                Log.d("studId", "StudieId in TestActivity = " + studienId);
+                Log.d("studId", "StudieIdISO in TestActivityISO = " + studienId);
                 //Daten an die AuswertungsTestActivity übergeben
 
                 for (int i = 0; i < antworten.length; i++) {
@@ -218,7 +253,7 @@ public class TestActivity extends AppCompatActivity {
 
                 endScreen();
             }else{
-                Toast.makeText(TestActivity.this, "Bitte geben Sie Ihr Alter ein.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestActivity_ISO.this, "Bitte geben Sie Ihr Alter ein.", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -238,7 +273,7 @@ public class TestActivity extends AppCompatActivity {
         LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmung);
 
 
-        textViewFrage.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
+        textViewUeberschrift.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
         btnWeiter.setText("Test beenden");
 
         layoutZustimmung.setVisibility((View.GONE));
@@ -255,7 +290,7 @@ public class TestActivity extends AppCompatActivity {
     //Außerdem wird hier der Intent anbeschickt, der zur Auswertung der Studie weiterleitet
     public void endScreen(){
             LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
-            textViewFrage.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
+            textViewUeberschrift.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
             layout.setVisibility(View.GONE);
             btnWeiter.setEnabled(true);
             btnWeiter.setOnClickListener(new View.OnClickListener() {
