@@ -46,7 +46,7 @@
         <activity android:name=".AuswertungsActivities.AuswertungStudieISONORMActivity"
         android:screenOrientation="portrait"></activity>
         <activity android:name=".TestActivity_ISO"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="sensor"></activity>
     </application>
 
 </manifest>

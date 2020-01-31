@@ -272,10 +272,10 @@ public class Datenbank extends SQLiteOpenHelper {
     public long insertStudie(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
-        neueZeile.put(SPALTE_STUDIE_NAME_ISO,name);
-        neueZeile.put(SPALTE_INTERFACE_TYP_STUDIE_ISO, interfaceTyp);
-        neueZeile.put(SPALTE_ANZAHL_TESTS_ISO,anzahlTests);
-        neueZeile.put(SPALTE_STUDIE_SCORE_ISO,scoreGesamt);
+        neueZeile.put(SPALTE_STUDIE_NAME,name);
+        neueZeile.put(SPALTE_INTERFACE_TYP_STUDIE, interfaceTyp);
+        neueZeile.put(SPALTE_ANZAHL_TESTS,anzahlTests);
+        neueZeile.put(SPALTE_STUDIE_SCORE,scoreGesamt);
         neueZeile.put(SPALTE_STUDIE_USABILITY, 0); // Als Anfansgwert
         neueZeile.put(SPALTE_STUDIE_LEARNABILITY, 0); //Als Anfangswert
 

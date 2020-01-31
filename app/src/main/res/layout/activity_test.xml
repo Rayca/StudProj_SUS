@@ -46,9 +46,7 @@
                 android:paddingTop="10dp"
                 android:text="TextView"
                 android:textAlignment="center"
-                android:textSize="24dp"
-                app:layout_constraintEnd_toEndOf="@+id/radioGroup4"
-                app:layout_constraintStart_toStartOf="@+id/radioGroup4" />
+                android:textSize="24dp"/>
             <!-- Zustimmungs Layout -->
             <LinearLayout
                 android:id="@+id/layoutZustimmung"
@@ -60,13 +58,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:id="@+id/textView_Ablehnung"
+                    android:id="@+id/textView_FrageLinks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Starke Ablehnung" />
 
                 <TextView
-                    android:id="@+id/textView_Zustimmung"
+                    android:id="@+id/textView_FrageRechts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"

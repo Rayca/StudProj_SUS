@@ -53,7 +53,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         studienId = intent.getLongExtra("studienId", -1);
-        Log.d("Jule", "Id der neuen Studie empfangen:  " + studienId);
+        Log.d("studie", "Id der neuen ISONORM-Studie empfangen:  " + studienId);
         Cursor c = db.getStudieByIdISO(studienId);
         c.moveToFirst();
         anzahl_tests = c.getInt(3);
@@ -140,7 +140,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), TestActivity_ISO.class);
-                i.putExtra("studienId", studienId);
+                i.putExtra("Jule", studienId);
                 startActivity(i);
             }
         });

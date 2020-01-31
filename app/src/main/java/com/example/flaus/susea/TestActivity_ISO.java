@@ -104,10 +104,11 @@ public class TestActivity_ISO extends AppCompatActivity {
         Log.d("studie", "testActivity : " + studie);
 
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup_Antworten);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup_AntwortenISO);
 
-        textViewUeberschrift = (TextView) findViewById(R.id.textView_Ueberschrift);
-        textViewUeberschrift.setText("Frage " + (index + 1));
+        //TODO: Frage + Nummer wieder anzeigen
+       // textViewUeberschrift = (TextView) findViewById(R.id.textView_Ueberschrift);
+        //textViewUeberschrift.setText("Frage " + (index + 1));
 
 
         textViewFrageLinks = (TextView) findViewById(R.id.textView_FrageLinks);
@@ -116,13 +117,13 @@ public class TestActivity_ISO extends AppCompatActivity {
         textViewFrageRechts = (TextView) findViewById(R.id.textView_FrageRechts);
         textViewFrageRechts.setText(texteFragen_rechts[index]);
 
-        progessBar = (ProgressBar) findViewById(R.id.progressBar);
+        progessBar = (ProgressBar) findViewById(R.id.progressBarISO);
         progessBar.setMax(texteFragen_links.length);
 
-        btnWeiter = (Button) findViewById(R.id.button_naechsteFrage);
+        btnWeiter = (Button) findViewById(R.id.button_naechsteFrageISO);
         btnWeiter.setEnabled(false);
 
-        radioGroup_geschlecht = (RadioGroup) findViewById(R.id.radioGroup_Geschlecht);
+        radioGroup_geschlecht = (RadioGroup) findViewById(R.id.radioGroup_GeschlechtISO);
 
 
         // Erst wenn man eine Antwort ausgewählt hat, kann man zur nächsten textViewFrage weiterkommen
@@ -158,25 +159,25 @@ public class TestActivity_ISO extends AppCompatActivity {
 
         int radioButtonID = radioGroup.getCheckedRadioButtonId();
         switch (radioButtonID) {
-            case R.id.radioButton1:
+            case R.id.radioButton1ISO:
                 antworten[index] = -3;
                 break;
-            case R.id.radioButton2:
+            case R.id.radioButton2ISO:
                 antworten[index] = -2;
                 break;
-            case R.id.radioButton3:
+            case R.id.radioButton3ISO:
                 antworten[index] = -1;
                 break;
-            case R.id.radioButton4:
+            case R.id.radioButton4ISO:
                 antworten[index] = 0;
                 break;
-            case R.id.radioButton5:
+            case R.id.radioButton5ISO:
                 antworten[index] = 1;
                 break;
-            case R.id.radioButton6:
+            case R.id.radioButton6ISO:
                 antworten[index] = 2;
                 break;
-            case R.id.radioButton7:
+            case R.id.radioButton7ISO:
                 antworten[index] = 3;
                 break;
 
@@ -185,7 +186,7 @@ public class TestActivity_ISO extends AppCompatActivity {
         //Setzt wieder alle RadioButtons auf unchecked
         radioGroup.clearCheck();
         index = index + 1;
-        textViewUeberschrift.setText("Frage " + (index + 1));
+        //textViewUeberschrift.setText("Frage " + (index + 1));
         progessBar.incrementProgressBy(1);
         if (index < texteFragen_links.length) {
             textViewFrageLinks.setText(texteFragen_links[index]);
@@ -200,7 +201,7 @@ public class TestActivity_ISO extends AppCompatActivity {
 
             //Eingegebne Daten sammeln
             //TODO: evtl Numberpicker statt EditText
-            eingabe_alter = (EditText) findViewById(R.id.textEdit_alter);
+            eingabe_alter = (EditText) findViewById(R.id.textEdit_alterISO);
             //TODO: sicher stellen, dass eine sinnvolle Zahl eingegben wurde
             alter = eingabe_alter.getText().toString();
             Log.d("alter","alter: \""+alter+"\"");
@@ -215,10 +216,10 @@ public class TestActivity_ISO extends AppCompatActivity {
                 String geschlecht = "";
 
                 switch (radioButtonId) {
-                    case R.id.radioButton_male:
+                    case R.id.radioButton_maleISO:
                         geschlecht = geschlecht + "m";
                         break;
-                    case R.id.radioButton_female:
+                    case R.id.radioButton_femaleISO:
                         geschlecht = geschlecht + "w";
                         break;
                 }
@@ -267,10 +268,10 @@ public class TestActivity_ISO extends AppCompatActivity {
 
     //Ändert das UI für die letzte Seite des Fragebogens zur Erhebung von Alter und Geschlecht
     public void changeUi(){
-        LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTestISO);
         //TextView zustimmung = (TextView) findViewById(R.studienId.textView_Zustimmung);
         //TextView ablehnung = (TextView) findViewById(R.studienId.textView_Ablehnung);
-        LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmung);
+        LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmungISO);
 
 
         textViewUeberschrift.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
@@ -289,7 +290,7 @@ public class TestActivity_ISO extends AppCompatActivity {
     //Schaltet das UI um, sodass das EndScreen angezeigt wird
     //Außerdem wird hier der Intent anbeschickt, der zur Auswertung der Studie weiterleitet
     public void endScreen(){
-            LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTest);
+            LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTestISO);
             textViewUeberschrift.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
             layout.setVisibility(View.GONE);
             btnWeiter.setEnabled(true);

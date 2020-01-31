@@ -171,6 +171,7 @@ public class TypActivity extends AppCompatActivity {
 
                    if(fragebogen.equals("S")) {
                        // Studie in Datenbank einfügen
+                       Log.d("studie", "SUS !!!!");
                        studienId =  db.insertStudie(name_studie,typ,anzahlTests,scoreGesamt);//Schickt den Intent ab, um eine Studie mit SUS zu starten
                        Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
                        intent.putExtra("studienName", name_studie);
@@ -178,9 +179,10 @@ public class TypActivity extends AppCompatActivity {
                        intent.putExtra("studienId", studienId);
                        startActivity(intent);
                    } else if(fragebogen.equals("I")){
-                       Log.d("Jule", "Intent soll abgeschickt werden");
+                       Log.d("studie", "ISO !!!!");
                        // Studie in Datenbank einfügen
                        studienId =  db.insertStudieISO(name_studie,typ,anzahlTests,scoreGesamt);//Schickt den Intent ab, um eine Studie mit ISONORM zu starten
+                       Log.d("studie", "StudienID_TypActivity: "+studienId);
                        Intent intent = new Intent(getBaseContext(), AuswertungStudieISONORMActivity.class);
                        intent.putExtra("studienName", name_studie);
                        intent.putExtra("Interfacetyp", typ);
