@@ -52,11 +52,11 @@ public class AdapterStudien extends CursorAdapter {
         TextView textViewAnzTests = view.findViewById(to[1]);
         textViewAnzTests.setText("Anzahl Tests: " + anzahl_tests);
 
-        int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[2]));
+        double score = cursor.getDouble(cursor.getColumnIndexOrThrow(from[2]));
         Log.d("Jule", "Score im Binding:" + score);
 
         TextView textViewScore = view.findViewById(to[2]);
-        textViewScore.setText(("Score: " + score));
+        textViewScore.setText(("Score: " + String.format("%.2f", score)));
 
     }
 }

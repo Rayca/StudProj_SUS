@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 public class Datenbank extends SQLiteOpenHelper {
@@ -68,7 +67,7 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_TEST_ERWARTUNGSKONFORMITAET = "ISO_Test_Erwartungskonformitaet";
     public static final String SPALTE_TEST_FEHLERTOLERANZ = "ISO_Test_Fehlertoleranz";
     public static final String SPALTE_TEST_INDIVIDUALISIERBARKEIT = "ISO_Test_Individualisierbarkeit";
-    public static final String SPALTE_TEST_LERNFOERDLICHKEIT = "ISO_Test_Lernfoerderlichkeit";
+    public static final String SPALTE_TEST_LERNFOERDERLICHKEIT = "ISO_Test_Lernfoerderlichkeit";
 
     //Konstanten für die Studien-Datenbank
     public static final String TABELLE_STUDIE = "Studie";
@@ -87,13 +86,13 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_INTERFACE_TYP_STUDIE_ISO = "Studie_Interfacetyp_ISO";
     public static final String SPALTE_ANZAHL_TESTS_ISO = "Studie_Anzahl_Tests_ISO";
     public static final String SPALTE_STUDIE_SCORE_ISO = "Studie_Score_gesamt_ISO";
-    public static final String SPALTE_STUDIE_AUSFGABENANGEMESSENHEIT= "Studie_Aufgabenangemessenheit_gesamt";
+    public static final String SPALTE_STUDIE_AUFGABENANGEMESSENHEIT = "Studie_Aufgabenangemessenheit_gesamt";
     public static final String SPALTE_STUDIE_SELBSTBESCHREIBUNGSFAEHIGKEIT= "Studie_Selbstbeschreibungsfaehigkeit_gesamt";
     public static final String SPALTE_STUDIE_STEUERBARKEIT= "Studie_Steuerbarkeit_gesamt";
     public static final String SPALTE_STUDIE_ERWARTUNGSKONFORMITAET= "Studie_Erwartungskonformitaet_gesamt";
     public static final String SPALTE_STUDIE_FEHLERTOLERANZ= "Studie_Fehlertoleranz_gesamt";
     public static final String SPALTE_STUDIE_INDIVIDUALISIERBARKEIT= "Studie_Individualisierbarkeit_gesamt";
-    public static final String SPALTE_STUDIE_LENRFOERDERLICHKEIT= "Studie_Lernfoerderlichkeit_gesamt";
+    public static final String SPALTE_STUDIE_LERNFOERDERLICHKEIT = "Studie_Lernfoerderlichkeit_gesamt";
 
     public Datenbank(Context cxt) {
         super(cxt, DATENBANK_NAMEN, null, DATENBANK_VERSION);
@@ -130,7 +129,7 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_ALTER_ISO + " INTEGER," +
                         SPALTE_GESCHLECHT_ISO + " TEXT," +
                         SPALTE_SCORE_ISO + " INTEGER," +
-                        SPALTE_STUDIE_ID + " INTEGER," +
+                        SPALTE_STUDIE_ID_ISO + " INTEGER," +
                         SPALTE_INTERFACE_TYP_TEST_ISO + " TEXT," +
                         SPALTE_TEST_AUFGABENANGEMESSENHEIT + " INTEGER," +
                         SPALTE_TEST_SELBSTBESCHREIBUNGSFAEHIGKEIT + " INTEGER," +
@@ -138,7 +137,7 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_TEST_ERWARTUNGSKONFORMITAET + " INTEGER," +
                         SPALTE_TEST_FEHLERTOLERANZ + " INTEGER," +
                         SPALTE_TEST_INDIVIDUALISIERBARKEIT + " INTEGER," +
-                        SPALTE_TEST_LERNFOERDLICHKEIT + " INTEGER" +
+                        SPALTE_TEST_LERNFOERDERLICHKEIT + " INTEGER" +
                         ")"
         );
 
@@ -184,14 +183,14 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_STUDIE_NAME_ISO + " TEXT," +
                         SPALTE_INTERFACE_TYP_STUDIE_ISO + " TEXT," +
                         SPALTE_ANZAHL_TESTS_ISO + " INTEGER," +
-                        SPALTE_STUDIE_SCORE_ISO + " INTEGER," +
-                        SPALTE_STUDIE_AUSFGABENANGEMESSENHEIT + " INTEGER," +
-                        SPALTE_STUDIE_SELBSTBESCHREIBUNGSFAEHIGKEIT + " INTEGER," +
-                        SPALTE_STUDIE_STEUERBARKEIT + " INTEGER," +
-                        SPALTE_STUDIE_ERWARTUNGSKONFORMITAET + " INTEGER," +
-                        SPALTE_STUDIE_FEHLERTOLERANZ + " INTEGER," +
-                        SPALTE_STUDIE_INDIVIDUALISIERBARKEIT + " INTEGER," +
-                        SPALTE_STUDIE_LENRFOERDERLICHKEIT + " INTEGER" +
+                        SPALTE_STUDIE_SCORE_ISO + " DOUBLE," +
+                        SPALTE_STUDIE_AUFGABENANGEMESSENHEIT + " DOUBLE," +
+                        SPALTE_STUDIE_SELBSTBESCHREIBUNGSFAEHIGKEIT + " DOUBLE," +
+                        SPALTE_STUDIE_STEUERBARKEIT + " DOUBLE," +
+                        SPALTE_STUDIE_ERWARTUNGSKONFORMITAET + " DOUBLE," +
+                        SPALTE_STUDIE_FEHLERTOLERANZ + " DOUBLE," +
+                        SPALTE_STUDIE_INDIVIDUALISIERBARKEIT + " DOUBLE," +
+                        SPALTE_STUDIE_LERNFOERDERLICHKEIT + " DOUBLE" +
                         ")"
         );
    }
@@ -201,6 +200,12 @@ public class Datenbank extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABELLE_TEST);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABELLE_STUDIE);
         onCreate(sqLiteDatabase);
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.disableWriteAheadLogging();  // Here the solution
+        super.onOpen(sqLiteDatabase);
     }
 
     /*------------------------------------------------------------------------------------------
@@ -224,6 +229,7 @@ public class Datenbank extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID_ISO+" as _id, "+SPALTE_STUDIE_NAME_ISO+", "+SPALTE_ANZAHL_TESTS_ISO+ " , "+ SPALTE_STUDIE_SCORE_ISO + " FROM " + TABELLE_STUDIE_ISO, null);
         cursor.moveToFirst();
+        Log.d("DB","Cursor-Länge: "+cursor.getCount());
         return cursor;
     }
 
@@ -246,20 +252,20 @@ public class Datenbank extends SQLiteOpenHelper {
 
     //Fügt eine neue Studie in die DB ein
     // Die ID der Studie wird automatisch beim Einfügen erzeugt und als long zurückgegeben
-    public long insertStudieISO(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){
+    public long insertStudieISO(String name, String interfaceTyp, int anzahlTests, double scoreGesamt){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_STUDIE_NAME_ISO,name);
         neueZeile.put(SPALTE_INTERFACE_TYP_STUDIE_ISO, interfaceTyp);
         neueZeile.put(SPALTE_ANZAHL_TESTS_ISO,anzahlTests);
         neueZeile.put(SPALTE_STUDIE_SCORE_ISO,scoreGesamt);
-        neueZeile.put(SPALTE_STUDIE_AUSFGABENANGEMESSENHEIT, 0); // Als Anfansgwert
+        neueZeile.put(SPALTE_STUDIE_AUFGABENANGEMESSENHEIT, 0); // Als Anfansgwert
         neueZeile.put(SPALTE_STUDIE_SELBSTBESCHREIBUNGSFAEHIGKEIT, 0); //Als Anfangswert
         neueZeile.put(SPALTE_STUDIE_STEUERBARKEIT, 0); //Als Anfangswert
         neueZeile.put(SPALTE_STUDIE_ERWARTUNGSKONFORMITAET, 0); //Als Anfangswert
         neueZeile.put(SPALTE_STUDIE_FEHLERTOLERANZ, 0); //Als Anfangswert
         neueZeile.put(SPALTE_STUDIE_INDIVIDUALISIERBARKEIT, 0); //Als Anfangswert
-        neueZeile.put(SPALTE_STUDIE_LENRFOERDERLICHKEIT, 0); //Als Anfangswert
+        neueZeile.put(SPALTE_STUDIE_LERNFOERDERLICHKEIT, 0); //Als Anfangswert
 
         long id = db.insert(TABELLE_STUDIE_ISO,null,neueZeile);
         Log.d("Jule", "Studie_Id = " + id);
@@ -269,7 +275,7 @@ public class Datenbank extends SQLiteOpenHelper {
 
     }
 
-    public long insertStudie(String name, String interfaceTyp, int anzahlTests, int scoreGesamt){
+    public long insertStudie(String name, String interfaceTyp, int anzahlTests, double scoreGesamt){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_STUDIE_NAME,name);
@@ -361,7 +367,7 @@ public class Datenbank extends SQLiteOpenHelper {
     //Test für ISONORM in die DB eintragen
     // Die ID des Tests wird automatisch beim Einfügen erzeugt und als long zurückgegeben
     //TODO:: int usabilty und int learnability und int score in der Doku beschreiben?
-    public long insertTestISO(int[] antworten, int alter, String geschlecht, String datum, long studienId, int score_gesamt,int aufgabenangemessenheit,int selbstbeschreibungsfaehigkeit, int steuerbarkeit, int erwartungskonformitaet,  int fehlertoleranz, int individualisierbarkeit, int lernfoerderlichkeit) {
+    public long insertTestISO(int[] antworten, int alter, String geschlecht, String datum, long studienId, double score_gesamt,double aufgabenangemessenheit,double selbstbeschreibungsfaehigkeit, double steuerbarkeit, double erwartungskonformitaet,  double fehlertoleranz, double individualisierbarkeit, double lernfoerderlichkeit) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_FRAGE1_ISO, antworten[0]);
@@ -396,12 +402,13 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_TEST_ERWARTUNGSKONFORMITAET, erwartungskonformitaet);
         neueZeile.put(SPALTE_TEST_FEHLERTOLERANZ, fehlertoleranz);
         neueZeile.put(SPALTE_TEST_INDIVIDUALISIERBARKEIT, individualisierbarkeit);
-        neueZeile.put(SPALTE_TEST_LERNFOERDLICHKEIT, lernfoerderlichkeit);
-        Log.d("jule", "score, der in die db geschrieben wird" +score_gesamt);
+        neueZeile.put(SPALTE_TEST_LERNFOERDERLICHKEIT, lernfoerderlichkeit);
+        Log.d("Jule", "score, der in die db geschrieben wird: " +score_gesamt);
 
         //Neuen Test in die DB einfügen
         long id = db.insert(TABELLE_TEST_ISO, null, neueZeile);
-        Log.d("Jule", id + "");
+        Log.d("Jule", "Testid " + id );
+        Log.d("Jule", "StudienId " + studienId);
 
         //Wichtig, dass die Anzahl Tests in der zugehörigen Studie erhöht wird.
         if(studienId != -1) {
@@ -422,10 +429,9 @@ public class Datenbank extends SQLiteOpenHelper {
     }
 
     //Gibt alle Tests, die zu einer bestimmten Studie gehören, in einem Cursor zurück
-    public Cursor selectAllTestsbyStudienId (long studienId){
+    public Cursor selectAllISOTestsbyStudienId (long studienId){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"";
-
+        String query = "SELECT "+SPALTE_TEST_ID_ISO+" as _id, " + SPALTE_SCORE_ISO + ", "+ SPALTE_TEST_AUFGABENANGEMESSENHEIT +", "+ SPALTE_TEST_LERNFOERDERLICHKEIT +", "+ SPALTE_TEST_INDIVIDUALISIERBARKEIT +", "+ SPALTE_TEST_STEUERBARKEIT +", "+ SPALTE_TEST_SELBSTBESCHREIBUNGSFAEHIGKEIT +", "+ SPALTE_TEST_ERWARTUNGSKONFORMITAET +", "+ SPALTE_TEST_FEHLERTOLERANZ + " FROM " + TABELLE_TEST_ISO + " WHERE " + SPALTE_STUDIE_ID_ISO + " = "+studienId+"";
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
         return cursor;
@@ -532,14 +538,14 @@ public class Datenbank extends SQLiteOpenHelper {
 
     public Cursor selectLernfoerderlichkeit(long studienId){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT "+SPALTE_TEST_LERNFOERDLICHKEIT+" FROM "+ TABELLE_TEST_ISO + " WHERE " + SPALTE_STUDIE_ID_ISO + " = " + studienId+"";
+        String query = "SELECT "+ SPALTE_TEST_LERNFOERDERLICHKEIT +" FROM "+ TABELLE_TEST_ISO + " WHERE " + SPALTE_STUDIE_ID_ISO + " = " + studienId+"";
         Log.d("median","StudienId = "+studienId);
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
         return cursor;
     }
 
-    public void insertScoreStudie(long studienID, int score){
+    public void insertScoreStudie(long studienID, double score){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_STUDIE_SCORE , score);
@@ -549,6 +555,38 @@ public class Datenbank extends SQLiteOpenHelper {
 
     }
 
+    public void updateISOStudie(long studienId){
+        Cursor c = selectAllISOTestsbyStudienId(studienId);
+        c.moveToFirst();
+        double score = Statistik.mittelWertISO(c,SPALTE_SCORE_ISO);
+        double auf = Statistik.mittelWertISO(c, SPALTE_TEST_AUFGABENANGEMESSENHEIT);
+        double erw = Statistik.mittelWertISO(c,SPALTE_TEST_ERWARTUNGSKONFORMITAET);
+        double feh = Statistik.mittelWertISO(c,SPALTE_TEST_FEHLERTOLERANZ);
+        double ind = Statistik.mittelWertISO(c,SPALTE_TEST_INDIVIDUALISIERBARKEIT);
+        double len = Statistik.mittelWertISO(c, SPALTE_TEST_LERNFOERDERLICHKEIT);
+        double sel = Statistik.mittelWertISO(c,SPALTE_TEST_SELBSTBESCHREIBUNGSFAEHIGKEIT);
+        double ste = Statistik.mittelWertISO(c,SPALTE_TEST_STEUERBARKEIT);
+        Log.d("DB","Spalte SCORE: "+score);
+        Log.d("DB","AUFGABENANGEMESSENHEIT: "+auf);
+        Log.d("DB","ERWARTUNGSKONFORMITAET: "+erw);
+        Log.d("DB","FEHLERTOLERANZ: "+feh);
+        Log.d("DB","INDIVIDUALISIERBARKEIT: "+ind);
+        Log.d("DB","LERNFOERDERLICHKEIT: "+len);
+        Log.d("DB","SELBSTBESCHREIBUNGSFAEHIGKEIT: "+sel);
+        Log.d("DB","SPALTE_STUDIE_STEUERBARKEIT: "+ste);
+        SQLiteDatabase db = getWritableDatabase();
+        String[] arg = new String[]{Long.toString(studienId)};
+        ContentValues neue_stats = new ContentValues();
+        neue_stats.put(SPALTE_STUDIE_SCORE_ISO, score);
+        neue_stats.put(SPALTE_STUDIE_AUFGABENANGEMESSENHEIT, auf);
+        neue_stats.put(SPALTE_STUDIE_ERWARTUNGSKONFORMITAET, erw);
+        neue_stats.put(SPALTE_STUDIE_FEHLERTOLERANZ, feh);
+        neue_stats.put(SPALTE_STUDIE_INDIVIDUALISIERBARKEIT, ind);
+        neue_stats.put(SPALTE_STUDIE_LERNFOERDERLICHKEIT, len);
+        neue_stats.put(SPALTE_STUDIE_SELBSTBESCHREIBUNGSFAEHIGKEIT, sel);
+        neue_stats.put(SPALTE_STUDIE_STEUERBARKEIT, ste);
+        db.update(TABELLE_STUDIE_ISO, neue_stats, SPALTE_STUDIE_ID_ISO + " = ?", arg);
+    }
 
 
 

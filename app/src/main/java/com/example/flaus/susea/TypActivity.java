@@ -43,7 +43,7 @@ public class TypActivity extends AppCompatActivity {
 
         // Variabeln zur erstellung der neue_studie
     int anzahlTests = 0;
-    int scoreGesamt = 0;
+    double scoreGesamt = 0;
     long studienId = -1;
     Toolbar toolbar;
     boolean kommeVonListeStudien;

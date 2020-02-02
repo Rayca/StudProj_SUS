@@ -3,9 +3,9 @@ package com.example.flaus.susea.ListViewActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +24,7 @@ import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.TypActivity;
 
 //Füllt und verwaltet das ListView, mit dem alle Studien aus der DB als Liste angezeigt werden können
-public class ListViewStudienActivity extends AppCompatActivity {
+public class ISO_ListViewStudienActivity extends AppCompatActivity {
 
     ListView listView;
     Button btnZurueck;
@@ -45,7 +45,7 @@ public class ListViewStudienActivity extends AppCompatActivity {
         // Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Alle SUS Studien");
+        getSupportActionBar().setTitle("Alle ISO Studien");
         // Pfeil Action
 
         ActionBar ab = getSupportActionBar();
@@ -72,8 +72,8 @@ public class ListViewStudienActivity extends AppCompatActivity {
         // listView füllen
         final Context context = this;
         int itemLayout = R.layout.studie_list_item_layout;
-        final Cursor cursor = db.selectAllStudien();
-        final String[] from = new String[]{Datenbank.SPALTE_STUDIE_NAME, Datenbank.SPALTE_ANZAHL_TESTS, Datenbank.SPALTE_STUDIE_SCORE};
+        final Cursor cursor = db.selectAllStudienISO();
+        final String[] from = new String[]{Datenbank.SPALTE_STUDIE_NAME_ISO, Datenbank.SPALTE_ANZAHL_TESTS_ISO, Datenbank.SPALTE_STUDIE_SCORE_ISO};
         int[] to = new int[]{R.id.textView_StudieName, R.id.textView_AnzahlTests, R.id.textView_StudieScore};
 
         final AdapterStudien adapterStudien = new AdapterStudien(context,itemLayout,cursor,from,to,0);

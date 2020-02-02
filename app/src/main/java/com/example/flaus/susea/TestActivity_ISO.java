@@ -2,6 +2,7 @@ package com.example.flaus.susea;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieISONORMActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,6 +53,7 @@ public class TestActivity_ISO extends AppCompatActivity {
             "ist schlecht auf die Anforderungen der Arbeit zugeschnitten",
             "liefert in unzureichendem Maße Informationen darüber, welche Eingaben zuverlässig oder nötig sind.",
             "bietet auf Verlangen keine situationsspezifischen Erklärungen, die konkret weiterhelfen.",
+            "bietet von sich aus keine situationsspezifischen Erklärungen, die konkret weiterhelfen.",
             "erzwingt eine unnötig starre Einhaltung von Berarbeitungsschritten.",
             "ermöglicht keinen leichten Wechsel zwischen einzelnen Menüs oder Masken",
             "erzwingt unnötige Unterbrechungen der Arbeit.",
@@ -72,11 +75,22 @@ public class TestActivity_ISO extends AppCompatActivity {
             "ist gut auf die Anforderungen der Arbeit zugeschnitten.",
             "liefert in zureichendem Maße Informationen darüber, welche Eingaben zulässig oder nötig sind.",
             "bietet auf Verlangen situationsspezifische Erklärungen, die konkret weiterhelfen.",
-            "Ich finde, dass die Software einheitlich aufgebaut ist.",
-            "Ich denke, dass die meisten Nutzer sehr schnell mit der Software zurecht kommen.",
-            "Ich finde die Software in der Benutzung sehr intuitiv.",
-            "Ich weiß bei der Benutzung der Software zu jedem Zeitpunkt, was ich tue.",
-            "Ich konnte die Software bedienen ohne zuvor Neues erlernen zu müssen."};
+            "bietet von sich aus situationsspezifische Erklärungen, die konkret weiterhelfen",
+            "erzwingt keine unnätig starre Einhaltung von Bearbeitungsschritten.",
+            "ermöglicht einen leichten Wechsel zwischen einzelnen Menüs oder Masken",
+            "erzwingt keine unnötigen Unterbrechungen der Arbeit.",
+            "erleichtert die Orientierung durch eine einheitliche Gestaltung.",
+            "informiert in ausreichendem Maße über das, was es gerade macht.",
+            "lässt siich durchgehend nach einem einheitlichen Prinzip bedienen.",
+            "liefert gut verständliche Fehlermeldungen.",
+            "erfordert bei Fehlern im Großen und Ganzen einen geringen Korrekturaufwand",
+            "gibt konkrete Hinweise  zur Fehlerbehebung.",
+            "lässt sich von mir leicht erweitern, wenn für mich neue Aufgaben entstehen.",
+            "lässt sich von mit gut an meine persönliche, induviduelle Art der Arbeitserledigung anpassen.",
+            "lässt sich - im Rahmen ihres Leistungsumfangs von mir gut für unterschiedliche Aufgaben passend einrichten.",
+            "erfordert wenig Zeit zum Erlernen.",
+            "erfordert nicht, dass man sich viele Details merken muss.",
+            "ist gut ohne fremde Hilfe oder Handbuch erlernbar."};
 
 
 
@@ -230,18 +244,18 @@ public class TestActivity_ISO extends AppCompatActivity {
 
                 //Berechnung der Werte für die einzelnen Dialogprinzipinen
                 int score_gesamt = Statistik.berechneGesamtScore(antworten);
-                int aufgabenangemessenheit = Statistik.berechneMittelwert3(antworten[1], antworten[2], antworten[3]);
-                int selbstbeschreibungsfaehigkeit = Statistik.berechneMittelwert3(antworten[4], antworten[5], antworten[6]);
-                int steuerbarkeit = Statistik.berechneMittelwert3(antworten[7], antworten[8], antworten[9]);
-                int erwartungskonformitaet = Statistik.berechneMittelwert3(antworten[10], antworten[11], antworten[12]);
-                int fehlertoleranz = Statistik.berechneMittelwert3(antworten[13], antworten[14], antworten[15]);
-                int individualisierbarkeit = Statistik.berechneMittelwert3(antworten[16], antworten[17], antworten[18]);
-                int lernfoerderlichkeit = Statistik.berechneMittelwert3(antworten[19], antworten[20], antworten[21]);
+                int aufgabenangemessenheit = Statistik.berechneMittelwert3(antworten[0], antworten[1], antworten[2]);
+                int selbstbeschreibungsfaehigkeit = Statistik.berechneMittelwert3(antworten[3], antworten[4], antworten[5]);
+                int steuerbarkeit = Statistik.berechneMittelwert3(antworten[6], antworten[7], antworten[8]);
+                int erwartungskonformitaet = Statistik.berechneMittelwert3(antworten[9], antworten[10], antworten[11]);
+                int fehlertoleranz = Statistik.berechneMittelwert3(antworten[12], antworten[13], antworten[14]);
+                int individualisierbarkeit = Statistik.berechneMittelwert3(antworten[15], antworten[16], antworten[17]);
+                int lernfoerderlichkeit = Statistik.berechneMittelwert3(antworten[18], antworten[19], antworten[20]);
 
 
                 //gesammelte Daten in die Datenbank schreiben
                 testId = manager.insertTestISO(antworten, alterInt, geschlecht, datum, studienId, score_gesamt, aufgabenangemessenheit, selbstbeschreibungsfaehigkeit, steuerbarkeit, erwartungskonformitaet, fehlertoleranz, individualisierbarkeit, lernfoerderlichkeit);
-
+                manager.updateISOStudie(studienId);
                 Log.d("TJ", "test_id vor intent" + testId);
                 Log.d("studId", "StudieIdISO in TestActivityISO = " + studienId);
                 //Daten an die AuswertungsTestActivity übergeben
@@ -271,16 +285,16 @@ public class TestActivity_ISO extends AppCompatActivity {
         LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTestISO);
         //TextView zustimmung = (TextView) findViewById(R.studienId.textView_Zustimmung);
         //TextView ablehnung = (TextView) findViewById(R.studienId.textView_Ablehnung);
-        LinearLayout layoutZustimmung = (LinearLayout) findViewById(R.id.layoutZustimmungISO);
+        ConstraintLayout layoutZustimmung = (ConstraintLayout) findViewById(R.id.layoutZustimmungISO);
 
 
-        textViewUeberschrift.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
+        //textViewUeberschrift.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
         btnWeiter.setText("Test beenden");
 
         layoutZustimmung.setVisibility((View.GONE));
         layout.setVisibility(View.VISIBLE);
         radioGroup.setVisibility(View.GONE);
-        textViewUeberschrift.setVisibility(View.GONE);
+        //textViewUeberschrift.setVisibility(View.GONE);
         //zustimmung.setVisibility(View.GONE);
         //ablehnung.setVisibility(View.GONE);
 
@@ -291,20 +305,21 @@ public class TestActivity_ISO extends AppCompatActivity {
     //Außerdem wird hier der Intent anbeschickt, der zur Auswertung der Studie weiterleitet
     public void endScreen(){
             LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTestISO);
-            textViewUeberschrift.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
+            //textViewUeberschrift.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
             layout.setVisibility(View.GONE);
             btnWeiter.setEnabled(true);
             btnWeiter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), AuswertungStudieActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), AuswertungStudieISONORMActivity.class);
                     intent.putExtra("antworten", antworten);
                     intent.putExtra("testId",testId);
 
 
                         //Das sind alles Werte, die man für die Auswertung einer Studie braucht
                         intent.putExtra("studienId", studienId);
-                        Log.d("Jule", "Id, die mitgeschickt wird: " + studienId);
+                        Log.d("Jule", "StudienId, die mitgeschickt wird: " + studienId);
+                        Log.d("Jule", "TestId, die mitgeschickt wird: " + testId);
                         intent.putExtra("studienName", studienName);
                         intent.putExtra("interfacetyp", interfacetyp);
                         startActivity(intent);

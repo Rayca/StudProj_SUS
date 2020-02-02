@@ -89,48 +89,61 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
             textViewAnzahlTests.setText("Noch keine Tests");
 
         } else { //Ansonten Name und Daten der Studie aus der Datenbank holen
+
+
+
             textViewAnzahlTests.append("" + anzahl_tests);
-            textViewGesamtScore.setText("" + c.getInt(4));
+            textViewGesamtScore.setText("" + String.format("%.2f",c.getDouble(4)));
+
 
             //Cursor mit allen Scores
-            Cursor scoreCursor = db.selectScoresByStudienId(studienId);
-            int scoreStudie =  (int) Statistik.mittelWert(scoreCursor);
-            textViewGesamtScore.setText(""+scoreStudie);
-            db.insertScoreStudie(studienId, scoreStudie);
+            //Cursor scoreCursor = db.selectScoresByStudienIdISO(studienId);
+            //double scoreStudie = Statistik.mittelWertISO(scoreCursor,Datenbank.SPALTE_SCORE_ISO);
+            //Log.d ("Jule",scoreStudie+"");
+            //scoreCursor.close();
+            //textViewGesamtScore.setText(""+scoreStudie);
+            //db.insertScoreStudie(studienId, scoreStudie);
 
-            Cursor aufgabenangemessenheitCursor = db.selectAufgabenangemessenheit(studienId);
-            double studieAufgabenangemessenheit = Statistik.berechneAufgabenangemessenheit(aufgabenangemessenheitCursor);
-            textViewAufgabenangemesseneheit.setText("" + studieAufgabenangemessenheit);
+            //Cursor aufgabenangemessenheitCursor = db.selectAufgabenangemessenheit(studienId);
+            //double studieAufgabenangemessenheit = Statistik.berechneAufgabenangemessenheit(aufgabenangemessenheitCursor);
+            //aufgabenangemessenheitCursor.close();
+            textViewAufgabenangemesseneheit.setText("" + String.format("%.2f",c.getDouble(5)));
 
-            Cursor selbstbeschreibungsfaehigkeitCursor = db.selectSelbstbeschreibungsfaehigkeit(studienId);
-            double studieSelbstbeschreibungsfaehigkeit = Statistik.berechneSelbstbeschreibungsfaehigkeit(selbstbeschreibungsfaehigkeitCursor);
-            textViewSelbstbeschreibungsfaehigkeit.setText("" + studieSelbstbeschreibungsfaehigkeit);
+            //Cursor selbstbeschreibungsfaehigkeitCursor = db.selectSelbstbeschreibungsfaehigkeit(studienId);
+            //double studieSelbstbeschreibungsfaehigkeit = Statistik.berechneSelbstbeschreibungsfaehigkeit(selbstbeschreibungsfaehigkeitCursor);
+            //selbstbeschreibungsfaehigkeitCursor.close();
+            textViewSelbstbeschreibungsfaehigkeit.setText("" + String.format("%.2f",c.getDouble(6)));
 
-            Cursor steuerbarkeitCursor = db.selectSteuerbarkeit(studienId);
-            double studieSteuerbarkeit = Statistik.berechneSteuerbarkeit(steuerbarkeitCursor);
-            textViewSteuerbarkeit.setText("" + studieSteuerbarkeit);
+            //Cursor steuerbarkeitCursor = db.selectSteuerbarkeit(studienId);
+            //double studieSteuerbarkeit = Statistik.berechneSteuerbarkeit(steuerbarkeitCursor);
+            //steuerbarkeitCursor.close();
+            textViewSteuerbarkeit.setText("" + String.format("%.2f",c.getDouble(7)));
 
-            Cursor erwartungskonfCursor = db.selectErwartungskonformiteat(studienId);
-            double studieErwartungskonf = Statistik.berechneErwartungskonf(erwartungskonfCursor);
-            textViewErwartungskonformitaet.setText("" + studieErwartungskonf);
+            //Cursor erwartungskonfCursor = db.selectErwartungskonformiteat(studienId);
+            //double studieErwartungskonf = Statistik.berechneErwartungskonf(erwartungskonfCursor);
+            //erwartungskonfCursor.close();
+            textViewErwartungskonformitaet.setText("" + String.format("%.2f",c.getDouble(8)));
 
-            Cursor fehlertoleranzCursor = db.selectFehlertoleranz(studienId);
-            double studieFehlertoleranz = Statistik.berechneFehlertoleranz(fehlertoleranzCursor);
-            textViewFehlertoleranz.setText("" + studieFehlertoleranz);
+            //Cursor fehlertoleranzCursor = db.selectFehlertoleranz(studienId);
+            //double studieFehlertoleranz = Statistik.berechneFehlertoleranz(fehlertoleranzCursor);
+            //fehlertoleranzCursor.close();
+            textViewFehlertoleranz.setText("" + String.format("%.2f",c.getDouble(9)));
 
-            Cursor indiviCursor = db.selectIndividualisierbarkeit(studienId);
-            double studieIndividualisierbarkeit = Statistik.berechneIndividualisierbarkeit(indiviCursor);
-            textViewIndividualisierbarkeit.setText("" + studieIndividualisierbarkeit);
+            //Cursor indiviCursor = db.selectIndividualisierbarkeit(studienId);
+            //double studieIndividualisierbarkeit = Statistik.berechneIndividualisierbarkeit(indiviCursor);
+            //indiviCursor.close();
+            textViewIndividualisierbarkeit.setText("" + String.format("%.2f",c.getDouble(10)));
 
-            Cursor lernfCursor = db.selectLernfoerderlichkeit(studienId);
-            double studieLernfoerderlichkeit = Statistik.berechneLernfoerderlichkeit(lernfCursor);
-            textViewLernfoeerdlichkeit.setText("" + studieLernfoerderlichkeit);
+            //Cursor lernfCursor = db.selectLernfoerderlichkeit(studienId);
+            //double studieLernfoerderlichkeit = Statistik.berechneLernfoerderlichkeit(lernfCursor);
+            //lernfCursor.close();
+            textViewLernfoeerdlichkeit.setText("" + String.format("%.2f",c.getDouble(11)));
         }
 
 
 
         // TextViews füllen
-        textViewNameStudie.setText(" " + studienName);
+        textViewNameStudie.setText("" + studienName);
         textViewNameStudie.setPaintFlags(textViewNameStudie.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
 
@@ -140,7 +153,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), TestActivity_ISO.class);
-                i.putExtra("Jule", studienId);
+                i.putExtra("studienId", studienId);
                 startActivity(i);
             }
         });
@@ -149,7 +162,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
 
 
 
-
+        c.close();
 
 
     }

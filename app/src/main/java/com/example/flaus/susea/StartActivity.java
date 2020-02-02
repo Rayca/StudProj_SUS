@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
+import com.example.flaus.susea.ListViewActivities.ISO_ListViewStudienActivity;
 
 //Controller, der nur vorgibt, was als nächstes getan werden soll
 public class StartActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class StartActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("System Usability Scale");
+        getSupportActionBar().setTitle("Usability Evaluation");
 
 
 
@@ -47,8 +48,13 @@ public class StartActivity extends AppCompatActivity {
     }
 
     //Lässt alle Studie in der DB als Liste anzeigen
-    public void studienEinsehen(View view){
+    public void SUS_StudienEinsehen(View view){
         Intent intent = new Intent(getBaseContext(), ListViewStudienActivity.class);
+        startActivity(intent);
+    }
+
+    public void ISO_StudienEinsehen(View view){
+        Intent intent = new Intent(getBaseContext(), ISO_ListViewStudienActivity.class);
         startActivity(intent);
     }
 }

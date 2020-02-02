@@ -141,7 +141,7 @@
                 </RadioGroup>
 
 
-            </LinearLayout>  <!--Letzte seite layout -->
+            </LinearLayout>  <!--Letzte Seite layout -->
             <!-- RadioGroup -->
             <RadioGroup
                 android:id="@+id/radioGroup_AntwortenISO"

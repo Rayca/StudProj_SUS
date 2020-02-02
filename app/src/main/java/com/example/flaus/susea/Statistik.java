@@ -4,9 +4,7 @@ import android.database.Cursor;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 //GANZ VIEL MATHEMATIK UND STATISTIK !! DANGER !!
 /* Stellt die mathematischen Funktionen zu Verfügung um Kennzahlen für Studien zu berechnen */
@@ -68,13 +66,33 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
+        return result;
+    }
+
+    public static double mittelWertISO(Cursor cursor, String Spalte){
+        double result;
+        int wert = 0;
+
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Spalte)));
+            cursor.moveToNext();
+        }
+
+
+        for(int i = 0;i<scoreList.size();i++){
+            wert+=scoreList.get(i);
+        }
+        result = (double) wert/scoreList.size();
+        Log.d("Jule","Wert: "+wert+", scorelist.size: "+scoreList.size()+" ,result: "+result);
         return result;
     }
 
     //Berechnet Learnability Median einer Studie
-    public static int berechneLearnability(Cursor cursor){
-        int result;
+    public static double berechneLearnability(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -89,14 +107,14 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
 
     }
 
     //Berechnet Usability Median einer Studie
-    public static int berechneUsability(Cursor cursor){
-        int result;
+    public static double berechneUsability(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -111,13 +129,13 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
     //Funktionen für ISONORM
-    public static int berechneAufgabenangemessenheit(Cursor cursor){
-        int result;
+    public static double berechneAufgabenangemessenheit(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -132,13 +150,13 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
 
-    public static int berechneSelbstbeschreibungsfaehigkeit(Cursor cursor){
-        int result;
+    public static double berechneSelbstbeschreibungsfaehigkeit(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -153,12 +171,12 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
-    public static int berechneSteuerbarkeit(Cursor cursor){
-        int result;
+    public static double berechneSteuerbarkeit(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -173,13 +191,13 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
 
-    public static int berechneErwartungskonf(Cursor cursor){
-        int result;
+    public static double berechneErwartungskonf(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -194,12 +212,12 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
-    public static int berechneFehlertoleranz(Cursor cursor){
-        int result;
+    public static double berechneFehlertoleranz(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -214,13 +232,13 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
 
-    public static int berechneIndividualisierbarkeit(Cursor cursor){
-        int result;
+    public static double berechneIndividualisierbarkeit(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -235,19 +253,19 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
-    public static int berechneLernfoerderlichkeit(Cursor cursor){
-        int result;
+    public static double berechneLernfoerderlichkeit(Cursor cursor){
+        double result;
         int wert = 0;
 
         ArrayList<Integer> scoreList = new ArrayList<>();
         cursor.moveToFirst();
 
         while(!cursor.isAfterLast()){
-            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LERNFOERDLICHKEIT)));
+            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_TEST_LERNFOERDERLICHKEIT)));
             cursor.moveToNext();
         }
 
@@ -255,7 +273,7 @@ public class Statistik {
         for(int i = 0;i<scoreList.size();i++){
             wert+=scoreList.get(i);
         }
-        result = wert/scoreList.size();
+        result = (double) wert/scoreList.size();
         return result;
     }
 
