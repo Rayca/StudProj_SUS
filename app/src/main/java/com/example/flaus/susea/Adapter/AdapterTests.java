@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /* Verknüpft die Daten aus der Datenbank, die in dem Cursor entahlten sind
     mit den Layout-Ressourcen des ListViews
@@ -22,6 +26,12 @@ public class AdapterTests extends CursorAdapter {
     int itemLayout;
     String[] from;
     int[] to;
+
+    private String parseDate (String source) throws ParseException {
+        Date date = new SimpleDateFormat("dd mm yyyy   HH:mm").parse(source);
+        String formattedDate = new SimpleDateFormat("dd.MM.yyyy, HH:mm").format(date);
+        return formattedDate;
+    }
 
 
     public AdapterTests(Context context, int itemLayout, Cursor cursor, String[] from, int[] to, int flags){
@@ -49,12 +59,15 @@ public class AdapterTests extends CursorAdapter {
         String datum = cursor.getString(cursor.getColumnIndexOrThrow(from[0]));
         Log.d("jule", "Datum für Test Liste: " + datum);
         TextView textViewDatum = (TextView) view.findViewById(to[0]);
-        textViewDatum.setText("Erstellt am: " + datum);
+        try {
+            textViewDatum.setText("Erstellt am: " +parseDate(datum));
+        }
+        catch (ParseException e) {}
 
-        int score = cursor.getInt(cursor.getColumnIndexOrThrow(from[1]));
+        double score = cursor.getDouble(cursor.getColumnIndexOrThrow(from[1]));
         TextView textViewScore = (TextView) view.findViewById(to[1]);
-        Log.d("jule", "Score für Test Liste: " + score);
-        textViewScore.setText("Score: " + score);
+        Log.d("jule", "Score für Test Liste: " + String.format("%.2f",score));
+        textViewScore.setText("Score: " + String.format("%.2f",score));
 
     }
 }

@@ -128,16 +128,16 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_FRAGE21_ISO + " INTEGER," +
                         SPALTE_ALTER_ISO + " INTEGER," +
                         SPALTE_GESCHLECHT_ISO + " TEXT," +
-                        SPALTE_SCORE_ISO + " INTEGER," +
+                        SPALTE_SCORE_ISO + " DOUBLE," +
                         SPALTE_STUDIE_ID_ISO + " INTEGER," +
                         SPALTE_INTERFACE_TYP_TEST_ISO + " TEXT," +
-                        SPALTE_TEST_AUFGABENANGEMESSENHEIT + " INTEGER," +
-                        SPALTE_TEST_SELBSTBESCHREIBUNGSFAEHIGKEIT + " INTEGER," +
-                        SPALTE_TEST_STEUERBARKEIT + " INTEGER," +
-                        SPALTE_TEST_ERWARTUNGSKONFORMITAET + " INTEGER," +
-                        SPALTE_TEST_FEHLERTOLERANZ + " INTEGER," +
-                        SPALTE_TEST_INDIVIDUALISIERBARKEIT + " INTEGER," +
-                        SPALTE_TEST_LERNFOERDERLICHKEIT + " INTEGER" +
+                        SPALTE_TEST_AUFGABENANGEMESSENHEIT + " DOUBLE," +
+                        SPALTE_TEST_SELBSTBESCHREIBUNGSFAEHIGKEIT + " DOUBLE," +
+                        SPALTE_TEST_STEUERBARKEIT + " DOUBLE," +
+                        SPALTE_TEST_ERWARTUNGSKONFORMITAET + " DOUBLE," +
+                        SPALTE_TEST_FEHLERTOLERANZ + " DOUBLE," +
+                        SPALTE_TEST_INDIVIDUALISIERBARKEIT + " DOUBLE," +
+                        SPALTE_TEST_LERNFOERDERLICHKEIT + " DOUBLE" +
                         ")"
         );
 

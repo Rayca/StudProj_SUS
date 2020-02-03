@@ -16,9 +16,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.flaus.susea.Datenbank;
+import com.example.flaus.susea.ListViewActivities.ISO_ListViewTestsActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /* Zeigt die Antworten aus einem einzelnen Test an */
 public class AuswertungTestISONORMActivity extends AppCompatActivity {
@@ -29,6 +34,13 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     long studienId, test_id;
+    String studienName;
+
+    private String parseDate (String source) throws ParseException{
+        Date date = new SimpleDateFormat("dd mm yyyy   hh:mm").parse(source);
+        String formattedDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
+        return formattedDate;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +90,14 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
         TextView anzeige_feh = findViewById(R.id.textViewFeh);
         TextView anzeige_ind = findViewById(R.id.textViewInd);
         TextView anzeige_ler = findViewById(R.id.textViewLer);
+        TextView anzeige_dat = findViewById(R.id.textViewDatum);
+        TextView anzeige_name = findViewById(R.id.textViewStudName);
 
 
         Intent intent = getIntent();
         test_id = intent.getLongExtra("testID", -1);
         studienId = intent.getLongExtra("studienId", -1);
+        studienName = intent.getStringExtra("studienName");
         Cursor c = db.getTestByIdISO(test_id);
 
 
@@ -91,7 +106,7 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
        btnZurStudie.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent = new Intent(getBaseContext(),AuswertungStudieActivity.class);
+               Intent intent = new Intent(getBaseContext(),AuswertungStudieISONORMActivity.class);
                intent.putExtra("studienId",studienId);
                startActivity(intent);
            }
@@ -103,7 +118,12 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
         //Die TextViews alle füllen mit den Daten aus dem Cursor
         anzeige_alter.setText("Alter: " + c.getInt(23));
         anzeige_geschlecht.setText("Geschlecht: "+ c.getString(24));
-        anzeige_score.setText("Score: "+ c.getInt(25));
+        try{
+            anzeige_dat.setText("Datum: "+ parseDate(c.getString(1)));
+        }
+        catch (ParseException e){Log.e("Jule","PARSING ERROR: "+e.getMessage());}
+        anzeige_score.setText("Score: "+ String.format("%.2f",c.getDouble(25)));
+        anzeige_name.setText(studienName);
         f1.setText("Frage 1:  " + c.getInt(2));
         f2.setText("Frage 2:  " + c.getInt(3));
         f3.setText("Frage 3:  " + c.getInt(4));
@@ -125,13 +145,13 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
         f19.setText("Frage 19:  " + c.getInt(20));
         f20.setText("Frage 20:  " + c.getInt(21));
         f21.setText("Frage 21:  " + c.getInt(22));
-        anzeige_auf.setText("Aufgabenangemessenheit: " + c.getInt(28));
-        anzeige_sel.setText("Selbstbeschreibungsfähigkeit: " + c.getInt(29));
-        anzeige_ste.setText("Steuerbarkeit: " + c.getInt(30));
-        anzeige_erw.setText("Erwartungskonformität: " + c.getInt(31));
-        anzeige_feh.setText("Fehlertoleranz: " + c.getInt(32));
-        anzeige_ind.setText("Individualisierbarkeit: " + c.getInt(33));
-        anzeige_ler.setText("Lernförderlichkeit: " + c.getInt(34));
+        anzeige_auf.setText("Aufgabenangemessenheit: " + String.format("%.2f",c.getDouble(28)));
+        anzeige_sel.setText("Selbstbeschreibungsfähigkeit: " + String.format("%.2f",c.getDouble(29)));
+        anzeige_ste.setText("Steuerbarkeit: " + String.format("%.2f",c.getDouble(30)));
+        anzeige_erw.setText("Erwartungskonformität: " + String.format("%.2f",c.getDouble(31)));
+        anzeige_feh.setText("Fehlertoleranz: " + String.format("%.2f",c.getDouble(32)));
+        anzeige_ind.setText("Individualisierbarkeit: " + String.format("%.2f",c.getDouble(33)));
+        anzeige_ler.setText("Lernförderlichkeit: " + String.format("%.2f",c.getDouble(34)));
 
     }
 
@@ -159,7 +179,7 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
-                Intent intent = new Intent(getBaseContext(), ListViewTestsActivity.class);
+                Intent intent = new Intent(getBaseContext(), ISO_ListViewTestsActivity.class);
                 intent.putExtra("studienId",studienId);
                 startActivity(intent);
                 Log.d("thomas", "pfeil wurde gedrückt");

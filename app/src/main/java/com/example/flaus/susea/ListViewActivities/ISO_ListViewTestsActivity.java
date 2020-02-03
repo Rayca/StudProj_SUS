@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 import com.example.flaus.susea.Adapter.AdapterTests;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieISONORMActivity;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungTestISONORMActivity;
 import com.example.flaus.susea.Datenbank;
@@ -60,7 +61,8 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
         studienId = intent.getLongExtra("studienId", -1);
         studienName = intent.getStringExtra("studienName");
         studie = intent.getBooleanExtra("studie",false);
-        Log.d("studID", "Empfangene Studien-ID: "+ studienId);
+        Log.d("Jule", "Empfangene Studien-ID: "+ studienId);
+        Log.d("Jule", "Empfangener Studien-Name: "+ studienName);
 
 
         Cursor testCursor = db.selectScoresByStudienIdISO(studienId);
@@ -89,6 +91,7 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
                 long test_id = cursor.getLong(0); //Test-Id aus dem Cursor holen
                 intent1.putExtra("testID", test_id);
                 intent1.putExtra("studienId", studienId);
+                intent1.putExtra("studienName",studienName);
                 startActivity(intent1);
             }
         });
@@ -134,7 +137,7 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
                 return true;
 
             default:
-                Intent intent1 = new Intent(getBaseContext(),AuswertungStudieActivity.class);
+                Intent intent1 = new Intent(getBaseContext(), AuswertungStudieISONORMActivity.class);
                 intent1.putExtra("studienId", studienId);
                 intent1.putExtra("studie",studie);
                 intent1.putExtra("studienName", studienName);

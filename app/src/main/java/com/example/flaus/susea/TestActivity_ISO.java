@@ -243,14 +243,14 @@ public class TestActivity_ISO extends AppCompatActivity {
                 datum = getDatum();
 
                 //Berechnung der Werte für die einzelnen Dialogprinzipinen
-                int score_gesamt = Statistik.berechneGesamtScore(antworten);
-                int aufgabenangemessenheit = Statistik.berechneMittelwert3(antworten[0], antworten[1], antworten[2]);
-                int selbstbeschreibungsfaehigkeit = Statistik.berechneMittelwert3(antworten[3], antworten[4], antworten[5]);
-                int steuerbarkeit = Statistik.berechneMittelwert3(antworten[6], antworten[7], antworten[8]);
-                int erwartungskonformitaet = Statistik.berechneMittelwert3(antworten[9], antworten[10], antworten[11]);
-                int fehlertoleranz = Statistik.berechneMittelwert3(antworten[12], antworten[13], antworten[14]);
-                int individualisierbarkeit = Statistik.berechneMittelwert3(antworten[15], antworten[16], antworten[17]);
-                int lernfoerderlichkeit = Statistik.berechneMittelwert3(antworten[18], antworten[19], antworten[20]);
+                double score_gesamt = Statistik.berechneGesamtScore(antworten);
+                double aufgabenangemessenheit = Statistik.berechneMittelwert3(antworten[0], antworten[1], antworten[2]);
+                double selbstbeschreibungsfaehigkeit = Statistik.berechneMittelwert3(antworten[3], antworten[4], antworten[5]);
+                double steuerbarkeit = Statistik.berechneMittelwert3(antworten[6], antworten[7], antworten[8]);
+                double erwartungskonformitaet = Statistik.berechneMittelwert3(antworten[9], antworten[10], antworten[11]);
+                double fehlertoleranz = Statistik.berechneMittelwert3(antworten[12], antworten[13], antworten[14]);
+                double individualisierbarkeit = Statistik.berechneMittelwert3(antworten[15], antworten[16], antworten[17]);
+                double lernfoerderlichkeit = Statistik.berechneMittelwert3(antworten[18], antworten[19], antworten[20]);
 
 
                 //gesammelte Daten in die Datenbank schreiben

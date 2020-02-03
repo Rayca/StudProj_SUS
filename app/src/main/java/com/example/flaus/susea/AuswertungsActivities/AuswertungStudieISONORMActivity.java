@@ -196,6 +196,8 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
                 }else {
                     Intent intent1 = new Intent(getBaseContext(), ISO_ListViewTestsActivity.class);
                     intent1.putExtra("studienId", studienId);
+
+                    intent1.putExtra("studienName", studienName);
                     startActivity(intent1);
                 }
                 return true;
@@ -213,7 +215,6 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
                 } else {
                     Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
                     intent3.putExtra("studienId", studienId);
-                    intent3.putExtra("studienName", studienName);
                     intent3.putExtra("anzahlTests",anzahl_tests);
                     startActivity(intent3);
                 }

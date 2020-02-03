@@ -10,344 +10,387 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <ScrollView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnZurStudie"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0.405"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="84dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/textViewStudName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="STUDIENNAME"
+            app:layout_constraintBottom_toTopOf="@+id/textViewScore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textViewScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewStudName" />
 
-                <TextView
-                    android:id="@+id/textViewScore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Score"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textViewGeschlecht"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Geschlecht"
+            app:layout_constraintEnd_toStartOf="@id/textViewDatum"
+            app:layout_constraintStart_toEndOf="@id/textViewAlter"
+            app:layout_constraintTop_toBottomOf="@+id/textViewScore" />
 
-                <TextView
-                    android:id="@+id/textViewGeschlecht"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Geschlecht"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/textViewAlter"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewScore" />
+        <TextView
+            android:id="@+id/textViewDatum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="DATUM"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewGeschlecht"
+            app:layout_constraintTop_toBottomOf="@id/textViewScore" />
 
-                <TextView
-                    android:id="@+id/textViewAlter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Alter"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewGeschlecht"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewScore" />
+        <TextView
+            android:id="@+id/textViewAlter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Alter"
+            app:layout_constraintEnd_toStartOf="@+id/textViewGeschlecht"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewScore" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Subscales:"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewAlter" />
+        <TextView
+            android:id="@+id/textViewAuf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="Aufgabenangemessenheit: "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/textViewF2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewScore" />
 
-                <TextView
-                    android:id="@+id/textViewAuf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aufgabenangemessenheit: "
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewSel"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <TextView
+            android:id="@+id/textViewSel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selbstbeschreibungsfähigkeit: "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewF5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewF2" />
 
-                <TextView
-                    android:id="@+id/textViewSel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="19dp"
-                    android:text="Selbstbeschreibungsfähigkeit: "
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textViewAuf"
-                    app:layout_constraintTop_toTopOf="@+id/textView" />
+        <TextView
+            android:id="@+id/textViewSteu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steuerbarkeit:  "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewF8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewF5" />
 
-                <TextView
-                    android:id="@+id/textViewSteu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Steuerbarkeit:  "
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewErw"
-                    app:layout_constraintTop_toBottomOf="@id/textViewAuf" />
+        <TextView
+            android:id="@+id/textViewErw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Erwartungskonformität: "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewF11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewF8" />
 
-                <TextView
-                    android:id="@+id/textViewErw"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Erwartungskonformität: "
-                    app:layout_constraintLeft_toRightOf="@+id/textViewSteu"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewSel" />
+        <TextView
+            android:id="@+id/textViewFeh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fehlertoleranz:   "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewF14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewF11" />
 
-                <TextView
-                    android:id="@+id/textViewFeh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fehlertoleranz:   "
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewInd"
-                    app:layout_constraintTop_toBottomOf="@id/textViewSteu" />
+        <TextView
+            android:id="@+id/textViewInd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Individualisierbarkeit:  "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewF17"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewF14" />
 
-                <TextView
-                    android:id="@+id/textViewInd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Individualisierbarkeit:  "
-                    app:layout_constraintLeft_toRightOf="@id/textViewFeh"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewErw" />
+        <TextView
+            android:id="@+id/textViewLer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lernförderlichkeit:   "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewF20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewF17" />
 
-                <TextView
-                    android:id="@+id/textViewLer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lernförderlichkeit:   "
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewInd" />
+        <TextView
+            android:id="@+id/textViewF1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 1:"
+            app:layout_constraintBottom_toTopOf="@id/textViewSel"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewAuf" />
 
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Antworten:"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewLer" />
+        <TextView
+            android:id="@+id/textViewF2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 2:"
+            app:layout_constraintBottom_toTopOf="@id/textViewSel"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF3"
+            app:layout_constraintStart_toEndOf="@id/textViewF1"
+            app:layout_constraintTop_toBottomOf="@id/textViewAuf" />
 
-                <TextView
-                    android:id="@+id/textViewF1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 1:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF11"
-                    app:layout_constraintTop_toBottomOf="@id/textView18" />
+        <TextView
+            android:id="@+id/textViewF3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 3:"
+            app:layout_constraintBottom_toTopOf="@id/textViewSel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewF2"
+            app:layout_constraintTop_toBottomOf="@id/textViewAuf" />
 
-                <TextView
-                    android:id="@+id/textViewF2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 2:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF12"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF1" />
+        <TextView
+            android:id="@+id/textViewF4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 4:"
+            app:layout_constraintBottom_toTopOf="@id/textViewSteu"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewSel" />
 
-                <TextView
-                    android:id="@+id/textViewF3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 3:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF13"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF2" />
+        <TextView
+            android:id="@+id/textViewF5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 5:"
+            app:layout_constraintBottom_toTopOf="@id/textViewSteu"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF6"
+            app:layout_constraintStart_toEndOf="@id/textViewF4"
+            app:layout_constraintTop_toBottomOf="@id/textViewSel" />
 
-                <TextView
-                    android:id="@+id/textViewF4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 4:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF14"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF3" />
+        <TextView
+            android:id="@+id/textViewF6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 6:"
+            app:layout_constraintBottom_toTopOf="@id/textViewSteu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewF5"
+            app:layout_constraintTop_toBottomOf="@id/textViewSel" />
 
-                <TextView
-                    android:id="@+id/textViewF5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 5:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF15"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF4" />
+        <TextView
+            android:id="@+id/textViewF7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 7:"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toTopOf="@id/textViewErw"
+            app:layout_constraintEnd_toStartOf="@id/textViewF8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewSteu" />
 
-                <TextView
-                    android:id="@+id/textViewF6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 6"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF16"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF5" />
+        <TextView
+            android:id="@+id/textViewF8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 8:"
+            app:layout_constraintBottom_toTopOf="@id/textViewErw"
+            app:layout_constraintEnd_toStartOf="@id/textViewF9"
+            app:layout_constraintStart_toEndOf="@id/textViewF7"
+            app:layout_constraintTop_toBottomOf="@id/textViewSteu" />
 
-                <TextView
-                    android:id="@+id/textViewF7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 7:"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF17"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF6" />
+        <TextView
+            android:id="@+id/textViewF9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 9:"
+            app:layout_constraintBottom_toTopOf="@id/textViewErw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewF8"
+            app:layout_constraintTop_toBottomOf="@id/textViewSteu" />
 
-                <TextView
-                    android:id="@+id/textViewF8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 8:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF18"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF7" />
+        <TextView
+            android:id="@+id/textViewF10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 10:"
+            app:layout_constraintBottom_toTopOf="@id/textViewFeh"
+            app:layout_constraintEnd_toStartOf="@id/textViewF11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewErw" />
 
-                <TextView
-                    android:id="@+id/textViewF9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 9:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF19"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF8" />
+        <TextView
+            android:id="@+id/textViewF11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 11:"
+            app:layout_constraintBottom_toTopOf="@id/textViewFeh"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF12"
+            app:layout_constraintStart_toEndOf="@+id/textViewF10"
+            app:layout_constraintTop_toBottomOf="@id/textViewErw" />
 
-                <TextView
-                    android:id="@+id/textViewF10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 10:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/textViewF20"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF9" />
+        <TextView
+            android:id="@+id/textViewF12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 12:"
+            app:layout_constraintBottom_toTopOf="@id/textViewFeh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewF11"
+            app:layout_constraintTop_toBottomOf="@id/textViewErw" />
 
-                <TextView
-                    android:id="@+id/textViewF11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 11:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF1"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView18" />
+        <TextView
+            android:id="@+id/textViewF13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 13:"
+            app:layout_constraintBottom_toTopOf="@id/textViewInd"
+            app:layout_constraintEnd_toStartOf="@id/textViewF14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewFeh" />
 
-                <TextView
-                    android:id="@+id/textViewF12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 12:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF2"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF11" />
+        <TextView
+            android:id="@+id/textViewF14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 14:"
+            app:layout_constraintBottom_toTopOf="@id/textViewInd"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF15"
+            app:layout_constraintStart_toEndOf="@+id/textViewF13"
+            app:layout_constraintTop_toBottomOf="@id/textViewFeh" />
 
-                <TextView
-                    android:id="@+id/textViewF13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 13:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF3"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF12" />
+        <TextView
+            android:id="@+id/textViewF15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 15:"
+            app:layout_constraintBottom_toTopOf="@id/textViewInd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewF14"
+            app:layout_constraintTop_toBottomOf="@id/textViewFeh" />
 
-                <TextView
-                    android:id="@+id/textViewF14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 14:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF4"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF13" />
+        <TextView
+            android:id="@+id/textViewF16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 16:"
+            app:layout_constraintBottom_toTopOf="@id/textViewLer"
+            app:layout_constraintEnd_toStartOf="@id/textViewF17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewInd" />
 
-                <TextView
-                    android:id="@+id/textViewF15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 15:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF5"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF14" />
+        <TextView
+            android:id="@+id/textViewF17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 17:"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toTopOf="@id/textViewLer"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF18"
+            app:layout_constraintStart_toEndOf="@+id/textViewF16"
+            app:layout_constraintTop_toBottomOf="@id/textViewInd" />
 
-                <TextView
-                    android:id="@+id/textViewF16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 16: "
-                    app:layout_constraintLeft_toRightOf="@id/textViewF6"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF15" />
+        <TextView
+            android:id="@+id/textViewF18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 18:"
+            app:layout_constraintBottom_toTopOf="@id/textViewLer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewF17"
+            app:layout_constraintTop_toBottomOf="@id/textViewInd" />
 
-                <TextView
-                    android:id="@+id/textViewF17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 17:"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF7"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF16" />
+        <TextView
+            android:id="@+id/textViewF19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 19:"
+            app:layout_constraintBottom_toTopOf="@+id/btnZurStudie"
+            app:layout_constraintEnd_toStartOf="@id/textViewF20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewLer" />
 
-                <TextView
-                    android:id="@+id/textViewF18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 18:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF8"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF17" />
+        <TextView
+            android:id="@+id/textViewF20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 20:"
+            app:layout_constraintBottom_toTopOf="@+id/btnZurStudie"
+            app:layout_constraintEnd_toStartOf="@+id/textViewF21"
+            app:layout_constraintStart_toEndOf="@+id/textViewF19"
+            app:layout_constraintTop_toBottomOf="@id/textViewLer" />
 
-                <TextView
-                    android:id="@+id/textViewF19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 19:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF9"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF18" />
+        <TextView
+            android:id="@+id/textViewF21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Frage 21:"
+            app:layout_constraintBottom_toTopOf="@+id/btnZurStudie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textViewF20"
+            app:layout_constraintTop_toBottomOf="@id/textViewLer" />
 
-                <TextView
-                    android:id="@+id/textViewF20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 20:"
-                    app:layout_constraintLeft_toRightOf="@id/textViewF10"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF19" />
+        <Button
+            android:id="@+id/btnZurStudie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button"
+            android:text="Zur Studie"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/textViewF21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Frage 21:"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewF20" />
-
-            </android.support.constraint.ConstraintLayout>
-        </LinearLayout>
-    </ScrollView>
-
-    <Button
-        android:id="@+id/btnZurStudie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:text="Zur Studie"
-        android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

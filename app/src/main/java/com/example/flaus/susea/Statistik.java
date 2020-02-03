@@ -399,18 +399,18 @@ public class Statistik {
 
     //Funktion zum berechnen des Wertes für Dialogprinzip für ISONORM
 
-    public static int berechneMittelwert3(int a, int b, int c){
-        int mittelwert = (a+b+c)/3;
+    public static double berechneMittelwert3(int a, int b, int c){
+        double mittelwert = (double) (a+b+c)/3;
         return  mittelwert;
     }
 
-    public static int berechneGesamtScore(int[] antworten){
+    public static double berechneGesamtScore(int[] antworten){
         int wert =0 ;
         for (int i =0; i < antworten.length; i++){
             wert = wert + antworten[i];
         }
 
-        int gesamtScore = wert/antworten.length;
+        double gesamtScore = (double) wert/antworten.length;
         return gesamtScore;
     }
 
