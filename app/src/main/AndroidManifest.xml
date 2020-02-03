@@ -55,6 +55,11 @@
             android:parentActivityName=".ListViewActivities.ListViewTestsActivity"
             android:theme="@style/Campusboard"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AuswertungsActivities.AuswertungTestISONORMActivity"
+            android:parentActivityName=".ListViewActivities.ISO_ListViewTestsActivity"
+            android:theme="@style/Campusboard"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".StatistikAuswertung"
             android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"

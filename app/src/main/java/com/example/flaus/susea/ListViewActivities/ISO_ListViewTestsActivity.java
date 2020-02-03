@@ -18,6 +18,7 @@ import android.widget.ListView;
 import com.example.flaus.susea.Adapter.AdapterTests;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungTestActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungTestISONORMActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
@@ -43,7 +44,7 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_theme));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Alle Tests");
+        getSupportActionBar().setTitle("Alle ISONORM Tests");
 
         // Pfeil für den User flow
         ActionBar ab = getSupportActionBar();
@@ -62,16 +63,18 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
         Log.d("studID", "Empfangene Studien-ID: "+ studienId);
 
 
-        Cursor testCursor = db.selectScoresByStudienId(studienId);
-        int median = Statistik.berechneMedian(testCursor);
+        Cursor testCursor = db.selectScoresByStudienIdISO(studienId);
+       //TODO: Warum hier den Median berechnen?
+
+       // int median = Statistik.berechneMedian(testCursor);
 
 
         // ListView füllen
         final Context context = this;
         int itemLayout = R.layout.test_list_item_layout;
-        final Cursor cursor = db.selectTestsByStudienIdSorted(studienId);
+            final Cursor cursor = db.selectTestsByStudienIdSortedISO(studienId);
         Log.d("Jule", " Länge des Cursor " + cursor.getCount());
-        final String[] from = new String[]{db.SPALTE_DATUM, db.SPALTE_SCORE};
+        final String[] from = new String[]{db.SPALTE_DATUM_ISO, db.SPALTE_SCORE_ISO};
         int[] to = new int[]{R.id.textView_TestDatum, R.id.textView_TestScore};
 
         final AdapterTests adapterTests = new AdapterTests(context,itemLayout,cursor,from,to,0);
@@ -81,7 +84,7 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent1 = new Intent(context, AuswertungTestActivity.class);
+                Intent intent1 = new Intent(context, AuswertungTestISONORMActivity.class);
                 cursor.moveToPosition(position);
                 long test_id = cursor.getLong(0); //Test-Id aus dem Cursor holen
                 intent1.putExtra("testID", test_id);

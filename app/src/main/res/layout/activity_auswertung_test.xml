@@ -206,7 +206,7 @@
         app:layout_constraintVertical_bias="0.905" />
 
     <TextView
-        android:id="@+id/textViewLearn"
+        android:id="@+id/textViewAuf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -222,7 +222,7 @@
         app:layout_constraintVertical_bias="0.729" />
 
     <TextView
-        android:id="@+id/textViewUse"
+        android:id="@+id/textViewErw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.example.flaus.susea.Adapter.AdapterStudien;
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieISONORMActivity;
 import com.example.flaus.susea.Datenbank;
 import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
@@ -89,14 +90,14 @@ public class ISO_ListViewStudienActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(context, AuswertungStudieActivity.class);
+                Intent intent = new Intent(context, AuswertungStudieISONORMActivity.class);
                 //ID der Studie raussuchen, die angeklickt wurde
                 cursor.moveToPosition(position);
                 long studie_id = cursor.getLong(0);
                 intent.putExtra("studienId", studie_id);
                 String studienName = cursor.getString(1);
                 cursor.close();
-                Log.d("thomas", "studienName: " + studienName);
+                Log.d("Jule", "ListView - Name der Angeklickten Studie: " + studienName + " ID: " + studie_id);
                 intent.putExtra("studienName",studienName);
                 startActivity(intent);
 

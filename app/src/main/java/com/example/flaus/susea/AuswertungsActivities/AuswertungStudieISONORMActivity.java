@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flaus.susea.Datenbank;
+import com.example.flaus.susea.ListViewActivities.ISO_ListViewStudienActivity;
+import com.example.flaus.susea.ListViewActivities.ISO_ListViewTestsActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewStudienActivity;
 import com.example.flaus.susea.ListViewActivities.ListViewTestsActivity;
 import com.example.flaus.susea.R;
@@ -192,7 +194,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
                 if(anzahl_tests == 0){
                     Toast.makeText(AuswertungStudieISONORMActivity.this,"Noch keine Tests innerhalb der Studie!",Toast.LENGTH_SHORT).show();
                 }else {
-                    Intent intent1 = new Intent(getBaseContext(), ListViewTestsActivity.class);
+                    Intent intent1 = new Intent(getBaseContext(), ISO_ListViewTestsActivity.class);
                     intent1.putExtra("studienId", studienId);
                     startActivity(intent1);
                 }
@@ -200,7 +202,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
 
             case R.id.actionAlleStudienEinsehen:
                 boolean kommeVonderStartseite = false;
-                Intent intent2 = new Intent(getBaseContext(), ListViewStudienActivity.class);
+                Intent intent2 = new Intent(getBaseContext(), ISO_ListViewStudienActivity.class);
                 intent2.putExtra("kommeVonDerStartseite",kommeVonderStartseite);
                 startActivity(intent2);
                 return true;

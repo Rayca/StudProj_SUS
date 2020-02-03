@@ -316,6 +316,14 @@ public class Datenbank extends SQLiteOpenHelper {
           return cursor;
       }
 
+    //Gibt einen einzelnen  ISONORM Test in einem Cursor zurück
+    public Cursor getTestByIdISO(long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ TABELLE_TEST_ISO + " WHERE " + SPALTE_TEST_ID_ISO  + " = " + id, null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
 
     //Fügt einen neuen Test in die DB ein
     // Die ID des Tests wird automatisch beim Einfügen erzeugt und als long zurückgegeben
@@ -440,6 +448,15 @@ public class Datenbank extends SQLiteOpenHelper {
     public Cursor selectTestsByStudienIdSorted( long studienId){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT "+SPALTE_TEST_ID+" as _id, "+SPALTE_DATUM+", "+SPALTE_SCORE+" FROM " + TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = "+studienId+"" + " ORDER BY " + SPALTE_DATUM + " DESC ";
+
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
+    public Cursor selectTestsByStudienIdSortedISO( long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_TEST_ID_ISO+" as _id, "+SPALTE_DATUM_ISO+", "+SPALTE_SCORE_ISO+" FROM " + TABELLE_TEST_ISO + " WHERE " + SPALTE_STUDIE_ID_ISO + " = "+studienId+"" + " ORDER BY " + SPALTE_DATUM_ISO + " DESC ";
 
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();

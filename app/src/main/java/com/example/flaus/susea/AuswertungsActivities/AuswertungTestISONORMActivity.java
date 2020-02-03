@@ -2,10 +2,10 @@ package com.example.flaus.susea.AuswertungsActivities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +21,7 @@ import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 
 /* Zeigt die Antworten aus einem einzelnen Test an */
-public class AuswertungTestActivity extends AppCompatActivity {
+public class AuswertungTestISONORMActivity extends AppCompatActivity {
 
 
 
@@ -33,7 +33,7 @@ public class AuswertungTestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auswertung_test);
+        setContentView(R.layout.activity_auswertung_test_isonorm);
         Datenbank db = new Datenbank(this);
 
         // Toolbar
@@ -60,14 +60,30 @@ public class AuswertungTestActivity extends AppCompatActivity {
         TextView f8 = findViewById(R.id.textViewF8);
         TextView f9 = findViewById(R.id.textViewF9);
         TextView f10 = findViewById(R.id.textViewF10);
-        TextView anzeige_usability = findViewById(R.id.textViewErw);
-        TextView anzeige_learnability = findViewById(R.id.textViewAuf);
+        TextView f11 = findViewById(R.id.textViewF11);
+        TextView f12 = findViewById(R.id.textViewF12);
+        TextView f13 = findViewById(R.id.textViewF13);
+        TextView f14 = findViewById(R.id.textViewF14);
+        TextView f15 = findViewById(R.id.textViewF15);
+        TextView f16= findViewById(R.id.textViewF16);
+        TextView f17 = findViewById(R.id.textViewF17);
+        TextView f18 = findViewById(R.id.textViewF18);
+        TextView f19 = findViewById(R.id.textViewF19);
+        TextView f20 = findViewById(R.id.textViewF20);
+        TextView f21 = findViewById(R.id.textViewF21);
+        TextView anzeige_auf = findViewById(R.id.textViewAuf);
+        TextView anzeige_sel = findViewById(R.id.textViewSel);
+        TextView anzeige_ste = findViewById(R.id.textViewSteu);
+        TextView anzeige_erw = findViewById(R.id.textViewErw);
+        TextView anzeige_feh = findViewById(R.id.textViewFeh);
+        TextView anzeige_ind = findViewById(R.id.textViewInd);
+        TextView anzeige_ler = findViewById(R.id.textViewLer);
 
 
         Intent intent = getIntent();
         test_id = intent.getLongExtra("testID", -1);
         studienId = intent.getLongExtra("studienId", -1);
-        Cursor c = db.getTestById(test_id);
+        Cursor c = db.getTestByIdISO(test_id);
 
 
        btnZurStudie = findViewById(R.id.btnZurStudie);
@@ -85,9 +101,9 @@ public class AuswertungTestActivity extends AppCompatActivity {
 
 
         //Die TextViews alle füllen mit den Daten aus dem Cursor
-        anzeige_alter.setText("Alter: " + c.getInt(12));
-        anzeige_geschlecht.setText("Geschlecht: "+ c.getString(13));
-        anzeige_score.setText("Score: "+ c.getInt(14));
+        anzeige_alter.setText("Alter: " + c.getInt(23));
+        anzeige_geschlecht.setText("Geschlecht: "+ c.getString(24));
+        anzeige_score.setText("Score: "+ c.getInt(25));
         f1.setText("Frage 1:  " + c.getInt(2));
         f2.setText("Frage 2:  " + c.getInt(3));
         f3.setText("Frage 3:  " + c.getInt(4));
@@ -98,10 +114,24 @@ public class AuswertungTestActivity extends AppCompatActivity {
         f8.setText("Frage 8:  " + c.getInt(9));
         f9.setText("Frage 9:  " + c.getInt(10));
         f10.setText("Frage 10:  " + c.getInt(11));
-        anzeige_usability.setText("Usability: " + c.getInt(17));
-        anzeige_learnability.setText("Learnability: " + c.getInt(18));
-        Log.d("subscales","Usability: "+c.getInt(17));
-        Log.d("subscales","Learnability: "+c.getInt(18));
+        f11.setText("Frage 11:  " + c.getInt(12));
+        f12.setText("Frage 12:  " + c.getInt(13));
+        f13.setText("Frage 13:  " + c.getInt(14));
+        f14.setText("Frage 14:  " + c.getInt(15));
+        f15.setText("Frage 15:  " + c.getInt(16));
+        f16.setText("Frage 16:  " + c.getInt(17));
+        f17.setText("Frage 17:  " + c.getInt(18));
+        f18.setText("Frage 18:  " + c.getInt(19));
+        f19.setText("Frage 19:  " + c.getInt(20));
+        f20.setText("Frage 20:  " + c.getInt(21));
+        f21.setText("Frage 21:  " + c.getInt(22));
+        anzeige_auf.setText("Aufgabenangemessenheit: " + c.getInt(28));
+        anzeige_sel.setText("Selbstbeschreibungsfähigkeit: " + c.getInt(29));
+        anzeige_ste.setText("Steuerbarkeit: " + c.getInt(30));
+        anzeige_erw.setText("Erwartungskonformität: " + c.getInt(31));
+        anzeige_feh.setText("Fehlertoleranz: " + c.getInt(32));
+        anzeige_ind.setText("Individualisierbarkeit: " + c.getInt(33));
+        anzeige_ler.setText("Lernförderlichkeit: " + c.getInt(34));
 
     }
 
