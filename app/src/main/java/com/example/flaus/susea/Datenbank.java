@@ -80,6 +80,8 @@ public class Datenbank extends SQLiteOpenHelper {
     public static final String SPALTE_STUDIE_LEARNABILITY = "Studie_Learnability_gesamt";
 
     //Konstanten für die Studien-Datenbank für ISONORM
+    public static final String SPALTE_STUDIENGANG_ISO = "Studiengang";
+    public static final String SPALTE_SEMESTER_ISO = "Semester";
     public static final String TABELLE_STUDIE_ISO = "Studie_ISO";
     public static final String SPALTE_STUDIE_ID_ISO = "Studie_ID_ISO";
     public static final String SPALTE_STUDIE_NAME_ISO = "Studie_Name_ISO";
@@ -137,7 +139,9 @@ public class Datenbank extends SQLiteOpenHelper {
                         SPALTE_TEST_ERWARTUNGSKONFORMITAET + " DOUBLE," +
                         SPALTE_TEST_FEHLERTOLERANZ + " DOUBLE," +
                         SPALTE_TEST_INDIVIDUALISIERBARKEIT + " DOUBLE," +
-                        SPALTE_TEST_LERNFOERDERLICHKEIT + " DOUBLE" +
+                        SPALTE_TEST_LERNFOERDERLICHKEIT + " DOUBLE," +
+                        SPALTE_STUDIENGANG_ISO + " TEXT," +
+                        SPALTE_SEMESTER_ISO + " TEXT" +
                         ")"
         );
 
@@ -375,7 +379,7 @@ public class Datenbank extends SQLiteOpenHelper {
     //Test für ISONORM in die DB eintragen
     // Die ID des Tests wird automatisch beim Einfügen erzeugt und als long zurückgegeben
     //TODO:: int usabilty und int learnability und int score in der Doku beschreiben?
-    public long insertTestISO(int[] antworten, int alter, String geschlecht, String datum, long studienId, double score_gesamt,double aufgabenangemessenheit,double selbstbeschreibungsfaehigkeit, double steuerbarkeit, double erwartungskonformitaet,  double fehlertoleranz, double individualisierbarkeit, double lernfoerderlichkeit) {
+    public long insertTestISO(int[] antworten, int alter, String geschlecht,String studiengang,String semester, String datum, long studienId, double score_gesamt,double aufgabenangemessenheit,double selbstbeschreibungsfaehigkeit, double steuerbarkeit, double erwartungskonformitaet,  double fehlertoleranz, double individualisierbarkeit, double lernfoerderlichkeit) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues neueZeile = new ContentValues();
         neueZeile.put(SPALTE_FRAGE1_ISO, antworten[0]);
@@ -411,6 +415,8 @@ public class Datenbank extends SQLiteOpenHelper {
         neueZeile.put(SPALTE_TEST_FEHLERTOLERANZ, fehlertoleranz);
         neueZeile.put(SPALTE_TEST_INDIVIDUALISIERBARKEIT, individualisierbarkeit);
         neueZeile.put(SPALTE_TEST_LERNFOERDERLICHKEIT, lernfoerderlichkeit);
+        neueZeile.put(SPALTE_STUDIENGANG_ISO, studiengang);
+        neueZeile.put(SPALTE_SEMESTER_ISO, semester);
         Log.d("Jule", "score, der in die db geschrieben wird: " +score_gesamt);
 
         //Neuen Test in die DB einfügen

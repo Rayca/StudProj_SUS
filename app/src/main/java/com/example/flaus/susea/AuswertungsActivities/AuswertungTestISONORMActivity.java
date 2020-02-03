@@ -92,6 +92,8 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
         TextView anzeige_ler = findViewById(R.id.textViewLer);
         TextView anzeige_dat = findViewById(R.id.textViewDatum);
         TextView anzeige_name = findViewById(R.id.textViewStudName);
+        TextView anzeige_studiengang = findViewById(R.id.textViewStudiengang);
+        TextView anzeige_semester = findViewById(R.id.textViewSemester);
 
 
         Intent intent = getIntent();
@@ -152,7 +154,8 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
         anzeige_feh.setText("Fehlertoleranz: " + String.format("%.2f",c.getDouble(32)));
         anzeige_ind.setText("Individualisierbarkeit: " + String.format("%.2f",c.getDouble(33)));
         anzeige_ler.setText("Lernförderlichkeit: " + String.format("%.2f",c.getDouble(34)));
-
+        anzeige_studiengang.setText("Studiengang: "+ c.getString(35));
+        anzeige_semester.setText("Semester: "+ c.getString(36));
     }
 
 

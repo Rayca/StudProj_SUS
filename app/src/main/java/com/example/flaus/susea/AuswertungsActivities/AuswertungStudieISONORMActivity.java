@@ -36,7 +36,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
     TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests,textViewAufgabenangemesseneheit, textViewSelbstbeschreibungsfaehigkeit, textViewSteuerbarkeit, textViewErwartungskonformitaet, textViewFehlertoleranz, textViewIndividualisierbarkeit, textViewLernfoeerdlichkeit;
     long studienId;
     int score = 0;
-    String studienName;
+    String studienName,interfacetyp;
     int anzahl_tests;
     Toolbar toolbar;
     Datenbank db = new Datenbank(this);
@@ -59,6 +59,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
         Cursor c = db.getStudieByIdISO(studienId);
         c.moveToFirst();
         anzahl_tests = c.getInt(3);
+        interfacetyp = c.getString(2);
 
 
 
@@ -156,6 +157,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), TestActivity_ISO.class);
                 i.putExtra("studienId", studienId);
+                i.putExtra("interfacetyp",interfacetyp);
                 startActivity(i);
             }
         });

@@ -27,7 +27,7 @@ import static java.lang.Integer.valueOf;
 public class TestActivity_ISO extends AppCompatActivity {
 
 
-    EditText eingabe_alter;
+    EditText eingabe_alter,eingabe_studiengang,eingabe_semester;
     TextView textViewUeberschrift;
     TextView textViewFrageLinks;
     TextView textViewFrageRechts;
@@ -37,7 +37,7 @@ public class TestActivity_ISO extends AppCompatActivity {
     Button btnWeiter;
     int[] antworten = new int[21];
     int index = 0;
-    String alter;
+    String alter,studiengang,semester;
     int alterInt;
     boolean studie;
     long studienId = -1;
@@ -121,8 +121,9 @@ public class TestActivity_ISO extends AppCompatActivity {
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup_AntwortenISO);
 
         //TODO: Frage + Nummer wieder anzeigen
-       // textViewUeberschrift = (TextView) findViewById(R.id.textView_Ueberschrift);
-        //textViewUeberschrift.setText("Frage " + (index + 1));
+        textViewUeberschrift = (TextView) findViewById(R.id.textView_FragenISO);
+        int i = index + 1;
+        textViewUeberschrift.setText("Frage " + i + ": Die "+interfacetyp+"...");
 
 
         textViewFrageLinks = (TextView) findViewById(R.id.textView_FrageLinks);
@@ -200,7 +201,7 @@ public class TestActivity_ISO extends AppCompatActivity {
         //Setzt wieder alle RadioButtons auf unchecked
         radioGroup.clearCheck();
         index = index + 1;
-        //textViewUeberschrift.setText("Frage " + (index + 1));
+        textViewUeberschrift.setText("Frage " + (index + 1)+ ": Die "+interfacetyp+"...");
         progessBar.incrementProgressBy(1);
         if (index < texteFragen_links.length) {
             textViewFrageLinks.setText(texteFragen_links[index]);
@@ -216,15 +217,28 @@ public class TestActivity_ISO extends AppCompatActivity {
             //Eingegebne Daten sammeln
             //TODO: evtl Numberpicker statt EditText
             eingabe_alter = (EditText) findViewById(R.id.textEdit_alterISO);
+            eingabe_studiengang = (EditText) findViewById(R.id.textEdit_StudiengangISO);
+            eingabe_semester = (EditText) findViewById(R.id.textEdit_SemesterISO);
             //TODO: sicher stellen, dass eine sinnvolle Zahl eingegben wurde
             alter = eingabe_alter.getText().toString();
+            studiengang = eingabe_studiengang.getText().toString();
+            semester = eingabe_semester.getText().toString();
             Log.d("alter","alter: \""+alter+"\"");
             try {
                 alterInt = valueOf(alter);
             }catch (NumberFormatException e){
                 alter = "";
             }
-            if(alter!="") {
+            if(alter=="") {
+                Toast.makeText(TestActivity_ISO.this, "Bitte geben Sie Ihr Alter ein.", Toast.LENGTH_SHORT).show();
+            }
+            else if(studiengang==""){
+                Toast.makeText(TestActivity_ISO.this, "Bitte geben Sie Ihren Studiengang ein.", Toast.LENGTH_SHORT).show();
+            }
+            else if(semester==""){
+                Toast.makeText(TestActivity_ISO.this, "Bitte geben Sie Ihr Semester ein.", Toast.LENGTH_SHORT).show();
+            }
+            else{
                 //Geschlecht auswerten
                 int radioButtonId = radioGroup_geschlecht.getCheckedRadioButtonId();
                 String geschlecht = "";
@@ -254,7 +268,7 @@ public class TestActivity_ISO extends AppCompatActivity {
 
 
                 //gesammelte Daten in die Datenbank schreiben
-                testId = manager.insertTestISO(antworten, alterInt, geschlecht, datum, studienId, score_gesamt, aufgabenangemessenheit, selbstbeschreibungsfaehigkeit, steuerbarkeit, erwartungskonformitaet, fehlertoleranz, individualisierbarkeit, lernfoerderlichkeit);
+                testId = manager.insertTestISO(antworten, alterInt, geschlecht,studiengang,semester, datum, studienId, score_gesamt, aufgabenangemessenheit, selbstbeschreibungsfaehigkeit, steuerbarkeit, erwartungskonformitaet, fehlertoleranz, individualisierbarkeit, lernfoerderlichkeit);
                 manager.updateISOStudie(studienId);
                 Log.d("TJ", "test_id vor intent" + testId);
                 Log.d("studId", "StudieIdISO in TestActivityISO = " + studienId);
@@ -267,8 +281,6 @@ public class TestActivity_ISO extends AppCompatActivity {
                 // Endscreen
 
                 endScreen();
-            }else{
-                Toast.makeText(TestActivity_ISO.this, "Bitte geben Sie Ihr Alter ein.", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -288,7 +300,7 @@ public class TestActivity_ISO extends AppCompatActivity {
         ConstraintLayout layoutZustimmung = (ConstraintLayout) findViewById(R.id.layoutZustimmungISO);
 
 
-        //textViewUeberschrift.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
+        textViewUeberschrift.setText("Bitte geben Sie noch Ihr Alter und Geschlecht an.");
         btnWeiter.setText("Test beenden");
 
         layoutZustimmung.setVisibility((View.GONE));
@@ -305,7 +317,7 @@ public class TestActivity_ISO extends AppCompatActivity {
     //Außerdem wird hier der Intent anbeschickt, der zur Auswertung der Studie weiterleitet
     public void endScreen(){
             LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_letzeSeiteTestISO);
-            //textViewUeberschrift.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
+            textViewUeberschrift.setText("Vielen Dank für Ihre Teilnahme, Sie sind fertig! Bitte geben Sie das Gerät zurück.");
             layout.setVisibility(View.GONE);
             btnWeiter.setEnabled(true);
             btnWeiter.setOnClickListener(new View.OnClickListener() {
