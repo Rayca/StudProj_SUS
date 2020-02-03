@@ -59,12 +59,16 @@
                 android:id="@+id/radioButton_SUS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
                 android:text="System Usability Scale"></RadioButton>
 
             <RadioButton
                 android:id="@+id/radioButton_ISONORM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
                 android:text="ISONORM"></RadioButton>
 
         </RadioGroup>
