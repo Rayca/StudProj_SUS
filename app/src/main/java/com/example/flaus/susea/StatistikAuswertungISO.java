@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieActivity;
+import com.example.flaus.susea.AuswertungsActivities.AuswertungStudieISONORMActivity;
 
 import static com.example.flaus.susea.Datenbank.SPALTE_SCORE_ISO;
 
@@ -61,26 +62,36 @@ public class StatistikAuswertungISO extends AppCompatActivity {
         textMittelwert = (TextView) findViewById(R.id.textMittelwert);
         textStandardAbweichung = (TextView) findViewById(R.id.textStandardabweichung);
         textMedian = (TextView) findViewById(R.id.textMedian);
+        textViewMinimum = (TextView) findViewById(R.id.textViewMinimum);
+        textViewMaximum = (TextView) findViewById(R.id.textViewMaximum);
         btnZurStudie = (Button) findViewById(R.id.btnZurStudie);
 
         //Cursor mit Daten holen
         Cursor scoreCursor = db.selectScoresByStudienIdISO_sorted(studienId);
+        scoreCursor.moveToFirst();
 
 
         mittelwert = Statistik.mittelWertISO(scoreCursor ,SPALTE_SCORE_ISO);
-        standartabweichung = Statistik.berechneStandardabweichung(scoreCursor, SPALTE_SCORE_ISO);
+        if (anzahlTests<2){
+            standartabweichung = 0;
+            textStandardAbweichung.setText(textStandardAbweichung.getText() +" zu wenige Tests");
+        }
+        else{
+            standartabweichung = Statistik.berechneStandardabweichung(scoreCursor, SPALTE_SCORE_ISO);
+            textStandardAbweichung.setText(textStandardAbweichung.getText() +" " + String.format("%.2f",standartabweichung));
+        }
         median = Statistik.berechneMedian(scoreCursor, SPALTE_SCORE_ISO);
 
         //TextViews füllen
         textViewNameStudie.setText(studienName);
         textViewNameStudie.setPaintFlags(textViewNameStudie.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
-        textMittelwert.setText(textMittelwert.getText() +" " + mittelwert);
-        textStandardAbweichung.setText(textStandardAbweichung.getText() +" " + standartabweichung);
-        textMedian.setText(textMedian.getText()+" " + median);
-        int index = anzahlTests-1;
-        double minimum = scoreCursor.getDouble(index);
-        textViewMinimum.setText("" + minimum);
-        textViewMaximum.setText("" + scoreCursor.getDouble(0));
+        textMittelwert.setText(textMittelwert.getText() +" " + String.format("%.2f",mittelwert));
+        textMedian.setText(textMedian.getText()+" " + String.format("%.2f",median));
+        scoreCursor.moveToLast();
+        textViewMinimum.setText("" + String.format("%.2f",scoreCursor.getDouble(0)));
+        scoreCursor.moveToFirst();
+        textViewMaximum.setText("" + String.format("%.2f",scoreCursor.getDouble(0)));
+        scoreCursor.moveToFirst();
 
 
 
@@ -103,8 +114,7 @@ public class StatistikAuswertungISO extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
-                Log.d("thomas", "home wurde gedrückt");
-                Intent intent = new Intent(getBaseContext(), AuswertungStudieActivity.class);
+                Intent intent = new Intent(getBaseContext(), AuswertungStudieISONORMActivity.class);
                 intent.putExtra("studienName", studienName);
                 intent.putExtra("studienId", studienId);
                 startActivity(intent);
@@ -125,7 +135,11 @@ public class StatistikAuswertungISO extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-
+        NavUtils.navigateUpFromSameTask(this);
+        Intent intent = new Intent(getBaseContext(), AuswertungStudieISONORMActivity.class);
+        intent.putExtra("studienName", studienName);
+        intent.putExtra("studienId", studienId);
+        startActivity(intent);
     }
 
 

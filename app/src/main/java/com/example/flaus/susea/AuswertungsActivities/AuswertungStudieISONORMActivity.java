@@ -222,6 +222,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
                     Intent intent3 = new Intent(getBaseContext(), StatistikAuswertungISO.class);
                     intent3.putExtra("studienId", studienId);
                     intent3.putExtra("anzahlTests",anzahl_tests);
+                    intent3.putExtra("studienName", studienName);
                     startActivity(intent3);
                 }
 
@@ -235,7 +236,8 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-
+        Intent intent = new Intent(getBaseContext(),StartActivity.class);
+        startActivity(intent);
     }
 
 }

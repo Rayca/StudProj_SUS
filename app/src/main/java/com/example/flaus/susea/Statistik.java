@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.lang.*;
 
 //GANZ VIEL MATHEMATIK UND STATISTIK !! DANGER !!
 /* Stellt die mathematischen Funktionen zu Verfügung um Kennzahlen für Studien zu berechnen */
@@ -25,8 +26,8 @@ public class Statistik {
 
     //Berechnet Standartabweichung des Scores in einer Studie
     public static double berechneStandardabweichung(Cursor cursor, String Spalte){
-        double varianz = 0;
-        double standardAbweichung = 0;
+        double varianz= 0,varianzkorr = 0;
+        double standardAbweichung = 0,standardAbweichungkorr = 0;
         double mittelWert = mittelWertISO(cursor, Spalte);
 
         ArrayList<Double> scoreList = new ArrayList<>();
@@ -36,16 +37,22 @@ public class Statistik {
             scoreList.add(cursor.getDouble(cursor.getColumnIndex(Spalte)));
             cursor.moveToNext();
         }
-
+        Log.d("Jule","SCORELIST LÄNGE: "+scoreList.size());
+        Log.d("Jule","CURSOR LÄNGE: "+cursor.getCount());
+        Log.d("Jule","MITTELWERT: "+mittelWert);
+        cursor.moveToFirst();
         for(int i = 0;i<scoreList.size();i++){
             varianz+=(scoreList.get(i) - mittelWert)*(scoreList.get(i) - mittelWert);
         }
-        varianz = varianz/(scoreList.size()-1);
+        varianzkorr=varianz;
+        varianz = (double) varianz/(scoreList.size());
+        varianzkorr = (double) varianzkorr/(scoreList.size()-1);
+        Log.d("Jule","VARIANZ: "+varianz);
+        Log.d("Jule","VARIANZ KORRIGIERT: "+varianzkorr);
         standardAbweichung = Math.sqrt(varianz);
-
-        double zwischenErgebnis = standardAbweichung*100;
-        zwischenErgebnis = (int) zwischenErgebnis;
-        standardAbweichung= zwischenErgebnis/100;
+        standardAbweichungkorr = Math.sqrt(varianzkorr);
+        Log.d("Jule","Standardabweichung: "+standardAbweichung);
+        Log.d("Jule","Standardabweichung korrigiert: "+standardAbweichungkorr);
         return standardAbweichung;
     }
 
@@ -72,12 +79,12 @@ public class Statistik {
 
     public static double mittelWertISO(Cursor cursor, String Spalte){
         double result;
-        int wert = 0;
+        double wert = 0;
 
-        ArrayList<Integer> scoreList = new ArrayList<>();
+        ArrayList<Double> scoreList = new ArrayList<>();
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            scoreList.add(cursor.getInt(cursor.getColumnIndex(Spalte)));
+            scoreList.add(cursor.getDouble(cursor.getColumnIndex(Spalte)));
             cursor.moveToNext();
         }
 

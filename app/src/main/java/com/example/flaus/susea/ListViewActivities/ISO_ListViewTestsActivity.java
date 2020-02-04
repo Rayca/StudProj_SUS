@@ -142,7 +142,6 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
                 intent1.putExtra("studie",studie);
                 intent1.putExtra("studienName", studienName);
                 startActivity(intent1);
-                Log.d("thomas", "Default");
                 return true;
 
 
@@ -150,6 +149,10 @@ public class ISO_ListViewTestsActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-
+        Intent intent1 = new Intent(getBaseContext(), AuswertungStudieISONORMActivity.class);
+        intent1.putExtra("studienId", studienId);
+        intent1.putExtra("studie",studie);
+        intent1.putExtra("studienName", studienName);
+        startActivity(intent1);
     }
 }

@@ -147,6 +147,7 @@ public class ISO_ListViewStudienActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-
+        Intent intent = new Intent(getBaseContext(), StartActivity.class);
+        startActivity(intent);
     }
 }
