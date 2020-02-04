@@ -25,6 +25,7 @@ import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.Statistik;
 import com.example.flaus.susea.StatistikAuswertung;
+import com.example.flaus.susea.StatistikAuswertungISO;
 import com.example.flaus.susea.TestActivity;
 import com.example.flaus.susea.TestActivity_ISO;
 
@@ -33,7 +34,7 @@ import com.example.flaus.susea.TestActivity_ISO;
 public class AuswertungStudieISONORMActivity extends AppCompatActivity {
 
 
-    TextView textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests,textViewAufgabenangemesseneheit, textViewSelbstbeschreibungsfaehigkeit, textViewSteuerbarkeit, textViewErwartungskonformitaet, textViewFehlertoleranz, textViewIndividualisierbarkeit, textViewLernfoeerdlichkeit;
+    TextView textViewInterfacetyp, textViewNameStudie ,textViewGesamtScore, textViewAnzahlTests,textViewAufgabenangemesseneheit, textViewSelbstbeschreibungsfaehigkeit, textViewSteuerbarkeit, textViewErwartungskonformitaet, textViewFehlertoleranz, textViewIndividualisierbarkeit, textViewLernfoeerdlichkeit;
     long studienId;
     int score = 0;
     String studienName,interfacetyp;
@@ -75,6 +76,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
         textViewFehlertoleranz = (TextView) findViewById(R.id.textView_Fehlertoleranz);
         textViewIndividualisierbarkeit = (TextView) findViewById(R.id.textView_Individualisierbarkeit);
         textViewLernfoeerdlichkeit = (TextView) findViewById(R.id.textView_Lernfoerderlichkeit);
+        textViewInterfacetyp = (TextView) findViewById(R.id.textViewInterfacetyp);
         Button btnNeuerTest = findViewById(R.id.btnNeuerTest);
 
 
@@ -141,6 +143,8 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
             //double studieLernfoerderlichkeit = Statistik.berechneLernfoerderlichkeit(lernfCursor);
             //lernfCursor.close();
             textViewLernfoeerdlichkeit.setText("" + String.format("%.2f",c.getDouble(11)));
+
+            textViewInterfacetyp.setText(" " + c.getString(2));
         }
 
 
@@ -215,7 +219,7 @@ public class AuswertungStudieISONORMActivity extends AppCompatActivity {
                 if(anzahl_tests == 0){
                     Toast.makeText(AuswertungStudieISONORMActivity.this,"Noch keine Tests innerhalb der Studie!",Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent3 = new Intent(getBaseContext(), StatistikAuswertung.class);
+                    Intent intent3 = new Intent(getBaseContext(), StatistikAuswertungISO.class);
                     intent3.putExtra("studienId", studienId);
                     intent3.putExtra("anzahlTests",anzahl_tests);
                     startActivity(intent3);

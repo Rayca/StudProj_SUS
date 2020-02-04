@@ -25,6 +25,8 @@ import com.example.flaus.susea.Statistik;
 import com.example.flaus.susea.StatistikAuswertung;
 import com.example.flaus.susea.TestActivity;
 
+import static com.example.flaus.susea.Datenbank.SPALTE_SCORE;
+
 /* Übernimmmt die Auswertung und Darstellung der gesammelten Daten eines einzelnen Tests */
 
 public class AuswertungStudieActivity extends AppCompatActivity {
@@ -103,7 +105,7 @@ public class AuswertungStudieActivity extends AppCompatActivity {
             double learnabilityStudie = Statistik.berechneLearnability(learnabilityCursor);
             textViewLearnabilityScore.setText("" + learnabilityStudie);
 
-            standartabweichung = Statistik.berechneStandardabweichung(scoreCursor);
+            standartabweichung = Statistik.berechneStandardabweichung(scoreCursor, SPALTE_SCORE);
             textViewStandardAbweichung.setText(textViewStandardAbweichung.getText() +" " + standartabweichung);
         }
 

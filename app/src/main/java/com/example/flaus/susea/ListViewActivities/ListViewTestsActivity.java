@@ -23,6 +23,8 @@ import com.example.flaus.susea.R;
 import com.example.flaus.susea.StartActivity;
 import com.example.flaus.susea.Statistik;
 
+import static com.example.flaus.susea.Datenbank.SPALTE_SCORE;
+
 //Füllt und verwaltet das ListView, mit dem alle Tests aus der DB als Liste angezeigt werden können
 public class ListViewTestsActivity extends AppCompatActivity {
 
@@ -63,7 +65,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
 
 
         Cursor testCursor = db.selectScoresByStudienId(studienId);
-        int median = Statistik.berechneMedian(testCursor);
+        double median = Statistik.berechneMedian(testCursor, SPALTE_SCORE);
 
 
         // ListView füllen
@@ -71,7 +73,7 @@ public class ListViewTestsActivity extends AppCompatActivity {
         int itemLayout = R.layout.test_list_item_layout;
         final Cursor cursor = db.selectTestsByStudienIdSorted(studienId);
         Log.d("Jule", " Länge des Cursor " + cursor.getCount());
-        final String[] from = new String[]{db.SPALTE_DATUM, db.SPALTE_SCORE};
+        final String[] from = new String[]{db.SPALTE_DATUM, SPALTE_SCORE};
         int[] to = new int[]{R.id.textView_TestDatum, R.id.textView_TestScore};
 
         final AdapterTests adapterTests = new AdapterTests(context,itemLayout,cursor,from,to,0);

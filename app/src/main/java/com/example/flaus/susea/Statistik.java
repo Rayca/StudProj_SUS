@@ -24,16 +24,16 @@ public class Statistik {
     // table befüllen
 
     //Berechnet Standartabweichung des Scores in einer Studie
-    public static double berechneStandardabweichung(Cursor cursor){
+    public static double berechneStandardabweichung(Cursor cursor, String Spalte){
         double varianz = 0;
         double standardAbweichung = 0;
-        double mittelWert = mittelWert(cursor);
+        double mittelWert = mittelWertISO(cursor, Spalte);
 
-        ArrayList<Integer> scoreList = new ArrayList<>();
+        ArrayList<Double> scoreList = new ArrayList<>();
         cursor.moveToFirst();
 
         while(!cursor.isAfterLast()){
-            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
+            scoreList.add(cursor.getDouble(cursor.getColumnIndex(Spalte)));
             cursor.moveToNext();
         }
 
@@ -278,17 +278,17 @@ public class Statistik {
     }
 
     //Berechnet Median einer Studie
-    public static int berechneMedian(Cursor cursor){
-        int median=0;
+    public static double berechneMedian(Cursor cursor, String Spalte){
+        double median=0;
 
-        ArrayList<Integer> scoreList = new ArrayList<>();
+        ArrayList<Double> scoreList = new ArrayList<>();
         cursor.moveToFirst();
         Log.d("median","scoreList wurde erstellt.");
         while(!cursor.isAfterLast()){
             Log.d("median","scoreList wird gefüllt.");
 
-            scoreList.add(cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
-            Log.d("median","scoreList SPALTE: "+cursor.getInt(cursor.getColumnIndex(Datenbank.SPALTE_SCORE)));
+            scoreList.add(cursor.getDouble(cursor.getColumnIndex(Spalte)));
+            Log.d("median","scoreList SPALTE: "+cursor.getDouble(cursor.getColumnIndex(Spalte)));
 
             cursor.moveToNext();
         }

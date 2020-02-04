@@ -486,6 +486,15 @@ public class Datenbank extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor;
     }
+
+    public Cursor selectScoresByStudienIdISO_sorted(long studienId){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT "+SPALTE_SCORE_ISO+" FROM "+ TABELLE_TEST_ISO + " WHERE " + SPALTE_STUDIE_ID_ISO + " = " + studienId+"" + " ORDER BY " + SPALTE_SCORE_ISO + " DESC ";
+        Log.d("median","StudienId = "+studienId);
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
     public Cursor selectUsabilityByStudienId(long studienId){
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT "+SPALTE_TEST_USABILITY+" FROM "+ TABELLE_TEST + " WHERE " + SPALTE_STUDIE_ID + " = " + studienId+"";

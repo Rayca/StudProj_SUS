@@ -65,6 +65,10 @@
             android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".StatistikAuswertungISO"
+            android:parentActivityName=".AuswertungsActivities.AuswertungStudieISONORMActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".AuswertungsActivities.AuswertungStudieISONORMActivity"
             android:screenOrientation="portrait"/>
 

@@ -48,49 +48,65 @@ public class TestActivity_ISO extends AppCompatActivity {
     String interfacetyp;
     Datenbank manager = new Datenbank(this);
     //Fragen aus dem ISONORM Fragebogen
-    String[] texteFragen_links = {"bietet nicht alle Funktionen, um die anfallenden Aufgaben effizient zu bewältigen.",
+    String[] texteFragen_links = {
+            //Fragen zu Aufgabenangemessenheit
+            "ist kompliziert zu bedienen.",
+            "bietet nicht alle Funktionen, um die anfallenden Aufgaben effizient zu bewältigen.",
             "erfordert überflüssige Eingaben.",
-            "ist schlecht auf die Anforderungen der Arbeit zugeschnitten",
+            //Fragen zu Aufgabenangemessenheit
+            "bietet einen schlechten Überblick über ihr Funktionsangebot.",
+            "verwendet schlecht verständliche Begriffe, Bezeichnungen, Abkürzungen oder Symbole in Masken und Menüs.",
             "liefert in unzureichendem Maße Informationen darüber, welche Eingaben zuverlässig oder nötig sind.",
-            "bietet auf Verlangen keine situationsspezifischen Erklärungen, die konkret weiterhelfen.",
-            "bietet von sich aus keine situationsspezifischen Erklärungen, die konkret weiterhelfen.",
+            //Fragen zu Steuerbarkeit
             "erzwingt eine unnötig starre Einhaltung von Berarbeitungsschritten.",
-            "ermöglicht keinen leichten Wechsel zwischen einzelnen Menüs oder Masken",
+            "Benutzer können nicht beeinflussen, welche Informationen wie am Bildschirm dargestellt werden.",
             "erzwingt unnötige Unterbrechungen der Arbeit.",
+            //Erwartungskonformität
             "erschwert die Orientierung durch eine uneinheitliche Gestaltung.",
-            "informiert in unzureichendem Maße über das, was er gerade macht.",
+            "reagiert mit schwer vorhersehbaren Bearbeitungszeiten.",
             "lässt sich nicht durchgehend nach einem einheitlichen Prinzip bedienen.",
+            //Fehlertoleranz
             "liefert schlecht verständliche Fehlermeldungen.",
-            "erdordert bei Fehlern im Großen und Ganzen keinen Korrekturaufwand.",
+            "erdordert bei Fehlern im Großen und Ganzen einen hohen Korrekturaufwand.",
             "gibt keine konkreten Hinweise zur Fehlerbehebung.",
-            "lässt sich von mir schwer erweitern, wenn für mich neue Aufgaben entstehen",
-            "lässt sich von mir schlecht an meine persänliche, individuelle Art der Arbeitserledigung anpassen.",
-            "lässt sich - im Rahmen ihrem Leistungsumfangs von mir schlecht für unterschiedliche Aufgaben passend einrichten.",
-            "erfordert viel Zeit zum Erlernen.",
-            "erfordert, dass man sich viele Details merken muss",
-            "ist schlecht ohen fremde Hilfe oder Handbuch erlernbar"};
+            //Individualisierbarkeit
+            "eignet sich für Anfänger und Experten nicht gleichermaßen.",
+            "lässt sich schlecht für unterschiedliche Aufgaben passend einrichten.",
+            "ist so gestaltet, dass die Bildschirmdarstellung schlecht an individuelle Bedürfnisse angepasst werden kann.",
+            //Lernförderlichkeit
+            "ermutigt nicht dazu, neue Funktionen auszuprobieren.",
+            "erfordert, dass man sich viele Details merken muss.",
+            "ist so gestaltet, dass sich einmal Gelerntes schlecht einprägt."};
 
-    String[] texteFragen_rechts = {"bietet alle Funktionen, um die anfallenden Aufgaben effizient zu bewältigen.",
+    String[] texteFragen_rechts = {
+            //Fragen zu Aufgabenangemessenheit
+            "ist unkompliziert zu bedienen.",
+            "bietet alle Funktionen, um die anfallenden Aufgaben effizient zu bewältigen.",
             "erfordert keine überflüssigen Eingaben.",
-            "ist gut auf die Anforderungen der Arbeit zugeschnitten.",
+            //Fragen zu Aufgabenangemessenheit
+            "bietet einen guten Überblick über ihr Funktionsangebot.",
+            "verwender gut verständliche Begriffe, Bezeichnungen, Abkürzungen oder Symbole in Masken und Menüs.",
             "liefert in zureichendem Maße Informationen darüber, welche Eingaben zulässig oder nötig sind.",
-            "bietet auf Verlangen situationsspezifische Erklärungen, die konkret weiterhelfen.",
-            "bietet von sich aus situationsspezifische Erklärungen, die konkret weiterhelfen",
+            //Fragen zu Steuerbarkeit
             "erzwingt keine unnätig starre Einhaltung von Bearbeitungsschritten.",
-            "ermöglicht einen leichten Wechsel zwischen einzelnen Menüs oder Masken",
+            "Benutzer können beeinflussen, welche Informationen wie am Bildschirm dargeboten werden.",
             "erzwingt keine unnötigen Unterbrechungen der Arbeit.",
+            //Erwartungskonformität
             "erleichtert die Orientierung durch eine einheitliche Gestaltung.",
-            "informiert in ausreichendem Maße über das, was es gerade macht.",
-            "lässt siich durchgehend nach einem einheitlichen Prinzip bedienen.",
+            "reagiert mit gut vorhersehbaren Bearbeitungszeiten.",
+            "lässt sich durchgehend nach einem einheitlichen Prinzip bedienen.",
+            //Fehlertoleranz
             "liefert gut verständliche Fehlermeldungen.",
             "erfordert bei Fehlern im Großen und Ganzen einen geringen Korrekturaufwand",
             "gibt konkrete Hinweise  zur Fehlerbehebung.",
-            "lässt sich von mir leicht erweitern, wenn für mich neue Aufgaben entstehen.",
-            "lässt sich von mit gut an meine persönliche, induviduelle Art der Arbeitserledigung anpassen.",
-            "lässt sich - im Rahmen ihres Leistungsumfangs von mir gut für unterschiedliche Aufgaben passend einrichten.",
-            "erfordert wenig Zeit zum Erlernen.",
+            //Individualisierbarkeit
+            "eignet sich für Anfänger und Experten gleichermaßen.",
+            "lässt sich gut für unterschiedliche Aufgaben passend einrichten.",
+            "ist so gestaltet, dass die Bildschirmdarstellung gut an individuelle Bedürfnisse angepasst werden kann.",
+            //Lernförderlichkeit
+            "ermutigt dazu, auch neue Funktionen auszuprobieren.",
             "erfordert nicht, dass man sich viele Details merken muss.",
-            "ist gut ohne fremde Hilfe oder Handbuch erlernbar."};
+            "ist so gestaltet, dass sich einmal Gelerntes gut einprägt."};
 
 
 
