@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".StartActivity"
+            android:name="de.hskl.hci2b.useva.StartActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -20,59 +20,59 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TestActivity"
+        <activity android:name="de.hskl.hci2b.useva.TestActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".TypActivity"
-            android:parentActivityName=".StartActivity"
+            android:name="de.hskl.hci2b.useva.TypActivity"
+            android:parentActivityName="de.hskl.hci2b.useva.StartActivity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".AuswertungsActivities.AuswertungStudieActivity"
+        <activity android:name="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungStudieActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ListViewActivities.ListViewTestsActivity"
-            android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"
+        <activity android:name="de.hskl.hci2b.useva.ListViewActivities.ListViewTestsActivity"
+            android:parentActivityName="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungStudieActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ListViewActivities.ISO_ListViewTestsActivity"
-            android:parentActivityName=".AuswertungsActivities.AuswertungStudieISONORMActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".ListViewActivities.ListViewStudienActivity"
-            android:parentActivityName=".StartActivity"
+        <activity android:name="de.hskl.hci2b.useva.ListViewActivities.ISO_ListViewTestsActivity"
+            android:parentActivityName="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungStudieISONORMActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ListViewActivities.ISO_ListViewStudienActivity"
-            android:parentActivityName=".StartActivity"
+            android:name="de.hskl.hci2b.useva.ListViewActivities.ListViewStudienActivity"
+            android:parentActivityName="de.hskl.hci2b.useva.StartActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".AuswertungsActivities.AuswertungTestActivity"
-            android:parentActivityName=".ListViewActivities.ListViewTestsActivity"
+            android:name="de.hskl.hci2b.useva.ListViewActivities.ISO_ListViewStudienActivity"
+            android:parentActivityName="de.hskl.hci2b.useva.StartActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungTestActivity"
+            android:parentActivityName="de.hskl.hci2b.useva.ListViewActivities.ListViewTestsActivity"
             android:theme="@style/Campusboard"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".AuswertungsActivities.AuswertungTestISONORMActivity"
-            android:parentActivityName=".ListViewActivities.ISO_ListViewTestsActivity"
+            android:name="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungTestISONORMActivity"
+            android:parentActivityName="de.hskl.hci2b.useva.ListViewActivities.ISO_ListViewTestsActivity"
             android:theme="@style/Campusboard"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".StatistikAuswertung"
-            android:parentActivityName=".AuswertungsActivities.AuswertungStudieActivity"
+        <activity android:name="de.hskl.hci2b.useva.StatistikAuswertung"
+            android:parentActivityName="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungStudieActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".StatistikAuswertungISO"
-            android:parentActivityName=".AuswertungsActivities.AuswertungStudieISONORMActivity"
+        <activity android:name="de.hskl.hci2b.useva.StatistikAuswertungISO"
+            android:parentActivityName="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungStudieISONORMActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".AuswertungsActivities.AuswertungStudieISONORMActivity"
+        <activity android:name="de.hskl.hci2b.useva.AuswertungsActivities.AuswertungStudieISONORMActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".TestActivity_ISO"
+        <activity android:name="de.hskl.hci2b.useva.TestActivity_ISO"
             android:screenOrientation="sensor"/>
     </application>
 

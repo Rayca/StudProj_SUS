@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.flaus.susea.TypActivity">
+    tools:context="de.hskl.hci2b.useva.TypActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -26,7 +26,6 @@
         android:drawSelectorOnTop="true"
         android:duplicateParentState="true"
         android:headerDividersEnabled="true"
-        android:listSelector="@color/bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
