@@ -49,8 +49,9 @@
 
         <RadioGroup
             android:id="@+id/radioGroup_fragebogen"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             tools:layout_editor_absoluteX="75dp"
             tools:layout_editor_absoluteY="530dp">
 
@@ -58,7 +59,7 @@
                 android:id="@+id/radioButton_SUS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="left"
                 android:layout_marginTop="20dp"
                 android:text="System Usability Scale"></RadioButton>
 
@@ -66,7 +67,7 @@
                 android:id="@+id/radioButton_ISONORM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="left"
                 android:layout_marginTop="20dp"
                 android:text="ISONORM"></RadioButton>
 
