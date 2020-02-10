@@ -222,6 +222,24 @@ public class Datenbank extends SQLiteOpenHelper {
       Funktionen für die TABELLE_STUDIEN
       ---------------------------------------------------------------------------------------------*/
      //Gibt alle Studien in der Tabelle Studien in einem Cursor zurück
+
+    public void deleteISOTest(long TestID,long StudienID){
+        Log.d("Jule", "DB: zu löschende Id " + TestID );
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+TABELLE_TEST_ISO+" WHERE "+SPALTE_TEST_ID_ISO+" = "+TestID);
+        Log.d("Jule","Test löschen");
+        updateISOStudie(StudienID);
+        if(StudienID != -1) {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABELLE_TEST_ISO + " WHERE " + SPALTE_STUDIE_ID_ISO + " = " + StudienID, null); //addierte alle Zeilen auf, in denen die tsud id gleich ist
+            cursor.moveToFirst();
+            int anzahl_tests = cursor.getCount();
+            Log.d("Jule", "Anzahl Tests in der Studie:  " + anzahl_tests);
+            ContentValues neue_anz_tests = new ContentValues();
+            neue_anz_tests.put(SPALTE_ANZAHL_TESTS_ISO, anzahl_tests);
+            String[] arg = new String[]{Long.toString(StudienID)};
+            db.update(TABELLE_STUDIE_ISO, neue_anz_tests, SPALTE_STUDIE_ID_ISO + " = ?", arg);
+        }
+    }
     public Cursor selectAllStudien() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+SPALTE_STUDIE_ID+" as _id, "+SPALTE_STUDIE_NAME+", "+SPALTE_ANZAHL_TESTS+ " , "+ SPALTE_STUDIE_SCORE + " FROM " + TABELLE_STUDIE, null);

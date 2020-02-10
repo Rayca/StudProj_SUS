@@ -387,9 +387,21 @@
             android:text="Zur Studie"
             android:textColor="#ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintEnd_toStartOf="@id/btntestloeschen"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btntestloeschen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button"
+            android:text="TEST LÖSCHEN"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.553"
+            app:layout_constraintStart_toEndOf="@+id/btnZurStudie" />
 
         <TextView
             android:id="@+id/textViewStudiengang"

@@ -30,7 +30,7 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
 
 
 
-    Button btnZurStudie;
+    Button btnZurStudie,btntestloeschen;
 
     Toolbar toolbar;
     long studienId, test_id;
@@ -46,7 +46,7 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auswertung_test_isonorm);
-        Datenbank db = new Datenbank(this);
+        final Datenbank db = new Datenbank(this);
 
         // Toolbar
         toolbar = findViewById(R.id.toolbar);
@@ -104,10 +104,21 @@ public class AuswertungTestISONORMActivity extends AppCompatActivity {
 
 
        btnZurStudie = findViewById(R.id.btnZurStudie);
+       btntestloeschen = findViewById(R.id.btntestloeschen);
 
        btnZurStudie.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               Intent intent = new Intent(getBaseContext(),AuswertungStudieISONORMActivity.class);
+               intent.putExtra("studienId",studienId);
+               startActivity(intent);
+           }
+       });
+
+       btntestloeschen.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v) {
+               db.deleteISOTest(test_id,studienId);
                Intent intent = new Intent(getBaseContext(),AuswertungStudieISONORMActivity.class);
                intent.putExtra("studienId",studienId);
                startActivity(intent);
